@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table{
+	margin:20px;
+}
+	table#tab1{
+		border: 10px inset red;
+	}
+	table#tab1 td{         /*tab1 td 띄어쓰기 ->후손관계 */
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	}
+	
+	table#tab2	{
+	border: 20px ridge green;  /*ridge groove*/
+	border-collapse: separate /* separate collapse;*/
+	}
+	table#tab2 td{
+	width: 350px;
+	height: 40px;
+	text-align: center;
+	}
+	table#tab2 th, #tab3 th{
+	height: 50px;
+	background: silver;
+	
+	}
+	#tab2 th{
+	border-bottom: 5px double green;
+	}
+	#tab3{
+	border: 30px double blue;
+	border-spacing: 10px;
+	}
+	#tab3 td{
+	width: 250px;
+	height: 50px;
+	}
+	
+</style>
+</head>
+<body>
+<h2>border-collapse:separate;(기본)</h2>
+<table border="1" id="tab1">
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+</table>
+
+<h2>border-collapse:collapse;</h2>
+<table border="1" id="tab2">
+	<tr>
+		<th>1번제목</th>
+		<th>2번제목</th>
+		<th>3번제목</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+</table>
+
+<table border="1" id="tab3">
+	<tr>
+		<th>1번제목</th>
+		<th>2번제목</th>
+		<th>3번제목</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+</table>
+
+</body>
+</html>

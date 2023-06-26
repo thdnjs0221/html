@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 아이디에는 초기값(value=" ") 없어도 된다  radio,checkbox는 있어야함-->
+<form action="inputtest1.jsp"  method="post">
+<!--checked="checked"마지막에 선택된것에 선택된다 (속성이 아니므로 뒤에 생략가능)
+required="required" -반드시 입력해라
+ -->
+아이디 <input type="text"  name="id" required > <br> 
+비밀번호 <input type="password"  name="pass" required="required" > <br>
+성별 <input type="radio"  name="gender" value="남자" checked>남자
+ <input type="radio"  name="gender" value="여자" checked="checked">여자 <br>
+ 
+ 좋아하는 과일<input type="checkbox" name="fruits" value="사과" checked="checked">사과
+ <input type="checkbox" name="fruits" value="복숭아">복숭아
+ <input type="checkbox" name="fruits" value="참외">참외
+ <input type="checkbox" name="fruits" value="수박" checked="checked">수박
+ <input type="checkbox" name="fruits" value="망고">망고
+ <input type="checkbox" name="fruits" value="자두">자두
+ <input type="checkbox" name="fruits" value="딸기">딸기
+ 
+<br>
+<br>
+첨부파일: <input type="file" name="file">
+<br><br>
+
+
+<input type="submit">
+</form>
+
+</body>
+</html>

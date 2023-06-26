@@ -1,0 +1,22 @@
+script에서 html요소로 접근 /검색하는 방법 
+
+1. id를 이용
+ document.getElementById('id명');
+ document.querySelector('#id명');
+  
+2. class를 이용
+
+3. name을 이용
+
+script에서 html요소의 값을 가져오기
+	value- input요소, textarea, select 
+	innerHTML - 가져오려고 하는 내용속에 html태그가 포함된 경우
+	innerText - 가져오려고 하는 내용속에 html태그가 포함되지 않은 경우
+
+
+
+   
+script의 함수에서 수행된 결과값을 출력
+	value- input요소, textarea, select 
+	innerHTML - 출력 하고자 하는 내용 속에 html태그가 포함된 경우
+	innerText - 출력 하고자 하는 내용 속에 html태그가 포함되지 않은 경우

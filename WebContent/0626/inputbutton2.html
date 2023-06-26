@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+function calc(){
+	
+	//id가 price인 요소와 id가 qty인 요소를 검색
+	//값을 가져온다
+	var price= document.getElementById('price').value;
+	var qty= document.getElementById('qty').value;
+	
+	//계산 
+	//더하기할때만 정 수로 바꾸기(parseInt)/ 스크립트는 정수/정수= 실수 나옴
+	
+	var res="물품가격: "+price+"<br>"
+	res+="수량: "+qty+"<br>"
+	res+= price + "*" + qty + "=" + (price*qty);
+	
+  /* 	var res= (parseInt)price * (parseInt)qty; */
+	
+	
+	//계산 결과를 출력-id="result"인 요소에 
+	document.querySelector('#result').innerHTML=res;
+}
+</script>
+
+</head>
+<body>
+<form action="inputbuttion2.jsp" method="post">
+
+<!-- 
+물품가격<input type="text" id="price" name="price"><br>
+수량 <input type="text" id="qty" name="qty"><br> 
+-->
+<!--step: 증가  -->
+물품가격<input type="number" value="50000" min="10000" max="100000" step="100" id="price" name="price"><br>
+수량 <input type="number"  value="500" min="100" max="10000" step="100" id="qty" name="qty"><br> 
+
+
+이름<input type="text" name="name" ><br>
+전화번호<input type="tel" name="tel"><br>
+이메일<input type="email" name="email"><br>
+	<br>
+	<input type="button" value="계산하기" onclick="calc()">
+	<!-- <input type="submit" >  -->
+
+
+</form>
+
+<br>
+<div id="result">
+<hr color="red">
+
+<form action="inputbuttion2.jsp" method="post">
+
+<!-- 
+물품가격<input type="text" id="price" name="price"><br>
+수량 <input type="text" id="qty" name="qty"><br> 
+-->
+<!--step: 증가  -->
+물품가격<input type="number" value="50000" min="10000" max="100000" step="100" id="price" name="price"><br>
+수량 <input type="number"  value="500" min="100" max="10000" step="100" id="qty" name="qty"><br> 
+
+	<br>
+	<img src="../images/강아지1.jfif" alt="강아지1.jfif">
+
+	<br>
+	<button type="button" value="계산하기" onclick="calc()">계산하기</button>
+	<button  type="submit" >전송</button>
+	<button type="reset">취소</button>
+	<input type="image" src="../images/강아지1.jfif" alt="강아지1.jfif">
+	<!--<input type="image">은<button  type="submit"> 과 같은 기능  -->
+</form>
+
+
+
+
+
+</div>
+
+</body>
+</html>

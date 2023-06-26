@@ -1,0 +1,134 @@
+<!-- ul#u4  ul 생략 가능-->
+<!-- hr 닫는태그 없음 -->
+<!-- class는 묶어서 쓸때 id는 따로 -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+ul#u2{
+ 	list-style-type: circle;
+}
+ul#u3{
+ 	list-style-type: square;
+ 	list-style-position: inside;
+}
+
+#u4{
+/* 	list-style-type: circle;
+ 	list-style-position: inside;
+ 	list-style-image: url(../images/물방울.jfif);*/
+ 	list-style: circle outside url(../images/물방울.png);
+}
+
+ul{
+	/*border-width:2px;
+	border-color:blue;
+	border-style: solid; */ /* double dotted dashed inset outset */
+	
+	border: 2px solid blue; /*한번에 쓸때*/
+}
+
+li{
+	/*border-width: : 1px;
+	border-style: dotted;
+	border-color: orange;*/
+	border: 1px dotted orange;
+}
+
+.lay{
+	width: 23%;
+	height: 100px;
+	
+	float: left;
+	margin-left: 20px;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<h3>list-style-type: disk </h3>
+<ul id="u1">
+<li>HTML</li>
+<li>CSS</li>
+<li>JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+<h3>list-style-type: circle </h3>
+<ul id="u2">
+<li>HTML</li>
+<li >CSS</li>
+<li >JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+
+<h3>list-style-type: square </h3>
+<ul id="u3">
+<li>HTML</li>
+<li >CSS</li>
+<li >JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+
+<h3>list-style-image: url(../images/물방울.png) </h3>
+<ul id="u4">
+<li>HTML</li>
+<li >CSS</li>
+<li >JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+
+
+<hr color="red">
+
+<pre>
+블럭요소를 인라인 요소처럼 옆 배치
+float:left 
+&lt;ul class="lay">
+여러요소를 한번에 일괄적으로 하나의 스타일을 적용하기 위해서 class속성을 이용한다
+</pre>
+
+<ul class="lay">
+<li>HTML</li>
+<li>CSS</li>
+<li>JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+<ul class="lay">
+<li>HTML</li>
+<li>CSS</li>
+<li>JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+<ul class="lay">
+<li>HTML</li>
+<li>CSS</li>
+<li>JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+<ul class="lay">
+<li>HTML</li>
+<li>CSS</li>
+<li>JAVA SCRIPT</li>
+<li>JQUERY</li>
+</ul>
+
+
+
+</body>
+</html>

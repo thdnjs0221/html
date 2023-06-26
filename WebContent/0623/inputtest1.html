@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body{
+	min-width: 400px;
+	
+}
+form{
+	border:2px solid blue;
+	padding: 20px;
+	margin: 40px auto;
+	width: 35%;
+}
+
+h1{m
+	text-align: center;
+}
+span{
+	display: inline-block;
+	width: 100px;
+	height: 30px;	
+}
+.send{
+	width: 50%;
+	height: 40px;
+}
+</style>
+</head>
+<body>
+
+
+<h1>get방식 전송</h1>
+
+<form action="inputpro.jsp" method="get">
+
+	<input type="hidden" name="age" value="10">
+	<span>아 이 디</span> <input type="text" name="id"><br>
+	<span>비밀번호</span> <input type="password" name="pass"><br>
+	<input class="send" type="submit" value="로그인">
+	<input type="reset">
+	<input type="button" value="확인">
+</form>
+
+<h1>post방식 전송</h1>
+<form action="inputpro.jsp" method="post">
+
+	<input type="hidden" name="age" value="10">
+	<span>아이디</span> <input type="text" name="id"><br>
+	<span>비밀번호</span> <input type="password" name="pass"><br>
+	<input class="send" type="submit"value="전송">
+	<input type="reset">
+	<input type="button" value="전송">
+	
+</form>
+
+</body>
+</html>
