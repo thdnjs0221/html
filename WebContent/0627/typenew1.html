@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+
+function proc(){
+	//html요소 검색
+	
+namevalue=document.getElementById('name').value;
+birvalue=document.getElementById('bir').value;
+colorvalue=document.getElementById('color').value;
+rvalue=document.getElementById('range').value;
+
+console.log(namevalue, birvalue,colorvalue,rvalue);
+	
+}
+</script>
+
+</head>
+<body>
+<form>
+	이름<input name="name" id="name"><br>
+	생일<input type="date" id="bir" name="bir"><br>
+	
+	색상<input type="color" id="color" name="color"><br>
+	
+	숫자<input type="range" id="range" value="100" min="100" max="10000" step="10"> <br>
+	<input type="button" value="확인" onclick="proc()">
+
+
+
+</form>
+
+
+
+</body>
+</html>

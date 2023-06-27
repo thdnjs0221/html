@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+select{
+	width: 200px;
+}
+option {
+	height: 30px;
+}
+fieldset {
+	width: 40%;	
+}
+select [name=car2]{
+	vertical-align: top;
+}
+
+
+
+</style>
+</head>
+<body>
+<form action="selectoption1.jsp" method="post">
+
+<fieldset>
+	<legend>지금 현재 소유 자동차</legend>
+	<label for="name">이름 </label>
+	<input type="text" name="name" id="name"><br>
+	
+	<label>자동차 </label>
+	<select name="car1">
+		<option>BMW</option>
+		<option selected>그랜저</option>
+		<option>소나타</option>
+		<option selected>QM6</option>
+	</select>
+</fieldset>
+	
+	<br> <br>
+
+<fieldset>
+	<legend>앞으로 소유계획 자동차</legend>
+	<label>자동차 </label>
+	<select name="car2" multiple="multiple" size="4">
+		<option>BMW</option>
+		<option selected>그랜저</option>
+		<option value="소나타">소나타</option>
+		<option selected>QM6</option>
+	</select>
+</fieldset>
+	
+	<input type="submit">
+	</form>
+</body>
+</html>

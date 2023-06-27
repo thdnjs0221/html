@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html  lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+label{
+	display: inline-block;
+	width:  100px;
+	height: 30px;
+}
+textarea {
+	vertical-align: top;
+}
+input[type=text]{
+	text-align: center;
+}
+
+</style>
+
+<script>
+function check(){
+	//id가area인 html요소를 검색
+	var areaValue = document.getElementById('area').value;//1줄로 쓰는 방법
+
+	let varea = document.getElementById('area').value;//2줄로 쓰는 방법
+	var areaValue=varea.value;
+	//
+	console.log(areaValue)	
+}
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+<form action="buttontest1.jsp" method="post"> 
+
+<form>
+	<!--  -->
+	<label for="id">아이디</label>
+	<input type="text" id="id" name="id"><br>
+	
+	<label  for="name">이름</label>
+	<input type="text" id="name" name="name"><br>
+	
+	<label  for="tel">전화번호</label>
+	<input type="tel" id="tel" name="tel"><br>
+	
+	<label  for="area">고객의 의견</label>
+	<textarea rows="5" id="area" cols="50" name="area"></textarea>
+
+	<br>
+	<!--<button> 타입 생략하면 submit -->
+	<button>전송</button>
+	<button type="button" onclick="check()">확인</button>
+	<button type="submit">전송</button>
+	<button type="reset">초기화</button>
+	
+	<br><br>
+	<!--<input> 타입 생략하면 텍스트 -->
+	
+	<input type="button"  onclick="check()" value="확인">
+	<input type="submit">
+	<input type="reset">
+	<input type="image" src="../images/물방울.png" alt="물방울.png">
+	
+	
+	
+</form>
+</body>
+</html>
