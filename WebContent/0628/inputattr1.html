@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- readonly 있을때는 value값이 있어야함
+readonly 
+disabled 마우스 포인터가없음 서버에 전송이 안된다
+
+ -->
+<form action="inputattr1.jsp" method="post">
+<input type="text" name="id" value="a001" readonly="readonly"><br>
+<input title="홍길동" pattern="[가-힣]{2,5}" type="text" name="name" placeholder="이름입력"><br>
+<input type="password" placeholder="비밀번호입력" required="required name="pass"><br>
+<input title="kkk123@korea.com" type="text" name="email" placeholder="이메일입력"><br>
+<input type="text" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" name="tel" value="010-1234-5678"  placeholder="전화번호입력" ><br>
+
+
+<br>
+<input type="submit">
+</form>
+</body>
+</html>

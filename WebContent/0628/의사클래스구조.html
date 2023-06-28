@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+table {
+	border: 2px solid blue;
+	margin: 20px;
+}
+td {
+	width: 250px;
+	height: 40px;
+	text-align: center;
+}
+.tt{
+	background: gold;
+}
+/* 한칸 띄우는건 후손이라는 의미. >자식? */
+table#tab1 tr:nth-child(2n) {
+	background: lightyellow;
+	
+}
+table#tab2 td:nth-child(odd) {
+	background: skyblue;
+	
+}
+table#tab2 td:nth-child(2) {
+	background: lightgray;
+	
+}
+/* 첫번째줄  */
+tr:first-child {
+	background: green;
+}
+
+
+</style>
+
+</head>
+<body>
+<pre>
+
+구조(관계)를 나타내는 의사클래스 선택자
+:first-child
+:last-child
+:nth-child(ex)- 1,2,3, 2n odd, even 2n-1 3n 2n+1 3n+2 4n
+</pre>
+
+<table border="1" id="tab1">
+	<tr class="tt"> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+	
+	<tr> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+	
+	<tr class="tt"> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+	
+	<tr> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+
+</table>
+
+<table border="1" id="tab2">
+	<tr> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+	
+	<tr> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+	
+	<tr> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+	
+	<tr> 
+	<td> 1</td>
+	<td> 2</td>
+	<td> 3</td>	
+	</tr>
+
+</table>
+
+</body>
+</html>

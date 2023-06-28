@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+form{
+width:250px;
+border:2px solid blue;
+margin: 40px;
+padding: 30px;
+
+}
+
+
+label{
+display:inline-block;
+width: 70px;
+height: 30px;
+	
+}
+
+
+textarea {
+	vertical-align: top;
+	height: 80px;
+	width: 160px;
+}
+input[type=button]{
+width: 50%;
+height: 40px;
+}
+
+
+h3{
+  margin-left: 130px;
+
+}
+
+
+</style>
+
+
+
+</head>
+<body>
+<h3> 회원가입 화면</h3>
+<br>
+<form action="회원가입h2.jsp" method="post">
+
+
+
+<label for id="name">이름</label>
+<input type="text" name="name" ><br>
+
+<label for id="name">주소</label>
+<input type="text" name="address" ><br>
+
+<label for id="name">이메일</label>
+<input type="text" name="email"  ><br>
+
+<label for id="name">성별</label>
+<input type="radio" name="gender" value="남자" >Male
+<input type="radio" name="gender" value="여자" >Female<br>
+
+<label for id="name">내용</label>
+<textarea rows="5" id="area" cols="30" name="area"></textarea>
+
+<br>
+<br>
+
+<button type="submit">제출</button>
+<button type="reset">초기화</button>
+
+
+
+</form>
+</body>
+</html>
