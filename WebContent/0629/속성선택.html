@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+p{
+	font-size: 1.35rem
+}
+p[title]{
+	color: red;
+}
+p[title=수국]{
+	background: yellow;
+}
+/* class f1 f2 */
+p[class^=f]{
+	border: 1px solid green;
+}
+/* 1로 끝나는 */
+p[class$="1"]{
+	font-size:2.0rem;
+	font-weight: bold;
+	font-style: italic;
+}
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<p title="무궁화">무궁화 꽃이 피었습니다 </p>
+<p class="p1">작약 꽃이 피었습니다 </p>
+<p class="f1">봉선화 꽃이 피었습니다 </p>
+<p title="수국" class="f2">수국 꽃이 피었습니다 </p>
+<p id="pp">라일락 꽃이 피었습니다 </p>
+</body>
+</html>
