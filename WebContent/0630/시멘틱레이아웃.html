@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="KO">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+html,body{
+	margin: 0px;
+	padding: 0px;
+}
+/* body태그의 후손들 */
+body*{
+	box-sizing: border-box;
+	margin: 1px;
+	padding: 1px;
+
+}
+#container{
+	display: flex;
+	flex-direction: column;
+}
+header,footer,aside,section{
+	border-radius: 20px;
+}
+#items{
+	display: flex;
+	flex-direction: row;
+}
+
+header,footer{
+	width: 100%;
+	height: 100px;
+}
+header{
+  	background: #F4B6D9;
+}
+footer{
+ 	background: #FFDCFF; 
+}
+aside{
+	 flex : 20%;
+    height : 500px;
+    background: cyan;
+
+}
+section{
+ 	flex : 60%;
+    height : 500px;
+    background: orange;
+	
+}
+
+</style>
+</head>
+<body>
+<div id="container">
+	<header> </header>
+	<div id="items"> 
+		<aside></aside>
+		<section>
+		<h2>여기는 본문입니다</h2>
+		</section>
+		
+		<aside></aside>
+	</div>
+		
+		<footer></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+div{
+	width: 80px;
+	height: 80px;
+	border: 2px dotted green;
+	margin: 10px;
+	padding: 10px;
+}
+.d1{
+	background: yellow;
+
+}
+.d2{
+	background: skyblue;
+}
+.d3{
+	background: pink;
+}
+.d4{
+	background: lightgreen;
+}
+.dd2{
+	position: relative;
+	left: 100px;
+	top: 50px;
+}
+.ddd2{
+	position: absolute;
+	left: 200px;
+	top: 200px;
+}
+.dd3{
+	position: fixed;
+	right: 100px;
+	top: 150px;
+}
+</style>
+
+</head>
+<body>
+<div class="d1"> </div>
+<div class="d2"> </div>
+<div class="d3"> </div>
+<div class="d4"> </div>
+
+<div class="d1"> </div>
+<div class="d2 dd2">dd2</div>
+<div class="d3"> </div>
+<div class="d4"> </div>
+
+<div class="d1"> </div>
+<div class="d2 ddd2">ddd2</div>
+<div class="d3"> </div>
+<div class="d4"> </div>
+
+<div class="d1"> </div>
+<div class="d2"></div>
+<div class="d3 dd3">dd3</div>
+<div class="d4"> </div>
+</body>
+</html>

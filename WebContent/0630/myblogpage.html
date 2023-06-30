@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="KO">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+
+
+html,body{
+	margin: 0px;
+	padding: 0px;
+}
+/* body태그의 후손들 */
+body*{
+	box-sizing: border-box;
+	margin: 1px;
+	padding: 1px;
+
+}
+img{
+
+	position: relative;
+	width: 200px;
+	height: 200px;
+
+}
+
+}
+#container{
+	display: flex;
+	flex-direction: column;
+}
+header,footer,aside,section{
+	border-radius: 20px;
+	margin: 5px;
+
+}
+#items{
+	display: flex;
+	flex-direction: row;
+}
+
+header,footer{
+	width: 100%;
+	height: 100px;
+}
+header{
+  	background: #F4B6D9;
+  	text-align: center;
+}
+footer{
+	
+ 	background: #FFDCFF; 
+ 	text-align: center;
+ 	
+}
+aside{
+	 flex : 20%;
+    height : 500px;
+    background: lightblue;
+
+}
+section{
+ 	flex : 60%;
+    height : 500px;
+    background: orange;
+	
+}
+.a1{ 
+	border: 2px dotted green;
+	padding: 30px;
+	margin: 50px;
+	border-radius: 20px;
+	
+}
+
+.a2{ 
+	border: 2px dotted green;
+	padding: 30px;
+	margin: 50px;	
+	border-radius: 20px;
+}
+a:actice{
+	color: yellow;
+}
+a:visite{
+	color: white;
+}
+
+</style>
+</head>
+<body>
+<div id="container">
+	<header> 
+	<h2>My Blog Page</h2>
+	<p>시멘틱 태그로 만들어진 페이지 입니다</p>	
+	</header>
+	
+	<div id="items"> 
+		<aside>
+		<h3>Links</h3>
+		<ul>
+		
+		<li><a href="#c1">w3schools</a></li>
+		<li><a href="#c1">Naver</a> </li>
+		<li><a href="#c1">Daum</a> </li>
+
+		<img src="../images/spongebob.png" alt="spongebob.png">
+		<p> 스폰지밥</p>
+		</ul>
+		</aside>
+		
+		
+		<section>
+		<article class= "a1">
+		<h2 >Semetic Tags</h2>
+		<p>시멘틱 요소(Semantic elements)들은 브라우저에게 요소의 의미나 목적을 명확하게 
+		알려주는 요소이다.레이아웃을 만들때 쓰는 것. 의미가 있는 요소라면 div보다는 시멘틱 태그를 사용해준다 </p>
+		</article>
+		
+		<article class= "a2">
+		<h2 >div와 span</h2>
+		<p>div은 "divide"의 약자로서 페이지를 논리적인 섹션으로 분리하는데 사용되는 태그이다. span요소는 
+		인라인 요소로서 텍스트를 위한 컨테이너로 사용 할 수 있다. </p>
+		</article>
+		
+		
+		</section>
+		
+		
+	</div>
+		
+		<footer>
+		<h3>Copyright (c)2019 Hong</h3>
+		</footer>
+</div>
+</body>
+</html>
