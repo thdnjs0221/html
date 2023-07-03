@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!--내부 스크립트  -->
+<script>
+
+/* var a = 10;
+var b = 20;
+var c = a*b;
+document.write(c); */
+
+
+function calc(){  //클릭해야지 실행
+	//입력한 값 가져오기
+	var vqty = document.getElementById('qty').value;
+	var vprice = document.getElementById('price').value;
+	
+	var res= vqty * vprice;
+	
+	/*const str = "수량: "+vqty + "<br>"; ==> const는 값을 변경 할 수 없음. 한줄로 끝내야함.
+		let or var 써야함!*/
+	var str = "수량: "+vqty + "<br>";
+	str += "가격: "+vprice + "<br>";
+	str += "총금액: "+res+ "<br>";
+	
+	//document.write(str); 
+	console.log(str);
+	
+	
+	var vresult = document.getElementById('result');
+	
+	//innerText html태그도 문자로 출력함.
+	vresult.innerHTML = str;
+	
+	
+}
+</script>
+<style>
+div{
+	border:  1px dotted red;
+	margin: 20px;
+	padding: 20px;
+	width: 30%;
+	height: 50px;
+}
+
+
+
+ </style>
+</head>
+<body> <!--body가 먼저 실행-> 스크립트 실행  -->
+수량: <input type="text" id="qty">
+가격: <input type="text" id="price"> 
+<input type="button" value="확인" onclick="calc()">
+<br>
+<br>
+<p>script에서 실행된 결과값을 출력 </p>
+<div id="result"> </div>
+
+</body>
+</html>

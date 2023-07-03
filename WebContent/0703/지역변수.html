@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script> 
+function add(a,b){
+	let res = a+b;
+	return res;  //let일때 다른곳에서 사용할수 없어서 리턴해주기(지역변수)
+				 //
+}
+
+function sub(a,b){ //add(a,b); 의 변수와 다름.
+	let res = a-b;
+	return res;
+}
+	
+window.onload = function(){  //
+	//id= result인 div요소를 검색
+	let vres = document.getElementById('result');
+	vres.innerHTML = "<h1>Hello</h1>";
+	vres.style.color = 'red';
+	
+	let a =10; //let a =10; 지역변수라서 다른 곳에서 쓸수 없음 / a = 10; 일때는 전역변수라 다른곳에서 사용 가능
+	let b =20;
+	
+	/* res= add(a,b); //add함수 호출  / 파라미터는 지역변수임 
+	str = a + "+" + b + "=" + res + "<br>";
+	
+	res= sub(a,b); //return res;와 다름. 이름은 같지마 서로 다른 변수임
+	str += a + "-" + b + "=" + res + "<br>"; */
+	
+	/* str = a + "+" + b + "=" + add(a,b) + "<br>";
+	str = a + "-" + b + "=" + sub(a,b) + "<br>"; */
+	
+	str = `${a} + ${b} = ${add(a,b)} <br>`;
+	str += `${a} - ${b} = ${sub(a,b)} <br>`;
+	
+	vres.innerHTML += str; //hello와 같이 출력하려면 
+	
+	
+}
+</script>
+
+<style>
+#result{
+	border: 1px dotted red;
+	width: 50%;
+	height: 150px;
+	margin: 20px;
+	padding: 20px;
+	overflow: auto;
+}
+
+</style>
+</head>
+<body>
+<pre>
+템플릿 리터럴: 백틱을 사용하는 문자열 ` 
+변수와 일반 문자열을 +, "" 기호 없이 한 문장으로 표현한다.
+변수는 ${변수}로 표현한다.
+str = `${a} + ${b} = ${add(a,b)} <br>`;
+str += `${a} - ${b} = ${sub(a,b)} <br>`;
+ </pre>
+<!-- <input type="button" value="확인" onclick=""> -->
+
+<div id="result"> </div>
+
+</body>
+</html>
