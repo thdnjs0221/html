@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+
+  window.onload = function(){
+   //입력
+   let vinput = window.prompt("이름을 입력하세요.","홍길동");   
+         /*window 생략 가능, 첫번째 파라미터 필수항목, 두번째 파라미터 선택항목*/  
+   
+   //id=result인 요소를 검색, 출력
+   document.getElementById('result').innerText = vinput;
+   
+  }
+
+  function gugupro(){
+     //입력
+     
+     let vinput = window.prompt("구구단 수를 입력하세요");
+     
+     //구구단 생성
+     //let res= "*****" +vinput+ "단 ******"
+     let res= `*****${vinput}단*****<br>`;
+    
+     for(let i=1; i<10; i++){
+    	 
+    	// res+= vinput + "*" + i + " = " + vinput*i + "<br>"
+    	 res+= `${vinput}* ${i} = ${vinput*i} <br>`;
+     }
+     //출력
+      document.getElementById('result2').style.height='320px';
+     document.getElementById('result2').innerHTML = res; 
+  }
+  
+  function addpro(){
+	  //첫번째 수 입력
+	  su1 = parseInt(prompt("첫번째 수 입력"));
+	  //두번째 수 입력
+	  su2 = parseInt(prompt("두번째 수 입력"));
+	  
+	  //더하기
+	  addVal = su1+su2;
+	    
+	  //출력내용만들기
+	  str=`첫번째 수: ${su1} <br>`;
+	  str+=`두번째 수 :${su2} <br>`;
+	  str+=`${su1}+${su2} = ${addVal} <br>`;
+	  
+		 
+	  
+	  
+	  //출력
+	   document.getElementById('result3').style.height='100px';
+	  document.getElementById('result3').innerHTML=str;
+	  
+	  
+  }
+  function calcpro(){
+	  //입력한 수를 가져오기 value- 각각의 id를 이용해서 요소를 검색
+	 // su1Value= document.getElementById('su1').value;
+	 // su2Value= document.getElementById('su2').value;
+	 
+	 su1Value = document.querySelector('#su1').value;
+	 su1Value = document.querySelector('#su2').value;
+	  
+	  //더하기
+	  addValue = parseInt(su1Value)+parseInt(su2Value);
+	  
+	  //출력 = value - id = "res"인 요소를 검색
+	  //doucumet.getElementById('res').value=addValue;
+	  document.querySelector('#res').value = addValue;
+	  
+  }
+
+</script>
+<style>
+div{
+  border : 1px dotted orange;
+  height : 50px;
+  padding : 10px;
+  margin : 10px;
+  font-size : 1.5rem;
+}
+
+/* #result2{
+	height: 320px;
+} */
+
+
+</style>
+</head>
+<body>
+<pre>
+실행하자마자 prompt를 이용하여 입력하고
+입력한 값을 id=result인 요소에 출력한다
+</pre>
+<div id="result"></div>
+<br>
+<hr color='red'>
+<h3>버튼을 클릭하면 prompt를 이용하여 숫자 한개를 입력받는다<br>
+입력받은 수의 구구단을 출력한다.
+</h3>
+<input type="button" value="구구단 입력" onclick="gugupro()">
+<br><br>
+<div id="result2"></div>
+
+<br>
+<hr color = "red">
+<input type="button" value="확인" onclick="addpro()">
+<div id="result3"> </div>
+
+<br>
+<hr color='red'>
+
+첫번째 수<input type="text"  id="su1"><br>
+두번째 수<input id="su2"><br>
+<br>
+결과<input id="res"><br>
+<br>
+<input type="button" value="확인" onclick="calcpro()">
+
+</body>
+</html>

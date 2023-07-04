@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+div{
+  border : 1px dotted orange;
+  height : auto;
+  padding : 10px;
+  margin : 10px;
+  font-size : 1.5rem;
+}
+
+
+
+</style>
+
+<script>
+/*function proc1(){	
+}*/
+proc3=function(){
+	//두사람의 가위바위보
+	//첫번째 사람 입력
+	user1=prompt("첫번째 사람입력", "가위바위보");
+	//두번째 사람 입력
+	user2=prompt("첫번째 사람입력", "가위바위보");
+	//비교
+	if(user1==user2){
+		res="비겼습니다"
+	}else if(user1=="가위" && user2=="보"
+			||user1=="바위"&& user2=="가위"
+			||user1=="보" && user2=="바위"){
+		res="user1이 이겼습니다"
+	}else{
+		res="user2이 이겼습니다"
+	}
+	//출력 내용
+	str=`첫번째 사람: ${user1}<br>`
+	str+=`두번째 사람: ${user2}<br><br>`
+	str+=`결과 :${res}<br>`
+	//출력
+	document.querySelector('#result3').innerHTML=str;
+	
+}
+
+
+
+
+proc2=function(){
+	//점수 입력 parseInt안써도 됨
+	score=prompt("점수를 입력하세요") ;
+	
+	if(score<0 || score>100){
+		alert("값이 범위를 벗어났습니다");
+		return false; 
+	}
+	
+	//점수비교 -if
+/* 	if(score>=90 && score<=100){   //90이상
+		res="A학점"
+	}else if(score>=80){  //80이상~90미만
+		res="B학점"
+	}else if(score>=70){//70이상 ~80미만
+		res="C학점"
+	}else if(score>=60){//60이상~70미만
+		res="D학점"
+	}else{
+		res="F학점"
+		//60미만
+	} */
+	
+	score1 = parseInt(score/10);
+	switch(score1){
+	case 10:
+	case 9:
+		res="A학점";
+		break;
+	case 8:
+		res="B학점";
+		break;
+	case 7:
+		res="C학점";
+		break;
+	case 6:
+		res="D학점";
+		break;
+	default:
+		res="F학점";
+	}
+
+	//출력 내용 점수:99  결과:A학점
+	str=`점수:${score}<br>`;
+	str+=`결과:${res}입니다<br>`;
+	//출력
+	document.querySelector('#result2').innerHTML=str;
+}
+
+
+proc1 = function(){
+	//숫자1입력
+	su1=parseInt(prompt("숫자1 입력하세요"));
+	//연산자 입력
+	op=prompt("연산자를 입력하세요 ");
+	//숫자2입력
+	su2=parseInt(prompt("숫자2 입력하세요"));
+	//연산자 비교
+	/*if(op=="+"){
+		res = su1 + su2;
+	}else if(op=="-"){
+		res=su1-su2;		
+	}else if(op=="/"){
+		res=su1/su2;		
+	}else if(op=="*"){
+		res=su1*su2;
+	}*/
+	
+	switch(op){
+	case "+":
+		res = su1 + su2;
+		break;
+	case "-":
+		res = su1 - su2;
+		break;
+	case "*":
+		res = su1 * su2;
+		break;
+	case "/":
+		res = su1 / su2;
+		res=res.toFixed(2);
+		break;
+		
+
+	}
+	
+	//출력 내용 구성- 56 -34 =22
+	str= `숫자1 ${su1} <br>`
+	str+= `숫자2 ${su2} <br>`
+	str+= `연산자 ${op} <br>`
+	str+= `${su1} ${op} ${su2} = ${res}`
+	//출력 - id=result인 요소를 검색
+	document.querySelector('#result1').innerHTML=str;
+}
+
+
+</script>
+</head>
+<body>
+<h3>숫자 2개와 연산자 1개를 prompt을 이용하여 입력 받는다<br>
+연산자에 맞는 계산결과를 출력- if또는 switch-case</h3>
+<input type="button" value="확인 " onclick="proc1()">
+<br><br>
+<div id="result1"></div>
+<br>
+<hr color="red">
+<h3>점수를 prompt를 이용하여 입력받아 학점을 출력하시오<br>
+</h3>
+<input type="button" value="확인 " onclick="proc2()">
+<br><br>
+<div id="result2"></div>
+<br>
+<hr color="red">
+<h3>두 사람의 가위, 바위, 보를 입력 받아 승자를 출력하는 프로그램을 작성하시오.</h3>
+<input type="button" value="확인 " onclick="proc3()">
+<br><br>
+<div id="result3"></div>
+</body>
+</html>
