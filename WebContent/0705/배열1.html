@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script> 
+//proc1= function(){
+	proc1=() => {
+	fruits1 = ["사과","바나나","복숭아","참외","수박","앵두","살구"];
+	
+	arrPrint(fruits1,"result1");  //호출
+	/* document.getElementById("result1").innerHTML=fruits+"<br>";
+	
+	str=" ";
+	for(i=0; i<fruits.length; i++){
+		str+=fruits[i]
+	}
+	document.getElementById("result1").innerHTML+=str;  //+=해야지 둘다 남음
+	
+	
+} */
+			//result1호출 
+	arrPrint = (fr, result) =>{ //매개변수 
+		document.getElementById(result).innerHTML=fr+"<br>";
+		
+		str=" ";
+		/*방법 1 
+		for(i=0; i<fr.length; i++){
+			str+=fr[i]
+		} */
+		//방법 2
+		for(let i: in fr){
+			str+=fr[i]
+		}
+			
+			
+		document.getElementById(result).innerHTML+=str;  //+=해야지 둘다 남음
+
+}
+		
+	proc2=() => {
+	fruits2 =[];
+	
+	fruits2[0]="자두"
+	fruits2[1]="파인애플"
+	fruits2[2]="망고"
+	fruits2[3]="두리안"
+	
+	arrPrint(fruits2,"result2") //fruits2를 result2에 출력해라
+	/* document.getElementById("result2").innerHTML=fruits+"<br>";
+	
+	str=" ";
+	for(i=0; i<fruits.length; i++){
+		str+=fruits[i]
+	}
+	document.getElementById("result2").innerHTML+=str;  
+ */
+	}
+
+
+</script>
+
+
+</head>
+<body>
+
+<h3>fruits = ["사과","바나나","복숭아","참외","수박"]</h3>
+<input type="button" value="확인" onclick="proc1()">
+<div id="result1"> </div>
+
+<br>
+<hr color="red">
+<h3>fruits = []</h3>
+<input type="button" value="확인" onclick="proc2()">
+<div id="result2"> </div>
+</body>
+</html>
