@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+calc = (op) => {
+   
+   //x, y의 입력값을 가져온다
+   xvalue = document.getElementById('x').value;
+   yvalue =document.getElementById('y').value;
+   
+   if(op =="+"){
+      res = add();
+   }else if(op == "-"){
+      res = sub();
+   }else if(op == "*"){
+      res = multi();
+   }else if(op =="/"){
+      res = div();
+   }
+   
+   //출력
+   //출력 장소 sum, sp1, sp2, sp3을 검색
+   
+   str = `<br> x = ${xvalue} <br>`;
+   str += `y = ${yvalue} <br>`;
+   str += `${xvalue} ${op} ${yvalue} = ${res}`;
+   
+   document.getElementById('sum').value = res;
+   document.getElementById('sp1').innerHTML = xvalue;
+   document.getElementById('sp2').innerHTML = yvalue;
+   document.querySelector('#sp3').innerHTML = str;
+   
+}
+
+function add(){
+   return parseInt(xvalue) + parseInt(yvalue);   
+}
+function sub(){
+   return xvalue - yvalue;
+}
+function multi(){
+   return xvalue * yvalue;
+}
+function div(){
+   return xvalue/yvalue;
+}
+</script>
+</head>
+<body>
+<form>
+      첫번째 :<input id="x"><br>
+      두번째 :<input id="y"><br>
+      결과 :<input id="sum"><br>
+      <input type="button"  onclick="calc('+')" value="+">
+      <input type="button"  onclick="calc('-')" value="-">
+      <input type="button"  onclick="calc('*')" value="*">
+      <input type="button"  onclick="calc('/')" value="/"><br>
+      <p>첫번째 값 :<span id="sp1"></span> </p>
+      <p>두번째 값 :<span id="sp2"></span> </p>
+      <p>결과 :<span id="sp3"></span> </p>     
+    </form>
+</body>
+</html>

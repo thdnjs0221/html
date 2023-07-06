@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+//rect객체 선언 -
+//속성 : width, height
+//메소드 : getArea(), getCircum()
+const rect = {
+      width : 10,
+      height : 5,
+      getArea(){
+         area = this.width + this.height;
+         return area;
+      },
+      getCircum(){
+         return (parseInt(this.width) + parseInt(this.height))*2
+      }
+      /*
+      getArea : function(){
+         
+      },
+      getCircum : function(){
+         
+      }
+      */
+}
+
+proc1 = ()=> {
+   //정보 출력
+   rectPrint('result1'); //getElementById
+}
+
+proc2 = () => {
+	//가로 값 입력
+	garo= prompt("가로 입력");  //위에 parseInt해줌
+	rect.width = garo;
+	//세로 값 입력
+	rect.height=prompt("세로 입력");
+	
+	//새로운 값의 의한 정보를 출력
+	rectPrint('result2');
+	
+   
+}
+
+rectPrint = function(result){
+   
+   //가로 = 
+   str = `가로 : ${rect.width} <br>`;
+   //세로 = 
+   str += `세로 : ${rect.height} <br>`;
+   //면적 =
+   str+= `면적 : ${rect.getArea()} <br>`;
+   //둘레 = 
+   str += `둘레 : ${rect.getCircum()}`;
+   
+   
+   document.getElementById(result).innerHTML = str;
+}
+</script>
+</head>
+<body>
+<h3>생성된 rect객체의 정보를 출력</h3>
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div id="result1"></div>
+
+<br>
+<hr color='red'>
+<h3>가로, 세로 값을 입력- prompt를 이용
+객체의 width, height의 값으로 대입, 정보 출력</h3>
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<div id="result2"></div>
+
+</body>
+</html>
