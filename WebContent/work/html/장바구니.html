@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+form{
+width:30%;
+margin: 40px auto;
+padding: 30px;
+
+
+}
+h3{
+margin: 50px;
+text-align: center;
+}
+table{
+	border :5px black;
+	
+	
+}
+
+td{
+	width: 100px;
+	height: 50px;
+	
+	
+}
+th{
+	
+
+	
+}
+
+input[type=button]{
+	margin:100px;
+	width: 50%;
+	height: 40px;
+}
+table#tab1 td{         /*tab1 td 띄어쓰기 ->후손관계 */
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	color: aqua;
+	}
+
+
+
+</style>
+</head>
+<body>
+	<form>
+<h3>장바구니페이지</h3>
+<table border="1" id="tab1" > 
+<tr>
+	<th>품목</th>
+	<th>가격</th>
+	<th>수량</th>
+	<th>합계</th>
+</tr>
+<tr>
+	<td> </td>
+	<td> </td>
+	<td><input type="qty" value="0" step="1" id="qty" name="qty" > </td>
+	<td><input type="number" value="0" step="1" id="number" name="number"><br></td>
+</tr>
+
+<tr> 
+	<td> </td>
+	<td> </td>
+	<td><input type="qty" value="0" step="1" id="qty" name="qty" > </td>
+	<td><input type="number" value="0" step="1" id="number" name="number"><br></td>
+</tr>
+
+<tr> 
+	<td> </td>
+	<td> </td>
+	<td><input type="qty" value="0" step="1" id="qty" name="qty" > </td>
+	<td><input type="number" value="0" step="1" id="number" name="number"><br></td>
+</tr>
+
+<tr> 
+	<td> </td>
+	<td> </td>
+	<td><input type="qty" value="0" step="1" id="qty" name="qty" > </td>
+	<td><input type="number" value="0" step="1" id="number" name="number"><br></td>
+</tr>
+
+</table>
+<button type="submit">계산</button>
+<button type="submit">구매</button>
+<button type="reset">초기화</button>
+</form>
+</body>
+</html>

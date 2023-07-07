@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+function Rect(width,height){ //객체는 속성 메소드 들어있는것
+	this.width= width;  //속성으로 직접 추가한것
+	this.height= height;
+	
+	
+	
+	this.getArea = function(){
+	return	this.width*this.height
+	}
+	
+	this.getCircum=function(){
+		return(this.width +this.height)*2
+		
+		
+	}
+}
+
+//원 객체를 통해서 생성되는 각각의 객체가 공통으로 사용 할 수 있는  메소드를 추가
+Rect.prototype.getName = function (){//한번만 쓰는 법 
+	return this.name //this.name 동적으로 추가 
+	
+}  
+
+
+
+function proc1(){ //일반함수
+	
+	//함수안에서 var let const->지역변수 .proc함수안에서만 사용가능
+	rect= new Rect(4,7);
+	
+	//메소드 추가
+	//rect.getName=function(){}
+	rectPrint(rect,'#result1');
+	
+	rect2 = new Rect(7,9);
+	//rect2.getName= function(){}
+	rectPrint(rect2,'#result2');
+	
+	rect3= new Rect(9,12);
+	
+	//rect3.getName= function(){}
+	rectPrint(rect3,'#result3');
+	
+	
+	
+	
+	
+}
+function rectPrint(rect, result){ 
+	
+	
+	str=`가로: ${rect.width}<br>`;
+	str+=`세로: ${rect.height}<br>`;
+	str+=`면적: ${rect.getArea()}<br>`;
+	str+=`둘레: ${rect.getCircum()}<br>`;
+	
+	document.querySelector(result).innerHTML=str;
+	
+}
+	
+function proc2(){
+	
+	rect4= new Rect(5,8);
+	rect4.name = "사각형 ";
+	addNamePrint(rect4,'#result4');
+	
+	rect5= new Rect(8,2);
+	rect5.name="네모네모";
+	addNamePrint(rect5,'#result5');
+	
+}
+
+function addNamePrint(rect, result){
+	str= `이름: ${rect.name}<br>`;
+	str+=`가로: ${rect.width}<br>`;
+	str+=`세로: ${rect.height}<br>`;
+	str+=`면적: ${rect.getArea()}<br>`;
+	str+=`둘레: ${rect.getCircum()}<br>`;
+	
+	document.querySelector(result).innerHTML=str;
+	
+}
+</script>
+
+
+
+</head>
+<body>
+<h3>생성된 rect객체의 정보를 출력</h3>
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div id="result1"></div>
+<div id="result2"></div>
+<div id="result3"></div>
+<br>
+<hr color="red">
+
+<h3>
+각각의 객체가 공통으로 사용할수있는 메소드를 추가<br>
+Rect.prototype.getName = function (){}</h3>
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<div id="result4"></div>
+<div id="result5"></div>
+<div id="result6"></div>
+<br>
+<hr color="red">
+
+</body>
+</html>

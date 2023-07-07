@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script>
+
+
+const arr=["사과","바나나","복숭아","사과","참외","수박","사과"]; //전역객체(함수 위 )
+//arr= new Array("사과","바나나","복숭아","사과","참외","수박","사과")
+
+proc1 = () => {
+	
+	//과일 이름 입력하기
+	input= prompt("과일을 입력하세요");
+	
+	//idx =arr.indexOf("사과");
+	//idx= arr.lastIndexOf("자두");
+	//alert(idx+ "번째");
+	
+	
+	//입력한 과일 찾기
+	idx=arr.indexOf(input);
+	
+	//비교하기 (있는지 없는지) /-1 : 없는거  
+
+	str="찾는과일:"+input+"<br>";
+	if(idx == -1){
+		str+="찾는과일이 없습니다";
+	}else {
+		str+=` ${idx}번째 있습니다<br>`;
+	}
+	
+	
+	document.getElementById('result1').innerHTML=str;
+}
+
+proc2 = () => {
+	cnt= 0;
+	idx= 0;
+	
+		//입력(while문 밖에)
+		fruits= prompt("찾는 과일을 입력하세요 ");
+		
+		str="찾는과일"+fruits+"<br>";
+		
+	while(true){
+		
+		//배열에서 검색한다
+		idx=arr.indexOf(fruits,idx);
+		
+		//비교하기 -break조건  
+		if(idx== -1) break;
+		
+		cnt++;   //else
+		str+= idx+"번째 "
+		
+		//다음번 찾기 -> break아니면 자동으로 돌아감 코딩필요없음
+		idx++;
+	}
+	
+	if(cnt>0){
+		str+="있습니다"
+	}else{
+		str+="없습니다"
+	}
+	
+	//출력하라
+	document.getElementById('result2').innerHTML=str;
+}
+//function proc3(){}
+proc3 = () =>{
+	
+	str=`원래배열 : ${arr} <br>`;
+	arr.push(1,2,100,200,10.5);
+	
+	while(true){
+	input=prompt("입력");
+	arr.push(input);
+	
+	cont= confirm("계속??");
+	if(!cont) break; 
+	}
+	
+	str+=`추가후 배열 : ${arr}`;
+	
+	document.getElementById('result3').innerHTML=str;
+}
+
+
+
+</script>
+
+
+</head>
+<body>
+
+<h3> arr=["사과","바나나","복숭아","사과","참외","수박","사과"];<br> 
+사과찾기, 입력한 과일 찾기,뒤에서부터 검색하여 찾기</h3>
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+
+<h3> arr=["사과","바나나","복숭아","사과","참외","수박","사과"];<br> 
+같은 과일 이름 찾기</h3>
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<div class="ddres" id="result2"> </div>
+<br>
+<hr color="red">
+
+<h3> arr=["사과","바나나","복숭아","사과","참외","수박","사과"];<br> 
+배열에 요소추가</h3>
+<input type="button" value="push" onclick="proc3()">
+<input type="button" value="pop" onclick="proc4()">
+<br>
+<div class="ddres" id="result3"> </div>
+<div class="ddres" id="result4"> </div>
+<br>
+<hr color="red">
+</body>
+</html>

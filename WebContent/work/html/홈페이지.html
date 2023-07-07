@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style> 
+
+
+/* body태그의 후손들 */
+body*{
+	box-sizing: border-box;
+	margin: 1px;
+	padding: 1px;
+
+}
+header,aside {
+    margin-bottom: 5px;
+}
+header img{
+    margin-top: 15px;
+    width: 35px;
+}
+header{
+	background: lightblue;
+  	text-align: left;
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+    
+}
+header a{
+    color: white;
+    text-decoration: none;
+}
+
+ 
+nav ul{
+    text-align: center;
+    list-style: none;
+   background-color: lightpink;
+   height: 30px;
+   width: 98%;
+   padding-top: 5px;
+   margin-top: 3px;
+   border-radius: 10px;
+
+}
+nav ul li{
+	 display: inline;
+	 letter-spacing: .3em;
+	 margin: 2em;
+     text-decoration: none;
+ }
+ nav ul li a{
+    text-decoration: none;   
+    color: white;
+ }
+ aside#left{
+	 float: left;
+	 width: 10em;
+	 margin-right: 5px;
+     margin-top: 1px;
+     background-color: lightgray;
+     height: 700px;
+     text-align: left;
+     border-radius: 10px;
+     
+ }
+ aside#left ul{
+     list-style: none
+     
+     
+     
+    }
+aside#left ul a{
+    text-decoration: none;
+    color: black;
+}
+aside#left h4{
+    color: black;
+}
+aside#right{
+    float: right;
+    background-color: lightgray;
+    width: 15em;
+    padding-left: 30px;
+    height: 700px;
+    text-align: left;
+    border-radius: 10px;
+
+}
+section#main{
+	 float: left;
+     width: 68%;
+     
+     padding-left: 40px;
+     border-radius: 10px;
+     height: 700px;
+     
+ }
+ article{
+    padding-left: 30px;
+ }
+a{
+    text-decoration: none;
+    color: white;
+}
+footer{
+     border-radius: 10px;
+	 clear: both;
+	 background-color:lightpink;
+	 color: white;
+	 text-align: center;
+     height: 30px;
+     margin-bottom: 30px;
+ }
+	 
+</style>
+
+</head>
+<body>
+<div id="container">
+</section>    
+<header>
+        <h1>
+            <img src="../images/쇼핑.png" alt="Shopping">
+            <a href=“홈페이지.html”>Web Shopping</a>
+       </h1>   
+</header>
+
+<nav>
+    <ul>
+        <li><a href="홈페이지.html">Home</a></li>
+        <li><a href="홈페이지.html">About Us</a></li>
+        <li><a href="홈페이지.html">News</a></li>
+        <li><a href="홈페이지.html">My Account</a></li>
+        <li><a href="홈페이지.html">Contacts</a></li>
+    </ul>
+</nav>
+
+<aside id="left">
+    <ul>
+        <h4>카테고리</h4>
+        <li><a href="컴퓨터.html" target="iframe1">컴퓨터</a></li>
+        <li><a href="의류.html" target="iframe1">의류</a></li>
+        <li><a href="음악.html" target="iframe1">음악</a></li>
+        <li><a href="영화.html" target="iframe1">영화</a></li>
+        <li><a href="가구.html" target="iframe1">가구/인테리어</a></li>
+        <li><a href="식품.html"  target="iframe1">식품</a></li>
+    </ul>
+</aside>
+
+<aside id="right">
+    <div id="shopcart">
+        <h4>Shopping Cart</h4>
+        현재 쇼핑카트에 물품이 없습니다.<br>
+        <a href="./장바구니.html" target="_blank">쇼핑카트 보기</a>
+    </div>
+
+    <div id="login">
+        <h4>Log In</h4>
+        <form action="./login.php" method="POST">
+            아이디<br>
+            <input type="text"><br>
+            패스워드<br>
+            <input type="password"><br>
+            <input type="submit" value="로그인">
+            <input type="reset" value="초기화"><br>
+            <a href="./회원가입.html" target="_blank">회원가입</a>
+            <a href="#">비밀번호 분실</a>
+        </form>
+    </aside>
+    </div>
+
+    <section id="main">
+        <article id="article1">
+            <iframe name="iframe1" src="컴퓨터.html" frameborder="0" width="100%" height="800"></iframe>
+           
+        </article>
+    </section>    
+    <footer>
+		<p>Copyright (c)2023 ksw</p>
+		</footer>
+
+
+
+</body>
+</html>
