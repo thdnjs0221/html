@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<script>
+   const arr = [ "사과", "바나나", "복숭아", "사과", "참외", "수박", "사과"];
+   
+   proc1 = () => {
+      varr = arr.slice(0,4) //이렇게하면 인덱스 0~3까지
+      str = `원래배열 : ${arr}<br>`;
+      str += `arr.slice(0,4) : ${varr}<br>`;
+      
+      str += `slice 후 배열 ${arr}<br>`;
+      document.getElementById('result1').innerHTML = str; 
+         }
+   
+   proc2 = () => {
+      
+      //사과와 사과 사이의 리스트 추출
+      //0번째 사과 찾고, 그 다음 사과를 찾아서 ..
+      //0+1, 3 해서 찾기
+      start=0;
+      end = 0;
+      
+      idx = 0;
+      str = "";
+      
+      while(true){
+      start = arr.indexOf("사과", idx); // 0번째
+      end = arr.indexOf("사과", start+1); //3번째
+      
+      if(end < 0) break;
+      newarr = arr.slice(start+1, end); //1,3 //바나나 복숭아
+      //str += newarr + ",";
+     
+      
+      // alert(newarr);
+      
+      idx = end; //idx = 3 
+   
+      }
+      
+      //String은 글자 하나하나가 인덱스
+      str= str.slice(0,str.length-1); //-> 마지막 ,없애고 출력 /마지막은 포함 x /인덱스는 -1작기때문에
+      
+      document.getElementById('result2').innerHTML = str; 
+      
+   }
+   
+
+   proc3 = () =>{
+      str = `원래배열 : ${arr} <br>`
+      
+//       arr.splice(2, 1, 100, 200, 300, 400);
+//       str += `arr.splice(2, 1, 100, 200, 300, 400) 수행 후 : ${arr} <br>`
+   //------------------------------------------------------------------
+      
+//       arr.splice(5, 0, "일", "이", "삼");
+//       str += `arr.splice(5, 0, "일", "이", "삼"); 수행 후 ${arr} <br>`
+   //----------------------------------------------------------------
+
+      arr.splice(4,2);
+      
+
+      document.getElementById('result3').innerHTML = str;
+   }
+   
+proc4=()=>{
+	
+	str= `배열길이: ${arr.length}<br>`;
+	
+	 
+	
+	str2= arr.join(",");
+	
+	str+=`str2 (join후)길이 :${str2.length}<br> `;
+	
+	arrstr="";
+	for(i=0; i<arr.length; i++){
+		
+		arrstr+=` arr[${i}] = ${arr[i]}<br>`;
+	}
+	
+	str+= arrstr + "<br>";
+	
+	
+	arrstr=""; //다시 초기화
+	for(let i=0; i<str2.length; i++ ){
+		arrstr+= `str2[${i}] = ${str2[i]}<br>`; 
+	}
+	
+	str += arrstr+"<br>";
+	document.getElementById('result4').innerHTML = str;
+	
+}
+
+proc5=()=>{
+	arr2= [ 100,200,300,400,500];
+	
+	cona= arr.concat(arr2); //arr+arr2 합친것
+	cona2= arr2.concat(arr);
+	
+	document.getElementById('result5').innerHTML = cona+"<br>";
+	document.getElementById('result5').innerHTML += cona2;
+	
+}
+
+
+
+</script>
+</head>
+<body>
+
+   <h3>proc1() : arr.slice(0,4);<br>
+   slice 후의 원래 배열은 바뀌지 않는다.
+   proc2() : 사과와 사과 사이의 리스트 출력</h3>
+   <input type="button" value="slice" onclick="proc1()">
+   <input type="button" value="slice" onclick="proc2()">
+   <br>
+   <div class="ddres" id="result1"></div>
+   <div class="ddres" id="result2"></div>
+   <br>
+   <hr color="red">
+
+   <h3>
+      splice(index, n, a, b, c) <br> index : 시작위치 <br> n : 삭제 갯수 -
+      0일때는 삭제되지 않는다 <br> a, b, c , ... : 추가되는 요소 <br>
+      splice(index, n, a, b, c)
+   </h3>
+   <input type="button" value="splice" onclick="proc3()">
+   <br>
+   <div class="ddres" id="result3"></div>
+   <br>
+   <hr color="red">
+   
+   <h3>join(구분자 ): 배열요소로 하나의 문자열 변환 </h3>
+   <input type="button" value="join" onclick="proc4()">
+   <input type="button" value="concat" onclick="proc5()">
+   <br>
+   <div class="ddres" id="result4"></div>
+   <div class="ddres" id="result5"></div>
+   <br>
+   <hr color="red">
+</body>
+</html>

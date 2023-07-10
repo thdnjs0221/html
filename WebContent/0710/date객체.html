@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+#dwdate{
+  border : 5px double blue;
+ 
+  color : red;
+  font-size : 2.0rem;
+}
+</style>
+<script>
+   today1 = new Date();
+   today2 = new Date(100000);
+   today3 = new Date("1999.3.5");
+   today4 = new Date(1999, 3-1, 5);
+
+window.onload = function(){
+   setInterval(function(){
+      today1 = new Date();
+      startTime = today1.toLocaleString()
+      document.getElementById('dwdate').innerHTML = startTime;
+   }, 1000);
+   
+}
+proc1 = () => {
+   
+   str = `${today1} <br>`;
+   str += `${today2} <br>`;
+   str += `${today3} <br>`;
+   str += `${today4} <br>`;
+   
+   document.querySelector('#result1').innerHTML = str;
+}
+
+proc2 = () => {
+   str = today1.toLocaleString() + "<br>";      /*시간 날짜 다나옴*/
+   str += today2.toLocaleDateString() + "<br>";      /*날짜만 나옴*/
+   str += today3.toLocaleTimeString() + "<br>";      /*시간만 나옴*/
+   str += today4.toLocaleString() + "<br>";
+   
+   document.querySelector("#result2").innerHTML = str;
+}
+
+proc3 = () => {
+//    alert(today1.getDay());
+   day = today1.getDay();
+   
+   switch(day){
+   case 0 : 
+      res = "일요일";
+      break;
+   case 1 : 
+      res = "월요일";
+      break;
+   case 2 : 
+      res = "화요일";
+      break;
+   case 3 : 
+      res = "수요일";
+      break;   
+   case 4 : 
+      res = "목요일";
+      break;
+   case 5: 
+      res = "금요일";
+      break;
+   case 6 : 
+      res = "토요일";
+      break;
+   
+   }
+   today = today1.toLocaleDateString();
+   
+   str = `오늘은 ${today} ${res} 입니다`;
+   
+   document.querySelector("#result3").innerHTML = str;
+}
+</script>
+</head>
+<body>
+<div id="dwdate"></div>
+<h3></h3>
+<input type="button" value="확인" onclick="proc1()">
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<div class="ddres" id="result1"></div>
+<div class="ddres" id="result2"></div>
+<br>
+<hr color="red">
+
+<h3>getDay() : 결과값 0 ~ 6 <br>
+0 : 일요일 ~ 6 : 토요일      -if, switch문 이용해서 변환하기
+</h3>
+<input type="button" value="확인" onclick="proc3()">
+<input type="button" value="확인" onclick="proc4()">
+<br>
+<div class="ddres" id="result3"></div>
+<div class="ddres" id="result4"></div>
+<br>
+<hr color="red">
+</body>
+</html>

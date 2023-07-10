@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<script>
+
+proc1=()=>{
+
+
+//const arr[];
+arr= new Array();
+while(true){
+
+	//입력
+	a= prompt("이름을 입력하세요"); //trim();앞뒤 공백제거
+	
+
+	//비교 trim()따로 비교해주기
+	if(a! null) a= a.trim();
+	if(a=="" || a==null)break;
+	  
+	//if(a==null) break;
+   //   if(a.trim()=="") break;
+	
+	//배열에추가
+	arr.push(a);
+}
+
+	//출력
+	
+	document.getElementById('result1').innerHTML = arr;
+}
+
+proc2=()=>{
+	//입력해서 배열에 있는지 판단 , 	idx=arr.indexOf(ㅂ,idx); 배열 넣은후 길이가 5이면brak;
+	const arr= new Array();   //const선언하면 arr다시 선언 가능
+	
+	while(true){
+		
+		//수입력
+		a1= prompt("숫자를 입력하세요 ");
+		
+		//배열요소 검색 ->indexOf(수입력). 없는 경우 push
+		idx= arr.indexOf(a1);
+		
+		
+		if(idx==-1)
+			arr.push(a1);	
+		//배열개수 비교
+		if(arr.length>=5) break;
+			
+	}
+	//출력
+	document.getElementById('result2').innerHTML = arr;
+
+}
+
+</script>
+
+
+
+</head>
+<body>
+
+<h3>prompt()를 이용하여 이름을 계속 입력 받아 배열에 저장<br>
+입력의 마지막은 공백 문자를 입력하거나 “취소” 버튼을 눌렀을 때(null)로 한다
+ </h3>
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+
+<h3>서로 중복되지 않은 정수 5개를 입력 받아 출력하는 프로그램을
+ </h3>
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<div class="ddres" id="result2"> </div>
+<br>
+<hr color="red">
+</body>
+</html>
