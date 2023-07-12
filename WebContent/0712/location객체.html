@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<script >
+proc1=()=>{
+	
+	
+	str=location.hostname+ "<br>"
+	str+=location.port+ "<br>"   //기본이라 안찍힘
+	str+=location.pathname+ "<br>"
+	str+=location.host+ "<br>" //hostname+port
+	
+	document.getElementById('result1').innerHTML=str;
+	
+}
+
+proc2=()=>{
+	
+	
+	
+	location.href="http://localhost/webpro/0711/date객체2.html"
+}
+
+
+
+
+
+
+</script>
+
+</head>
+<body>
+
+<h3> </h3>
+<input type="button" value="확인" onclick="proc1()">
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+</body>
+</html>

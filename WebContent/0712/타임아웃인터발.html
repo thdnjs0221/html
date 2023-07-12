@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<style> 
+div.ddres{
+		height: 50px;
+}
+
+
+
+</style>
+
+<script> 
+
+proc1=()=>{ 
+	
+	setTimeout(function(){},500);
+	//람다식=> 
+	setTimeout( () => {
+		
+		vres1=document.querySelector('#result1');
+		
+		vres1.style.backgroundColor='red';
+		
+		
+		
+		
+	},500);
+	
+	
+}
+
+
+proc2=(but)=>{
+	//매개변수 but는 this를 받은 변수
+	//but는 확인 버튼이다
+	//자기자신인 확인 버튼을 더이상 사용  할 수 없도록 설정
+	but.style.display="none";
+	
+	gbut=but; //지역변수를 전역변수로 생성(대입)stop이나 다른메서드에서도 사용할수있게
+	
+	vres2= document.getElementById('result2');
+	//setInterval(function(){},500)
+	idx= setInterval( ()=>{
+		
+		cr=parseInt(Math.random()*256);
+		cg=parseInt(Math.random()*256);
+		cb=parseInt(Math.random()*256);
+		
+	//vres2.style.backgroundColor=`rgb(${cr},${cg},${cb})`;
+	//16진수로 변경한다
+	cr16=cr.toString(16);
+	cg16=cg.toString(16);
+	cb16=cb.toString(16);
+	
+	
+	vres2.style.backgroundColor=`#${cr16}${cg16}${cb16}`;
+	console.log(idx);
+	},500)
+	
+	
+}
+
+stop=()=>{
+	
+	//확인버튼 다시 나타나게 한다
+	//확인버튼 검색
+	gbut.style.display="block";
+	
+	//setInterval종료
+	clearInterval(idx);
+	
+	
+}
+
+
+</script>
+
+</head>
+<body>
+
+<h3>setTimeout: 정해진 시간이 경과 후 한 번 실행 후 종료 </h3>
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+
+<h3>setInterval: 정해진 시간이 경과할 때마다 계속 실행한다<br>
+종료하기 위해서 clearInterval()메서드가 필요하다. </h3>
+<input type="button" value="확인" onclick="proc2(this)">
+<input type="button" value="종료" onclick="stop()">
+<br>
+<div class="ddres" id="result2"> </div>
+<br>
+<hr color="red">
+</body>
+</html>
