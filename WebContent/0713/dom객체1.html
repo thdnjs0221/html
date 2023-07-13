@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script>
+proc1=()=>{
+	//첫번째 ul요소를 검색
+	vul=document.querySelector('ul');
+	//vul=document.getElementsByTagName('ul')[0];
+	
+	//li요소를 검색한다
+	lilist= vul.getElementsByTagName('li');
+	//lilist= vul.querySelectorAll('li');
+	
+	str="";
+	
+	for(i=0; i<lilist.length; i++){
+		//console.log(lilist[i].firstChild);
+		//alert(lilist[i].firstChild.data)
+		str+=lilist[i].firstChild.data+"<br>";
+		
+	}
+	document.getElementById('result1').innerHTML=str;
+}
+
+
+addText=()=>{
+	
+	
+	vtext="안녕하세요";
+	textNode= document.createTextNode(vtext)
+	
+	//부모.appendChild(자식)
+	document.getElementById('result').appendChild(textNode);
+}
+proc2=()=>{
+	
+	//vul2=document.getElementsByTagName('ul')[1];
+	//vul2.querySelectorAll('li');
+	
+	vul2=document.querySelectorAll('ul');
+	vlist=vul2[1].querySelectorAll('li');
+	
+	//vul2=document.querySelectorAll('ul');
+	//vul2[1].querySelectorAll('li');
+	
+	for(i=0; i<vlist.length; i++){
+		//arlert(vlist[i].firstChild);
+		vstr=vlist[i].firstChild.data;
+		
+		vimg=document.createElement('img');
+		vimg.src="../images/"+vstr+".jpg";
+		vimg.alt=vstr;
+		
+		vlist[i].appendChild(vimg);
+		
+	}
+}
+
+proc3=(vli)=>{
+	
+	//vli: 호출시 클릭한 li 객체를 받는 변수
+	
+	//클릭한 li에서 문자를 가져온다
+	vstr= vli.firstChild.data;
+	
+	//img객체를 생성
+	vimg=document.createElement('img');
+	vimg.src="../images/"+vstr+".jpg";
+    vimg.alt=vstr;
+
+	vli.appendChild(vimg);
+
+}
+
+
+</script>
+<style>  
+
+img{
+width: 50px;
+height: 50px;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<h3> li의 문자열 을 추출 해당 문자열로 이미지 객체를 생성-craeteElemnet('img')
+ 이미지 객체를 해당 li요소에 추가한다</h3>
+<ul> 
+		<li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+        <li>List item 4</li>
+        <li>List item 5</li>
+       
+</ul>
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+버튼을 클릭하면 버튼을 생성해서 result에 추가한다
+<br>
+<input type="button" value="추가" onclick="addText()">
+<br>
+<div id="result" class="ddres"> </div>
+<hr color="red">
+<h3> </h3>
+<ul>
+        <li>Penguins</li>
+        <li>Hydrangeas</li>
+        <li>아메리카노</li>
+        <li>에스프레소</li>
+        <li>딸기스무디</li>
+</ul>
+<input type="button" value="확인" onclick="proc2()">
+<br>
+<hr color="red">
+
+
+<h3> li의 문자열 을 추출
+ 해당 문자열로 이미지 객체를 생성-craeteElemnet('img')
+ 이미지 객체를 해당 li요소에 추가한다 </h3>
+<ul>
+        <li onclick="proc3(this)">Penguins</li>
+        <li onclick="proc3(this)">Hydrangeas</li>
+        <li onclick="proc3(this)">아메리카노</li>
+        <li onclick="proc3(this)">에스프레소</li>
+        <li onclick="proc3(this)">딸기스무디</li>
+</ul>
+<hr color="red">
+
+
+</body>
+</html>

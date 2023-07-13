@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script>
+
+proc1=()=>{
+	
+	//문자배열
+	arr=["hello","happy","merry christmas","javascript","공부합시다","사랑은 늘 도망가"]
+	rand=parseInt(Math.random()*arr.length);
+	
+	//문자열 선택: arr[rand]
+	arr[rand]
+	//p태그 생성
+	vp=document.createElement('p');
+	//textNode 생성
+	vtext= document.createTextNode(arr[rand]);
+	//p태그에 vtext룰 추가
+	vp.appendChild(vtext)
+	//p태그를 result1에 추가 - result1검색한다
+	vresult= document.getElementById('result1')
+	
+	//p태그를 result1에 추가
+	vresult.appendChild(vp);
+
+
+}
+
+delproc=()=>{
+	
+	//result1의 첫번째 (마지막)자식을 선택!?!
+	//부모.removeChild(자식)
+	vresult.removeChild(vresult.firstChild)
+	
+	
+	//result1
+	
+	
+}
+
+</script>
+
+
+</head>
+<body>
+
+<h3>버튼을 클릭하면 문자열을 가진 p태그를 생성하여 result1번에 추가한다 
+<br>p태그 생성-createElement('p')
+textNode생성-createtextNode('문자열')
+textNode를 p태그에 추가한다-.p태그 .appendChild(textNode)
+p태그를 result1번에 추가한다 -result1.appendChild(p태그)
+
+
+</h3>
+<input type="button" value="확인" onclick="proc1()">
+<input type="button" value="삭제" onclick="delproc()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+</body>
+</html>
