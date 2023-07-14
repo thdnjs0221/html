@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+
+
+<style>
+img {
+   width: 80px;
+   height: 80px;
+}
+
+#dred {
+   width : 80%;
+   height: 400px;
+ /*   border : 1px solid blue; */
+   margin : 1px;
+   padding : 1px;
+   display : flex;
+   flex-direction: row;
+   background: lightgray;
+}
+
+/* 
+.dgr{ 
+    float : left; 
+    width: calc() 
+ } 
+ 
+ */
+
+.dgr{
+   box-sizing : border-box;
+   flex : 24%;
+ /*   border : 1px solid green; */
+   margin : 1px;
+   height: 90%;
+   padding: 2px;
+   background: gray;
+   } 
+   
+#dred img{
+width: 99%;
+height: 75%
+}
+</style>
+
+
+<script>
+
+/* proc1=()=>{
+	//시작버튼이 사라지도록 한다
+	document.getElementById('start').style.display="none";
+	//
+
+} */
+
+selimg=null;
+proc1=(but)=>{ //this 대입  but-> 확인버튼이면서 지역변수
+	but.style.display="none";
+	
+	//stop()시 수행됐던 테두리를 지운다
+	if(selimg!=null) selimg.style.border="none";
+	
+	
+	gbut= but; //전역변수로 만들어줌 
+	
+
+//ressult1검색
+vres1=document.getElementById('result1');
+
+vid =setInterval(function(){
+	//첫번째 이미지를 선택한다-result1 검색후 첫번째 자식을 찾는다 
+	child= vres1.firstChild;
+	//부모의 뒤로 이동 =appendChsild()
+	vres1.appendChild(child);
+	
+},500)
+
+
+
+}
+
+stop=()=>{
+	
+	
+	//확인 버튼 나타내기 
+	gbut.style.display="inline";
+	//종료하기 
+	clearInterval(vid);
+	
+	//랜덤발생- img태그의 개수만큼 곱해서 랜덤을 발생 
+	vimg=document.getElementsByTagName('img');//vimg는 배열이 된다 //querySelectorAll도 사용 가능
+	
+	rand=parseInt(Math.random()*vimg.length);
+	
+	//랜덤 수에 해당하는 이미지를 선택한다
+	selimg= vimg[rand];
+	
+	//선택된 이미지에 테두리를 설정한다- 시작 누를때 테두리는 없어짐
+	selimg.style.border="10px double red";
+	//
+	
+}
+//this를 파라미터로 넘겨받은 호출방식
+/* proc2=(vimg)=>{
+
+} */
+window.onload=function(){
+	//img태그를 검색하여 일괄등록
+	vimg=document.querySelectorAll('#dred img'); //만약 function밖에 있는것은 실행은 제일 최초로 실행 #dred img'를 찾을수 없어서 window 안에 넣어줌
+	for(i=0; i<vimg.length; i++){
+		
+		vimg[i].addEventListener('click',saleProc);
+	}
+}
+
+
+ptag=null;
+saleProc=function(){ //람다x this사용할거라서,,
+	//alert(this);
+	//this-> vimg
+	
+	//이미 생성된 p태그를 삭제한다
+	if(ptag!=null) {
+		//id=sale인 p요소를 검색
+		//document.getElementById('sale').remove();
+		ptag.remove();
+	}	
+	
+	//랜덤으로 할인율을 생성(10~50%)
+	rand= parseInt(Math.random() * 41 + 10)
+	
+	text="할인율: "+rand+"%"; 
+	//textNode를 생성
+	tNode=document.createTextNode(text);
+	
+	//p태그 생성
+	ptag=document.createElement('p');
+	ptag.id="sale";
+	
+	//p태그에 tNode를 추가
+	ptag.appendChild(tNode);
+	
+	//p태그를 .dgr에 추가 -> 클릭한 이미지 기준으로 부모를 검색한다  . p태그의 부모는 dgr
+	this.parentNode.appendChild(ptag);
+	
+	//한번 클릭 실행 후 더이상 실행되지 않도록 이벤트를 제거
+	this.removeEventListener('click',saleProc) //-> this는 클릭한 이미지 ! 
+	
+	
+
+}
+//만약 function밖에 있는것은 실행은 제일 최초로 실행 
+</script>
+</head>
+<body>
+
+<h3> </h3>
+<!-- <input type="button" value="시작" id="start" onclick="proc1()"> -->
+<input type="button" value="시작" onclick="proc1(this)">
+<input type="button" value="종료" onclick="stop()">
+<br>
+<div class="ddres" id="result1">
+
+	<img src="../images/딸기스무디.jpg" alt="딸기스무디.jpg">
+	<img src="../images/꽃.jpg" alt="꽃.jpg">
+	<img src="../images/단풍.jpg" alt="단풍.jpg">
+	<img src="../images/뱅쇼.jpg" alt="뱅쇼.jpg">
+	<img src="../images/아메리카노.jpg" alt="아메리카노.jpg">
+	<img src="../images/에스프레소.jpg" alt="에스프레소.jpg">
+ </div>
+<br>
+<hr color="red">
+
+<h3> 이벤트 설정
+각 태그마다 onclick=proc2(this)방법으로 설정<br>
+스크립트에서 img를 검색하여 일괄 등록방법 
+.addEventListener('click',함수이름)
+이벤트 제거 방법
+removeEventListener('click',함수이름)
+
+
+</h3>
+<div id="dred">
+<!-- 	<div class="dgr"><img onclick="proc2(this)" src="../images/대나무숲.jpg" alt="대나무숲.jpg"> </div>
+	<div class="dgr"><img onclick="proc2(this)" src="../images/셔틀콕.jpg" alt="셔틀콕.jpg"> </div>
+	<div class="dgr"><img onclick="proc2(this)" src="../images/수국.jpg" alt="수국.jpg"> </div>
+	<div class="dgr"><img onclick="proc2(this)" src="../images/아메리카노.jpg" alt="아메리카노.jpg"> </div> -->
+
+
+	<div class="dgr"><img src="../images/대나무숲.jpg" alt="대나무숲.jpg"> </div>
+	<div class="dgr"><img src="../images/셔틀콕.jpg" alt="셔틀콕.jpg"> </div>
+	<div class="dgr"><img src="../images/수국.jpg" alt="수국.jpg"> </div>
+	<div class="dgr"><img src="../images/아메리카노.jpg" alt="아메리카노.jpg"> </div> 
+</div>
+
+
+
+
+</body>
+</html>

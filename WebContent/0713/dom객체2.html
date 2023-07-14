@@ -6,10 +6,13 @@
 <link rel="stylesheet" href="../css/style.css">
 <script>
 
+
+arr=["hello","happy","merry christmas","javascript","공부합시다","사랑은 늘 도망가"];
+
 proc1=()=>{
-	
-	//문자배열
-	arr=["hello","happy","merry christmas","javascript","공부합시다","사랑은 늘 도망가"]
+	//appendChild- 새로운거 만들때, 앞에 있는거 뒤로 옮길때 사용
+	//문자배열 전역변수 
+	//arr=["hello","happy","merry christmas","javascript","공부합시다","사랑은 늘 도망가"]
 	rand=parseInt(Math.random()*arr.length);
 	
 	//문자열 선택: arr[rand]
@@ -18,7 +21,7 @@ proc1=()=>{
 	vp=document.createElement('p');
 	//textNode 생성
 	vtext= document.createTextNode(arr[rand]);
-	//p태그에 vtext룰 추가
+	//p태그에 vtext룰 추가, 
 	vp.appendChild(vtext)
 	//p태그를 result1에 추가 - result1검색한다
 	vresult= document.getElementById('result1')
@@ -33,6 +36,7 @@ delproc=()=>{
 	
 	//result1의 첫번째 (마지막)자식을 선택!?!
 	//부모.removeChild(자식)
+	//부모:vresult
 	vresult.removeChild(vresult.firstChild)
 	
 	
@@ -41,25 +45,109 @@ delproc=()=>{
 	
 }
 
+proc2=()=>{
+	//랜덤발생
+	rand= parseInt(Math.random()*arr.length);
+	
+	//p태그 생성한다
+	vp=document.createElement('p');
+	//textNode생성 -arr[rand]
+	tNode=document.createTextNode(arr[rand]);
+	//input버튼 생성한다
+	vinput=document.createElement('input');
+	vinput.type="button";
+	vinput.value="삭제";
+	/*vinput.onclick=function(){ //람다식 함수를 쓰면 안된다.람다에서 this는 function이기 때문에.
+		this.parentNode.remove();//this=>vinput / 부모는 p태그 	
+	} 	*/						
+	vinput.onclick=removeP; //removeP->함수이름  함수호출이 아니고 주소를 대입하는 방법
+	
+	//p태그에 tNode를 추가한다
+	vp.appendChild(tNode);
+	//p태그에 vinput를 추가한다
+	vp.appendChild(vinput);
+	//result2를 검색
+	vres2=document.getElementById('result2');
+	//vres2에 p태그를 추가
+	vres2.appendChild(vp);
+	
+}
+
+removeP=function(){  //람다함수로 쓸수 없음 this쓸때는 ..
+	this.parentNode.remove();
+
+}
+
+proc3=()=>{
+	
+	//p태그를 생성
+	vp=document.createElement('p');
+	// input file를 생성
+	vfile=document.createElement('input');
+	vfile.type="file";
+	//input button 생성 -삭제 버튼을 만들어라 
+	vinput=document.createElement('input');
+	vinput.type="button";
+	vinput.value="삭제";
+	vinput.onclick=function(){
+		this.parentNode.remove();
+	} 
+	//p태그에 vfile을 추가 
+	vp.appendChild(vfile);
+	//p태그에 vinput을 추가
+	vp.appendChild(vinput);
+	//result3을 검색 
+	vres3=document.getElementById('result3');
+	//result3에 p태그 추가	
+	vres3.appendChild(vp);
+}
+
 </script>
 
 
 </head>
 <body>
 
-<h3>버튼을 클릭하면 문자열을 가진 p태그를 생성하여 result1번에 추가한다 
-<br>p태그 생성-createElement('p')
-textNode생성-createtextNode('문자열')
-textNode를 p태그에 추가한다-.p태그 .appendChild(textNode)
-p태그를 result1번에 추가한다 -result1.appendChild(p태그)
+	<h3>
+		버튼을 클릭하면 문자열을 가진 p태그를 생성하여 result1번에 추가한다 <br>p태그
+		생성-createElement('p') textNode생성-createtextNode('문자열') textNode를 p태그에
+		추가한다-.p태그 .appendChild(textNode) p태그를 result1번에 추가한다
+		-result1.appendChild(p태그)
 
 
-</h3>
-<input type="button" value="확인" onclick="proc1()">
-<input type="button" value="삭제" onclick="delproc()">
-<br>
-<div class="ddres" id="result1"> </div>
-<br>
-<hr color="red">
+	</h3>
+	<input type="button" value="확인" onclick="proc1()">
+	<input type="button" value="삭제" onclick="delproc()">
+	<br>
+	<div class="ddres" id="result1"></div>
+	<br>
+	<hr color="red">
+
+	<h3>
+		버튼을 클릭하면 문자열을 가진 p태그를 생성하여 result1번에 추가한다 <br>p태그
+		생성-createElement('p') textNode생성-createtextNode('문자열') input태그를 생성-
+		createElement('input') .type="button" .value="삭제" textNode를 p태그에
+		추가한다-.p태그 .appendChild(textNode) input button을 p태그에 추가 p태그를 result2번에
+		추가한다 -result2.appendChild(p태그)
+	</h3>
+	<input type="button" value="확인" onclick="proc2()">
+
+	<br>
+	<div class="ddres" id="result2"></div>
+	<br>
+	<hr color="red">
+	
+	<h3>
+	추가버튼을 클릭하면 input file객체를 생성한다.
+		
+	</h3>
+	
+
+	<br>
+	<input type="button" value="추가" onclick="proc3()">
+	<div class="ddres" id="result3">
+	</div>
+	<br>
+	<hr color="red">
 </body>
 </html>
