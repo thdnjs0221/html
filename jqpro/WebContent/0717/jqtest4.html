@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="shortcut icon" href="../images/cloud03.jpg">
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+
+<script>
+window.onload=function(){
+	hlist=document.querySelectorAll('#result2 h1');
+	for(i=0; i<hlist.length; i++){
+		hlist[i].addEventListener('click', changeColor);
+	}
+	
+	//result3에 h1태그를 검색
+	$('#result3 h1').on('click',function(){
+		$(this).css('color','hotpink');
+	}) //jquery
+	
+	$('#btn4').on('click',function(){
+        //전체 배경색을 변경 
+        $('*').css('background','yellow');
+        // h1요소의 글자색을 파랑 
+        $('#result4 h1').css('color','blue');
+	     //id가 para인 요소의 글자색은 녹색
+	     $('#para').css('color','green')
+	     //class 가 sample요소의 글자색은 빨강 
+		$('#result4 .sample').css('color','red');
+	})
+	
+}
+
+changeColor=function(){
+	this.style.color='green';	
+}
+
+proc1=(vh1)=>{
+	vh1.style.color='red';
+	
+	
+}
+
+
+</script>
+</head>
+<body>
+
+	<h3>클릭한 대상을 this파라미터를 함수호출시 넘겨준다 <br>
+	onclick="proc1(this)</h3>
+	<br>
+	<div class="ddres" id="result1">
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+		<h1 onclick="proc1(this)">무궁화 꽃이 피었습니다</h1>
+
+	</div>
+	<br>
+	<hr color="red">
+	
+	
+	<h3>이벤트 일괄등록<br>
+	addEventListener('click',함수이름)</h3>
+	<br>
+	<div class="ddres" id="result2">
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+
+	</div>
+	<br>
+	<hr color="red">
+	
+	<h3>jquery 방식- script에서 onclick이벤트를 설정<br>
+	</h3>
+	<br>
+	<div class="ddres" id="result3">
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+		<h1>무궁화 꽃이 피었습니다</h1>
+
+	</div>
+	<br>
+	<hr color="red">
+	
+	<h3>jquery 방식- script에서 onclick이벤트를 설정<br>
+	</h3>
+	<br>
+	<input type="button" value="확인" id="btn4">
+	<div class="ddres" id="result4">
+		 <h1> 제목입니다 </h1>
+		 <h2 id="para"> 작은 제목입니다 </h2>
+		 <h2 class="sample"> 샘플입니다 </h2>
+	</div>
+	<br>
+	<hr color="red">
+</body>
+</html>
