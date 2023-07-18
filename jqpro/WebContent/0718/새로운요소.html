@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+
+<script>
+
+
+
+$(() => {
+	
+	$('#btn2').on('click',function(){
+		//새로운 요소 p태그 만들기
+		ptag=$('<p></p>',{
+			class: "aa",
+			text: "hello~",
+			/* click: function(){
+				cr= parseInt(Math.random() * 256);
+				cg= parseInt(Math.random() * 256);
+				cb= parseInt(Math.random() * 256);
+				
+				$(this).css('color',`rgb(${cr}, ${cg}, ${cb})`);
+				
+			} */
+			click : proc2
+			
+		})
+		$('#result2').append(ptag);
+		//$(ptag).appendTo($('#result2'));  //appendTo: 부모가 뒤에 올때 
+		
+		
+	})//btn2 끝
+	
+	function proc2(){
+		//alert(this); //클릭한 p태그-> this
+		cr= parseInt(Math.random() * 256);
+		cg= parseInt(Math.random() * 256);
+		cb= parseInt(Math.random() * 256);
+		
+		$(this).css('color',`rgb(${cr}, ${cg}, ${cb})`);
+	}
+	
+	
+	
+	$('#btn1').on('click',() => {
+		
+		//새로운 요소 p태그 만들기
+		ptag=$('<p id="aa" onclick="proc1(this)"> Hello~~</p>');
+		$('#result1').append(ptag);
+		
+		
+		/* //스크립트 방식
+		//p태그 생성
+		vp= document.createElement('p');
+		vp.onclick =function(){
+			
+		}
+		//textNode 생성
+		vtext= document.createTextNode("hello!")
+		
+		//pxo태그에 vtext추가 
+		vp.appendChild('vtext')
+		
+		document.geElementById('result1').appendChild(vp)
+		*/
+	})
+
+})
+function proc1(pp){
+	//alert("aa");
+	//pp; 클릭한 p태그를 파라미터로 this를 받은 지역 변수 
+	//dom변수다 ,제이쿼리 변수 아니다 .
+	
+	//pp의 글자색깔을 바꾼다 
+	cr= parseInt(Math.random() * 256);
+	cg= parseInt(Math.random() * 256);
+	cb= parseInt(Math.random() * 256);
+	
+	//pp.style.color= `rgb(${cr}, ${cg}, ${cb})`;
+	//제이쿼리:
+	$(pp).css('color',`rgb(${cr}, ${cg}, ${cb})`);
+
+		}
+
+		
+
+</script>
+
+</head>
+<body>
+
+	<h3>새로운 p태그를 생성하여  result1에 추가한다 <br>
+	ptag= $("html문장")</h3>
+	<input type="button" value="확인" id="btn1">
+	<br>
+	<div class="ddres" id="result1"></div>
+	<br>
+	<hr color="red">
+	
+	<h3>새로운 p태그를 생성하여  result2에 추가한다 <br>
+	$('&lt; p>&lt;/p>',{속성들})
+	</h3>
+	<input type="button" value="확인" id="btn2">
+	<br>
+	<div class="ddres" id="result2"></div>
+	<br>
+	<hr color="red">
+</body>
+</html>

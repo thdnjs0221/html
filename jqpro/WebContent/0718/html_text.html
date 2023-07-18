@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+<script>
+function proc1(){
+	//body태그 안의 모든 내용을 가져오기
+	
+	//태그 포함-html()
+	vhtml= $('body').html();
+	
+	//출력하기 
+	//alert(vhtml); 
+	//$('#result1').html(vhtml);
+	$('#result1').text(vhtml);
+	
+	
+	
+}
+function proc2(){
+	
+	//태그 미포함 -text()
+	vtext = $('body').text();
+	alert(vtext);
+	
+	//출력
+	//$('#result2').html(vtext);
+	$('#result2').text(vtext);
+	
+	//스크립트
+	//vtext=document.querySelector('body').innerText;
+	//alert(vtext);	
+	
+}
+
+function proc3(){
+	/* vhtml= $('#dd2 div').html();
+	alert(vhtml); */
+	
+	//반복문
+	/* vhtml="";
+	$('#dd2 div').each(function(i){ 	
+		vhtml+= $($('#dd2 div')[i]).html()+"\n" 
+		
+	}) */
+	
+	
+	/* vhtml="";
+	$('#dd2 div').each(function(i,param){ 	// param-> $('#dd2 div')[i]	
+		vhtml+= $(param).html()+"\n" 
+	}) */
+	
+	
+	vhtml="";
+	$('#dd2 div').each(function(){ 
+		vhtml+=$(this).html()+"\n";
+	})
+	
+	
+	
+	alert(vhtml);  //첫번째거 3번반복 
+	 
+}
+
+function proc4(){
+	vtext=$('#dd2 div').text();
+	alert(vtext);
+	
+}
+</script>
+
+</head>
+<body>
+
+<h3> body를 대상으로 수행: html() / text(): body의 모든값을 가져온다<br>
+특정 태그 포함-html()<br>
+태그미포함 -text()<br>
+</h3>
+<input type="button" value="html" onclick="proc1()">
+<input type="button" value="text" onclick="proc2()">
+<br>
+<div class="ddres" id="result1"></div>
+<div class="ddres" id="result2"></div>
+<br>
+<hr color="red">
+
+
+<h3>특정대상으로  대상으로 수행: html() / text(): 해당요소의 값만 가져온다<br>
+태그 포함-html(): 특정대상이 여러개일때 첫번째 요소만 가져온다 <br>
+태그미포함 -text()<br>
+</h3>
+<div id="dd2"> 
+	<div>Hello<p>1<span>홍길동</span></p></div>
+    <div>HI<p>2<span>개나리</span></p></div>
+    <div>Good<p>3<span>진달래</span></p> </div>
+</div> 
+<input type="button" value="html" onclick="proc3()">
+<input type="button" value="text" onclick="proc4()">
+<br>
+<div class="ddres" id="result3"></div>
+<div class="ddres" id="result4"></div>
+<br>
+<hr color="red">
+
+
+</body>
+</html>
