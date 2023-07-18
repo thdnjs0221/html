@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script> 
+
+
+<script>
+ $(function(){
+	
+	//전체 p태그 검색
+	$('p').css('color','blue');
+	
+	//id= result1 안의 p태그 검색
+	$('#result1 p').css('color', 'green');
+	
+	//태그 이름 form 안에 p태그 검색
+	$('form p').css('color', 'red');
+	
+	//객체 forms [0]를 컨텍스트로 지정 
+    //$(  선택자, [컨텍스트] )
+    //컨텍스트는 검색의 시작점을 지정, 생략하면 문서 전체에서 검색!
+	$('p', document.forms[0]).css('background','yellow');   //자식, 부모 -> 객체 변수라 ''없는 형식!
+
+
+    
+	//클릭한 요소(.ddres)내부의 p태그를 선택
+	$('.ddres').on('click', function(){
+		    $('p',this).css('font-size', '+=5px')  //**중요!**자식 부모(this->ddres)this는 '' 못씀
+	})
+ 
+ })
+ 
+
+</script>
+
+
+</head>
+<body>
+
+<h3> </h3>
+
+<br>
+<div class="ddres" id="result1">
+
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+</div>
+
+<div class="ddres" id="result2">
+
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+</div>
+
+<br>
+<hr color="red">
+<form class="ddres" >
+
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+</form>
+
+<form class="ddres" >
+
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+<p>무궁화 꽃이 피었습니다</p>
+</form>
+
+
+<!-- <script>
+//p태그 검색
+$('p')   //가능 ! p태그 거쳐와서 ,,
+
+</script> -->
+
+</body>
+</html>
