@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+<script>
+
+
+$(function(){
+	
+	$('#btn1').on('click',function(){
+		
+		//input  요소 테두리 lime , 배경색  핑크
+		$('#result1 input').css({'border': 'solid lime' ,  //스타일은 필수 ! 스타일과 lime같이 줘야함 
+					'background':'pink'
+				});
+		//input   type이 button 인 요소 배경색 노란      
+		$('#result1 input[type=button]').css('background','yellow')
+		$('#result1 input:button').css ('background','yellow')
+		
+		//Button  요소와 input   type이 button 인 요소 배경색 하늘색
+		$(':button').css('background','skyblue')
+		
+		//Type이 submit 요소의 배경색 녹색
+		//$('input[type=submit], button[type=submit]')
+		$(':submit').css('background','green')
+		
+		//Type이 reset인 요소의 배경색 노랑 
+		$(':reset').css('background','yellow')
+		
+		//Type이 text, password 인 요소의 테두리 파랑
+		//$('input [type=text], input[type=password]')
+		$(':text, :password').css('border','double blue')
+		
+		//Type이 file, image인요소의 테두리 빨강
+		$('input [type=file], input[type=image]')
+		$(':file, :image').css('border', '9px inset red')
+		
+
+		
+	})
+	
+	
+})
+
+
+
+
+</script>
+
+<style>
+
+
+input[type=image]{
+	width: 50px;
+	height: 50px;
+
+}
+
+</style>
+
+</head>
+<body>
+
+   <h3></h3>
+   <input type="button" value="확인" id="btn1">
+   <br>
+   <div class="ddres" id="result1">
+      <!--  onsubmit="return false;" -->
+      <form action="test.jsp"  onsubmit="return false;" method="post">
+         Text : <input type="text" /><br> 
+         
+         Password : <input type="password" /><br><br> 
+         
+         Radio : <input type="radio" name="radioGroup" id="radioA"
+            value="A" /> A <input type="radio" name="radioGroup" id="radioB"
+            value="B" /> B<br><br>
+         
+         Checkbox : <input type="checkbox" name="checkboxes"
+            id="checkbox1" value="1" /> 1 <input type="checkbox"
+            name="checkboxes" id="checkbox2" value="2" /> 2<br><br> 
+         
+         Textarea : <br><textarea rows="15" cols="50" id="myTextarea" id="myTextarea"></textarea><br><br> 
+         
+         <!-- <input type="image"은 전송버튼과 같다. -->
+         Image : <input type="image" src="../images/Jellyfish.jpg"><br><br> 
+         
+         File : <input type="file"><br><br> 
+         
+         Buttons :
+         <button>전송</button> <!-- type 생략시 submit -->
+         <button type="button" id="normalButton">Normal</button>
+         <button type="submit" id="submitButton">Submit</button>
+         <button type="reset" id="resetButton">Reset</button>
+         <br>
+         <br> <input type="button" value="일반버튼">
+            <input type="submit" value="전송버튼">
+            <input type="reset"   value="초기화버튼"> <br><br>
+      </form>
+   </div>
+   <br>
+   <hr color="red">
+
+</body>
+</html>

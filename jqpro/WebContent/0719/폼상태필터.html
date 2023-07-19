@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+<script>  
+$(function(){
+	
+	$('#btn1').on('click',function(){
+		$('form *:disabled').css('border','2px solid lime');
+		$('form *:enabled').css('border','2px solid red');
+		
+	})
+	$('#btn2').on('click',function(){
+		//$('input[type=checkbox]:checked')
+		//$('input:checkbox:checked')
+		
+		str="";
+		
+		$(':checkbox:checked').each(function(){
+		str+= $(this).val()+"&nbsp;&nbsp;&nbsp;"  //this->:checkbox:checked
+		})
+		
+		 $('#result2 div').html(str);
+	})
+	
+	$('#btn3').on('click',function(){
+		
+		str="";
+		
+		$('#spring option:selected').each(function(){
+			str+=$(this).val()+"&nbsp;&nbsp;&nbsp;" 
+			
+		})
+		$('#result3 div').html(str);
+	})
+	
+})
+
+</script>
+<style>
+	select {
+		width: 200px;
+		
+}
+select option{
+	height: 40px;
+	font-size: 1.5rem;
+	
+}
+
+
+</style>
+</head>
+<body>
+	<h3></h3>
+	<input type="button" value="확인" id="btn1">
+	<br>
+	<div class="ddres" id="result1">
+		<form action="test.jsp" method="post">
+			<input type="text" name="id" ><br> <input
+				type="password" value="1234" name="pass" disabled="disabled"  ><br> 
+				<select name="disSelect" disabled="disabled" >
+				<option>Option1</option>
+				<option>Option2</option>
+				<option selected>Option3</option>
+				<option>Option4</option>
+			</select> <br>
+			<textarea name="enTextarea" rows=10 cols=20>text</textarea>
+			<br> <input type="button" value="확인" onclick="alert('hello!!')"> <br>
+				<input type="submit" disabled="disabled">
+		</form>
+	</div>
+	<br>
+	<hr color="red">
+	
+	<h3></h3>
+	<input type="button" value="확인" id="btn2">
+	<br>
+	<div class="ddres" id="result2"> 
+		<form action="check.jsp" method="post">
+			취 미 :
+ 			<input type="checkbox" name="hobby" value="여행" checked >여행
+			<input type="checkbox" name="hobby" value="장기">장기
+			<input type="checkbox" name="hobby" value="바둑">바둑
+			<input type="checkbox" name="hobby" value="독서" checked >독서
+			<input type="checkbox" name="hobby" value="낚시">낚시<br><br>
+			<input type="submit" value="전송">
+		</form>
+		<div> </div>
+	</div>
+	<hr color="red">
+	
+	<h3></h3>
+	<input type="button" value="확인" id="btn3">
+	<br>
+	<div class="ddres" id="result3"> 
+		<form action="" method="">
+			봄소식 : <br>
+			<select name="spring" id="spring" multiple size="6">
+				<option>개나리</option>
+				<option selected>진달래</option>
+				<option>민들레</option>
+				<option selected>벚꽃</option>
+				<option>목련</option>
+				<option>철쭉</option>
+			</select>
+		</form>
+		<div> </div>
+	</div>
+	<br>
+	<hr color="red">
+	
+</body>
+</html>
