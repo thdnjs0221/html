@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+<script> 
+
+$(function(){
+	
+	$('#btn1').on('click', function(){
+		
+		str=" **** hidden 객체****<br>"
+		$('form *:hidden').each(function(){
+			//alret(this.tagName);
+			
+		if(this.tagName == "INPUT"){ //$가없으면 dom속성
+			//input 태그일때 
+			str+= this.tagName+ ":" + $(this).attr('name') + "["+
+			$(this).val() + "] <br>" 
+		}else{
+			//input가 아닐때
+			str+= this.tagName+ ":" + $(this).text() +"<br>" 
+			}
+		})
+		$('#result1').html(str);
+	})
+	
+	$('#btn2').on('click',function(){
+		str=" **** visible 객체****<br>"
+		$('form *:visible').each(function(){
+			
+			if(this.tagName=="INPUT"){
+				vtype= $(this).attr('type');
+				if(vtype=="radio"){
+					if($(this).prop('checked')){
+						str+= this.tagName+ ":" + $(this).attr('name') + "["+
+						$(this).val() + "] <br>" 
+					}
+				}else{
+				
+				str+= this.tagName+ ":" + $(this).attr('name') + "["+
+				$(this).val() + "] <br>" 
+				
+			}else if (this.tagName !="BR"){
+				str+=this.tagName+ ":" + $(this).text() +"<br>" 
+			}
+		})
+		
+		$('#result2').html(str);
+	})
+	
+})
+
+
+</script>
+</head>
+<body>
+
+<h3>
+태그이름 얻기: this.tagName<br>
+속성값 얻기: attr('속성명')/attr('name'),attr('type')
+체크된 상태 값 얻기 : prop('속성명') /prop('checked') prop('disabled')
+체크된 상태 값은 true/false를 리턴한다 <br>
+
+
+
+
+ </h3>
+<input type="button" value="hidden" id="btn1" >
+<input type="button" value="visible" id="btn2" >
+<br>
+
+<form id="testForm"> 
+<input type="hidden" name="userAge" value="33">
+<input type="hidden" name="userCity" value="대전">
+
+	I D : <input type="text" name="userID" value="hong">  
+	<span style="display:none">ID가 중복됩니다. </span> <br>  
+
+	이름 : <input type="text" name="userName" value="홍길동">   
+	<span style="visibility:hidden">이름을 입력하세요</span><br>
+  
+	성별 : <input type="radio" name="sung" value="남" checked>남자  
+	<input type="radio" name="sung" value="여">여자  
+
+</form>
+
+<div class="ddres" id="result1"> </div>
+<div class="ddres" id="result2"> </div>
+<br>
+<hr color="red">
+</body>
+</html>

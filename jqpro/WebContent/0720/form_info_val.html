@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+<script> 
+
+$(function(){
+	str="";
+	$('#btnview').on('click',function(){
+		//입력값들을 가져오기 
+	
+		//str+= "이름: "$('#user').val() + "<br>";
+		str+=`이름: ${ $('#user').val()} <br>`;
+		str+=`성별: ${ $('.gend:checked').val()} <br>`;
+		
+		info=$('#intro').val();
+		info=info.replace(/\n/g,"<br>");
+		
+		str+=`소개<br>${'info'}<br> `;
+		//str+="소개<br>" +info+"<br>";
+		
+		work= $('#work option:selected').val();
+		str+=`직업: ${work}<br>`
+		//str+="직업: "+work+"<br>"
+		
+		$('#result1').html(str);	
+		
+	})
+	
+})
+
+
+
+
+
+</script> 
+</head>
+<body>
+<form>
+
+<h3> </h3>
+
+<br>
+
+  <label for="user">이름</label>
+<input type="text" id="user" value="korea"><br>
+	<label >성별</label> 
+ 		<input type="radio" class="gend" name="gend" value="남자" checked >남자
+  		<input type="radio" class="gend" name="gend" value="여자"  >여자<br>
+  		<label for="intro">소개</label> <br>
+<textarea id="intro" cols="40" rows="4"></textarea> <br>
+ 	<label for="work">직업</label>
+ 	<select id="work">
+  		 <option value="programmer">프로그래머</option>
+   		<option value="progammer">프로게이머</option>
+   		<option value="whitehand">백수</option>
+ 	</select><br>
+ 	
+<button type="button" id="btnview">조사하기 </button>
+<button type="button" id="btnchange">이름변경 </button>
+</form>
+
+
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+</body>
+</html>
