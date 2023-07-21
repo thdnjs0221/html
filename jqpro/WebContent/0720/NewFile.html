@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+
+<script>
+   $(function(){
+      /*   
+      $('#p2').on('click', function(){
+         
+         // 타이틀 속성 가져오기
+         vtitle = $(this).attr('title');
+         
+         // 이미지 만들기
+         vimg = $("<img>", {
+            'src' : '../images/' + vtitle,
+            'alt' : vtitle   
+         });
+            
+         $(this).prepend(vimg);
+         // $(vimg).prependTo(this);
+         
+      });
+   
+      $('#p3').on('click', function(){
+         
+         // 타이틀 속성 가져오기
+         vtitle = $(this).attr('title');
+         
+         // 이미지 만들기
+         vimg = $("<img>", {
+            'src' : '../images/' + vtitle,
+            'alt' : vtitle   
+         });
+            
+         $(this).after(vimg);
+         //$(vimg).insertAfter(this);
+      
+      });
+      
+      $('#p4').on('click', function(){
+         
+         // 타이틀 속성 가져오기
+         vtitle = $(this).attr('title');
+         
+         // 이미지 만들기
+         vimg = $("<img>", {
+            'src' : '../images/' + vtitle,
+            'alt' : vtitle   
+         });
+            
+         $(this).before(vimg);
+         // $(vimg).insertBefore(this);
+         
+      });
+   
+      
+      $('#p1').on('click', function(){
+         
+         // 타이틀 속성 가져오기
+         vtitle = $(this).attr('title');
+         
+         // 이미지 만들기
+         vimg = $("<img>", {
+            'src' : '../images/' + vtitle,
+            'alt' : vtitle   
+         });
+            
+         $(this).append(vimg);
+         // $(vimg).appendTo(this);
+      });
+      */
+      
+      $('p').on('click', function(){
+            vtitle = $(this).attr('title');
+            vmethod = $(this).prev().text();
+            
+            vimg = $("<img>", {
+               'src' : '../images/' + vtitle,
+               'alt' : vtitle
+            });
+            
+            switch(vmethod){
+            case "append" : 
+               $(this).append(vimg);
+               break;
+            case "prepend" : 
+               $(this).prepend(vimg);
+               break;
+            case "after" : 
+               $(this).after(vimg);
+               break;
+            default : 
+               $(this).before(vimg);
+               break;
+            }
+         });
+      
+   });
+</script>
+
+<style>
+p{
+   border : 1px dotted orange;
+   padding : 5px;
+}
+
+img{
+   width : 80px;
+   height : 80px;
+   margin : 5px;
+}
+</style>
+
+</head>
+<body>
+   
+   <h2>각 p태그를 클릭하면 이미지를 생성하여 추가한다.</h2>
+   <h3>append</h3>
+   <p title="Koala.jpg" id="p1">코알라</p>
+   
+   <h3>prepend</h3>
+   <p title="spongebob.png" id="p2">스폰지밥</p>
+   
+   <h3>after</h3>
+   <p title="Tulips.jpg" id="p3">튤립</p>
+   
+   <h3>before</h3>
+   <p title="딸기스무디.jpg" id="p4">딸기스무디</p>
+
+   <br>
+   <hr color="red">
+   
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+<style>
+.siblings * { 
+  display: block;
+  border: 2px solid lightgrey;
+  color: lightgrey;
+  padding: 5px;
+  margin: 15px;
+}
+</style>
+<script>
+$(function(){
+	$('#next').on('click',function(){
+		$('#result1 li.start').next().css( {'color' : 'red',
+											'border':'1px solid red'
+											
+										} )//css
+		
+	})//click
+	$('#nextall').on('click',function(){
+		$('#result1 li.start').prev().css( {'color' : 'green',
+			'border':'1px solid green'
+				
+		} )//css')
+	})//click
+	
+	$('#nextun').on('click',function(){
+		$('#result1 li.start').siblings().css({'color':'blue' , 
+			'border':'1px solid green'
+			} )
+	})
+	
+	
+	//다음 click prev
+	//siblings
+	
+	
+})//function
+
+
+</script>
+</head>
+<body>
+
+<h3> </h3>
+<input type="button" value="next" id="next">
+<input type="button" value="nextall" id="nextall" >
+<input type="button" value="nextuntil" id="nextun">
+
+<br>
+<div class="ddres" id="result1"> 
+	<div style="width:500px;" class="siblings">
+  		<ul>ul (parent)  
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li class="start">li (sibling with class name "start")</li>
+		    <li>li (the next sibling of li with class name "start")</li>
+		    <li>li (sibling)</li>
+		    <li>li (sibling)</li>
+		    <li class="stop">li (sibling with class name "start")</li>
+  		</ul>   
+	</div>
+</div>
+<br>
+<hr color="red">
+
+
+</body>
+</html>

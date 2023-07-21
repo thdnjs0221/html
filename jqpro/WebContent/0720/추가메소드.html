@@ -18,6 +18,7 @@
 				'alt' : vtitle		
 			})
 			$(this).prepend(vimg);
+			//$(vimg).prependTo(this);
 			
 		})
 		
@@ -33,7 +34,7 @@
 				'alt' : vtitle		
 			})
 			$(this).after(vimg);
-			
+			//$(vimg).insertAfter(this);
 		})
 		
 		$('#p4').on('click',function(){
@@ -47,7 +48,7 @@
 				'alt' : vtitle		
 			})
 			$(this).before(vimg);
-			
+			//$(vimg).insertBefore(this);
 		})
 		
 		$('#p1').on('click', function() {

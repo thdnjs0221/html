@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.ancestors * {
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="../js/jquery-3.7.0.min.js"></script>
+
+<script>
+	$(function() {
+
+		$('#parent').on('click', function() {
+
+			$('#result1 span').parent().css({
+				'color' : 'red',
+				'border' : '2px solid red'
+			})//css
+		})
+		
+		$('#parents').on('click', function() {
+			$('#result1 span').parents().css({
+				'color' : 'green',
+				'border' : '2px solid green'
+			})
+		})
+		
+		$('#parentss').on('click', function() {
+			$('#result1 span').parents('#result1 ul').css({
+				'color' : 'blue',
+				'border' : '2px solid blue'
+			})
+		})
+		
+		$('#parentsun').on('click', function() {
+			$('#result1 span').parentsUntil('#result1').css({
+				'color' : 'pink',
+				'border' : '2px solid pink'
+			})
+
+		}) //click
+	//-----------------------------------------------------------	
+		$('input[value=확인]').on('click',function(){
+			$(this).parent().find('span').css( {
+				'background' : 'skyblue'	
+			})   //css     //this의 직속 조상이라 parent()
+			
+		//	$(this).parents('.ddres').find('span').css({
+		//	'background' : 'skyblue'
+		// }) //모든 조상인데 ddres찾는거       
+			
+		}) 
+	})
+</script>
+
+
+</head>
+<body>
+
+	<h3></h3>
+	<input type="button" value="parent" id="parent">
+	<input type="button" value="parents" id="parents">
+	<input type="button" value="parentss" id="parentss">
+	<input type="button" value="parentsun" id="parentsun">
+	<br>
+	<div class="ddres" id="result1">
+		<div class="ancestors" style="width: 500px;">
+			div (great-grandparent)
+			<ul>
+				ul (grandparent)
+				<li>li (direct parent) <span>span</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<br>
+	<hr color="red">
+	
+	<div class="ddres" id="result2">
+		<div class="ancestors" style="width: 500px;">
+			div (great-grandparent)
+			<ul>
+				ul (grandparent)
+				<li>li (direct parent) <span>span</span>
+				</li>
+			</ul>
+		</div>	
+		<input type="button" value="확인">
+	</div>
+	
+	<div class="ddres" id="result3">
+		<div class="ancestors" style="width: 500px;">
+			div (great-grandparent)
+			<ul>
+				ul (grandparent)
+				<li>li (direct parent) <span>span</span>
+				</li>
+			</ul>
+		</div>
+		<input type="button" value="확인">
+	</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+
+<script>
+   $(function(){
+      
+      //---------------------------------------------------------------------
+      
+      $('.pp').on('click', function(){
+         $(this).css('font-size', '+=3px');
+      });
+      
+      //---------------------------------------------------------------------
+      
+      $('#btn1').on('click', function(){
+         
+         /* vp1 = $('#p1').clone();
+         $('#result1').append(vp1); */
+         
+         //$('#p1').clone().appendTo($('#result1'));
+         
+         $('#result1').append($('#p1').clone());
+         
+      });
+      
+      //---------------------------------------------------------------------
+      
+      $('#btn2').on('click', function(){
+         
+         //$('#result2').append($('#p2').clone(true));
+         
+         $('#p2').clone(true).appendTo($('#result2'));
+      });
+      
+      //---------------------------------------------------------------------
+   });
+</script>
+
+</head>
+<body>
+
+   <h3></h3>
+   <input type="button" value="clone()" id="btn1">
+   <input type="button" value="clone(true)" id="btn2">
+   <br>
+
+   <p id="p1" class="pp">모래알갱이</p>
+   <p id="p2" class="pp">사랑은 늘 도망가</p>
+
+   <br>
+   <div class="ddres" id="result1"></div>
+   <div class="ddres" id="result2"></div>
+   
+   <br>
+   <hr color="red">
+   
+</body>
+</html>
