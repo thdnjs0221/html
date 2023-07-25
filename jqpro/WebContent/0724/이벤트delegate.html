@@ -6,60 +6,73 @@
 <link rel="stylesheet" href="../css/style.css">
 <script src="../js/jquery-3.7.0.min.js"></script>
 <script>
-
 $(function(){
-	
-	//bind방식-실행 전에 body태그 안에 미리 만들어져있는 요소에 대한 이벤트
-/* 	$('.btn').on('click',function(){
+	//새로운 버튼을 만들어서 result1에 추가한다.	
+	/*
+	//bind방식 - 실행 전에 body태그 안에 미리 만들어져있는 요소에 대한 이벤트	
+	$('.btn').on('click',function(){
 		
-		//새로운 버튼을 만들어서 result1에 추가한다 
-		newbtn= '<input type="button" value="확인" class="btn">';
+		newbtn = '<input type="button" value="확인" class="btn">';
 		
 		$('#result1').append(newbtn);
-	
+		
 	})
-	
-	 */
-	
-	 //delegate
-	// $(document).delegate('.btn', 'click', function(){})
+	*/
+	//delegate방식
+// 	$(document).delegate('.btn','click',function(){})
 	$(document).on('click', '.btn', function(){
-		
-		//새로운 버튼을 만들어서 result1에 추가한다 
-		newbtn= '<input type="button" value="확인" class="btn">';		
-		$('#result1').append(newbtn);
-		
+		newbtn = '<input type="button" value="확인" class="btn">';
+		$('#result1').append(newbtn);		
 	})
 	
-	//해제버튼 = bind형식과 delegate형식 모두 이벤트 핸들러 설정가능
-	//$('#clear').on('click', function(){ })
-	$(document).on('click','#clear',function(){
-		
-		$(document).off('click', '.btn',);
+	//해제버튼 - bind형식과 delegate형식 모두 이벤트 핸들러 설정 가능
+// 	$('#clear').on('click',function(){ })
+	$(document).on('click','#clear', function(){
+		$(document).off('click','.btn')
 	})
-
-
-
+	
+	count = 0;
+	
+	$('#add').on('click', function(){
+		count++;
+		newf=`<p>
+			파일첨부<input type="file">
+			<input type="button" value="삭제${count}" class="del">
+			</p>`;
+		
+		$('#result2').append(newf);
+	})
+	
+	//새롭게 추가된 del 삭제 버튼에 대한 이벤트 핸들러 - delegate
+	$(document).on('click','.del',function(){
+		$(this).parent().remove();
+	})
 })
-
-
 </script>
 </head>
 <body>
 
-<h3>bind: 실행 전에 body태그 안에 미리 만들어져있는 요소에 대한 이벤트 핸들러 지정<br>
-delegate: 실행 전에 body태그 안에 미리 만들어진 요소뿐만 아니라, 실행도중에 새롭게 만들어진 요소에 대한 이벤트 핸들러 지정<br>
-</h3>
+<h3>bind : 실행전에 body태그안에 미리 만들어져 있는 요소에 대한 이벤트 핸들러 지정<br>
+delegate : 실행도중에 새롭게 만들어진 요소에 대한 이벤트 핸들러 지정</h3>
 <div>
 	<input type="button" value="확인" class="btn">
 </div>
 <br>
-<div class="ddres" id="result1">
-
-
-</div>
+<div class="ddres" id="result1"></div>
 <br>
-<hr color="red">
 <input type="button" id="clear" value="해제">
+<hr color="red">
+
+<div class="ddres" id="result2">
+  <p>
+  이름<input type="text"><br>
+  </p>
+  
+  <p>
+  파일첨부<input type="file">
+  <input type="button" value="추가" id="add">
+  </p>
+</div>
+
 </body>
 </html>
