@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<script type="text/javascript">
+
+let xhr = new XMLHttpRequest();
+
+function getSend() {
+
+	//입력한 값 가져오기
+	//document.getElementById()
+	vname= document.ffget.name.value;
+	vid= document.ffget.id.value;
+	vaddr= document.ffget.addr.value;
+	vtel= document.ffget.tel.value;
+	
+	console.log(vname,vid,vaddr,vtel);
+	
+	//요청  //''사이에 공백있으면 안된다.
+	xhr.open('get', 'test1.jsp?id=' + vid + "&name=" + vname +
+                  "&addr=" + vaddr + "&tel=" + vtel, true);
+	
+	xhr.send();
+	
+	//응답- readyState(0~4)  sttatus: 200/404/304/403 
+	xhr.onreadystatechange = function(){
+		alert(this.readyState); 
+		if(this.readyState == 4 && this.status == 200){//속성이름은 대문자  //test1.jsp의 결과가 -> res
+			res=this.responseText;
+		
+		document.getElementById('result1').innerHTML=res;
+			
+		}
+	}
+	
+
+}
+
+
+function postSend() {
+	//요청
+	//입력한 값 가져오기
+	//document.getElementById()
+	vname= document.ffpost.name.value;
+	vid= document.ffpost.id.value;
+	vaddr= document.ffpost.addr.value;
+	vtel= document.ffpost.tel.value;
+	
+	console.log(vname,vid,vaddr,vtel);
+	
+	
+	//응답
+	xhr.onreadystatechange = function(){
+		alert(this.readyState); 
+		if(this.readyState == 4 && this.status == 200){//속성이름은 대문자  //test1.jsp의 결과가 -> res
+			res=this.responseText;
+		
+		document.getElementById('result2').innerHTML=res;
+			
+		}
+	}
+	
+	
+	
+	//요청  //''사이에 공백있으면 안된다.
+	data= "id=" + vid + "&name=" + vname +
+        "&addr=" + vaddr + "&tel=" + vtel;
+        
+	xhr.open('post', 'test1.jsp', true);
+	
+	xhr.setRequestHeader('Content-Type', 
+    'application/x-www-form-urlencoded');
+
+	
+	xhr.send(data);
+}
+
+
+
+</script>
+
+<style type="text/css">
+
+lable{
+ display: inline-block;
+ width: 100px;
+ height: 30px;
+}
+
+</style>
+</head>
+<body>
+
+<h3>동기방식<br>
+submit버튼을 이용한 action(test1.jsp)실행
+결과가 별도의 페이지로 로드되어 실행된다
+</h3>
+<form action="test1.jsp"  method="post">
+	<label>이름</label>
+	<input type="text" name="name"><br>
+	
+	<label>아이디</label>
+	<input type="text" name="id"><br>
+	
+	<label>주소</label>
+	<input type="text" name="addr"><br>
+	
+	<label>전화번호</label>
+	<input type="text" name="tel"><br>
+
+<input type="submit" value="전송">
+</form>
+<br>
+<hr color="red">
+
+
+
+<h3>비동기를 이용한 GET방식  실행
+결과가 별도의 페이지로 로드되지 않고 현재 페이지의 일부분에 실행된다 
+action(test1.jsp)실행 </h3>
+
+<form name="ffget" >
+	<label>이름</label>
+	<input type="text" name="name"><br>
+	
+	<label>아이디</label>
+	<input type="text" name="id"><br>
+	
+	<label>주소</label>
+	<input type="text" name="addr"><br>
+	
+	<label>전화번호</label>
+	<input type="text" name="tel"><br>
+
+<input type="button" value="전송" onclick="getSend()">
+
+</form>
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+
+
+<h3>비동기를 이용한 POST방식
+결과가 별도의 페이지로 로드되지 않고 현재 페이지의 일부분에 실행된다 
+ action(test1.jsp)실행 </h3>
+<form name="ffpost" >
+<label>이름</label>
+	<input type="text" name="name"><br>
+	
+	<label>아이디</label>
+	<input type="text" name="id"><br>
+	
+	<label>주소</label>
+	<input type="text" name="addr"><br>
+	
+	<label>전화번호</label>
+	<input type="text" name="tel"><br>
+
+<input type="button" value="전송" onclick="postSend()">
+
+</form>
+
+<br>
+<div class="ddres" id="result2"> </div>
+<br>
+<hr color="red">
+</body>
+
+</html>
