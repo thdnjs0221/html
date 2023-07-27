@@ -9,6 +9,40 @@ function proc1(){
 	location.href="/jqpro/0726/lprodList.jsp"
 }
 function proc2(){
+	//요청
+	xhr = new XMLHttpRequest();
+	xhr.open('get','lprodJson.jsp',true);
+	xhr.send();
+	
+	
+	
+	
+	//응답
+	xhr.onreadystatechange= function(){
+		//alert(this.readyState);
+		if(this.readyState==4 && this.status==200){
+			res= this.responseText;
+			
+			pares=JSON.parse(res);
+			
+			code="<table border='1'>";
+			code+="<tr><th>LPROD_ID</th>"
+			code+="<th>LPROD_GU</th>"
+			code+="<th>LPROD_NM</th> </tr>"
+
+			for(let i=0; i<pares.length; i++){
+				
+				code+="<tr><td>"+pares[i].lprod_id+"</td>"
+				code+="<td>"+pares[i].lprod_gu+"</td>"
+				code+="<td>"+pares[i].lprod_nm+"</td> </tr>"
+			
+			}
+			code+="</table>";
+			
+			//출력 - result1에 출력
+			document.getElementById('result1').innerHTML=code;
+		}
+	}
 	
 }
 
@@ -17,7 +51,13 @@ function proc2(){
 <body>
 
 <h3> </h3>
+<p> location.href="/jqpro/0726/lprodList.jsp"</p>
+<input type="button" value="동기" onclick='location.href="/jqpro/0726/lprodList.jsp"'>
+
+<p>onclick="proc1()" </p>
 <input type="button" value="동기" onclick="proc1()">
+`32e	
+<p> javascript의 비동기 처리 - 처리후 jason데이터를 응답받는다</p>
 <input type="button" value="비동기" onclick="proc2()">
 <br>
 <div class="ddres" id="result1"> </div>
