@@ -22,8 +22,10 @@ PUBLIC "-//mybatis.org/DTD config 3.0//EN"
       <!-- <typeAlias type="클래스의 전체 경로" alias="별칭"/> -->
       <typeAlias type="kr.or.ddit.member.vo.MemberVo" alias="memVO"/>
       <typeAlias type="kr.or.ddit.lprod.vo.LprodVO" alias="lprodVO"/>
+      <typeAlias type="kr.or.ddit.buyer.vo.BuyerVO" alias="buyerVO"/>     
    </typeAliases>
  
+
 
 
 <!--db 연결 설정 부분  -->
@@ -50,6 +52,7 @@ PUBLIC "-//mybatis.org/DTD config 3.0//EN"
  	<mappers>
  		<mapper resource="kr/or/ddit/mybatis/mapper/member_mapper.xml"/>
  		<mapper resource="kr/or/ddit/mybatis/mapper/lprod_mapper.xml"/>
+ 		<mapper resource="kr/or/ddit/mybatis/mapper/buyer_mapper.xml"/>
  	</mappers>
 
 </configuration>
