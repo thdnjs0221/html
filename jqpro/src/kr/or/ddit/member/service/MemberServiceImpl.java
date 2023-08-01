@@ -2,9 +2,14 @@ package kr.or.ddit.member.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.or.ddit.member.dao.IMemberDao;
 import kr.or.ddit.member.dao.MemberDaoImpl;
 import kr.or.ddit.member.vo.MemberVo;
+import kr.or.ddit.mybatis.config.MyBatisUtil;
+import kr.or.ddit.prod.vo.ZipVO;
+
 
 public class MemberServiceImpl implements IMemberService {
 
@@ -13,6 +18,7 @@ public class MemberServiceImpl implements IMemberService {
 	
 	//dao의 객체가 필요 
 	private IMemberDao dao;
+	
 	//생성자-dao객체 얻어오기
 	private MemberServiceImpl() {
 		dao= MemberDaoImpl.getDao();  //dao getdao메소드호출
@@ -25,7 +31,7 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public List<MemberVo> getAllMember() {
 		//변수선언
-		 List <MemberVo>list = null;
+		 List<MemberVo> list = null;
 		
 		 //실행
 		 list = dao.getAllMember();
@@ -34,6 +40,43 @@ public class MemberServiceImpl implements IMemberService {
 		 return list;
 		
 
+	}
+
+	@Override
+	public String selectById(String mid) {
+		
+		
+		return null;
+	}
+
+	@Override
+	public int insertMember(MemberVo vo) {
+		int cnt;
+		SqlSession session;
+try {
+			
+			session=MyBatisUtil.getSqlSession();
+			cnt= session.insert("member.insertMember",memVo);
+			
+			if(cnt>0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session!=null)session.close();
+		}
+		
+		return cnt;
+		
+		
+	}
+
+	@Override
+	public List<ZipVO> selectByDong(String dong) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

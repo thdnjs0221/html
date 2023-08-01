@@ -11,6 +11,14 @@
    <select id="getAllMember" resultType="memVO"> <!--kr.or.ddit.member.vo.MemberVO  -->
     select *from member  
    </select>
+   
+   <select id="selectById" resultMap="String" parameterType="String">
+   s elect mem_id from member where mem_id=${mem_id}';
+   </select>
+   
+    <select id="selectByDong" resultMap="String" parameterType="String">
+   select * from ziptb where dong like ${%dong};
+   </select>
     
 
    

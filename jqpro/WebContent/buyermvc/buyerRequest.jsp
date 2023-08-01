@@ -12,7 +12,7 @@
    function proc1() {
    $.ajax({
          url : "/jqpro/buyerNames.do",
-         type : 'get',
+         type : 'post',
          dataType : 'json',
          success : function(res){
             code = "";
