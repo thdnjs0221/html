@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/jquery-3.7.0.min.js"></script>
+
+<script type="text/javascript">
+
+
+function proc1() {
+	
+	//입력한 동을 가져오기
+	dongvalue= $('#dong').val().trim();
+	
+	//입력확인 
+	if(dongvalue.length <1){
+		alert("동이름 입력");
+		return false;
+	}
+	
+	$.ajax({   
+		url : "/jqpro/SelectByDong.do",  //==> 로컬호스트에서부터 찾는것     jqpro/==>자신의 위치에서 찾는것
+		type: 'post',
+		data:{'dong':dongvalue },
+		dataType:'json',
+		success: function(res){
+			//dongList
+			
+			code=`<table border="1"><tr><th>우편번호</th>
+			<th>주소</th>
+			<th>번지</th></tr>`;
+			
+			$.each(res,function(i,v){
+				
+				bunji = v.bunji;
+				if(typeof bunji == "undefined")bunji="";
+				
+				
+				code+=`<tr class="ziptr"><td>${v.zipcode}</td>
+					<td>${v.sido}${v.gugun}${v.dong}</td>
+					<td>${bunji}</td></tr>`
+				
+				
+			})
+			code+=`</table>`
+			$('#result1').html(code);
+		},
+		error: function(xhr){
+			alert("상태: "+xhr.status)
+		}
+	})//ajax
+}//function
+
+
+$(function() {
+	/*새로 만드는것은 document  */
+	$(document).on('click','.ziptr',function(){
+		//alert("hello")
+		zipvalue= $('td',this).eq(0).text()
+		addrvalue= $('td',this).eq(1).text()
+		
+		$('#zip',opener.document).val(zipvalue);
+		$('#add1',opener.document).val(addrvalue);
+		
+		window.close();
+	})
+	
+	
+})
+
+
+
+
+
+</script>
+
+<style type="text/css">
+
+.ziptr:hover{
+	background: CRIMSON;
+	
+
+}
+
+</style>
+
+</head>
+<body>
+
+<h3> 우편번호 찾기 </h3>
+<p> 찾는동을 입력하세요</p>
+<input type="text" id="dong">
+<input type="button" value="확인" onclick="proc1()">
+<br>
+<div class="ddres" id="result1"> </div>
+<br>
+<hr color="red">
+</body>
+</html>
