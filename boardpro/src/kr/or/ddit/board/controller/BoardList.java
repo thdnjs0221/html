@@ -1,6 +1,10 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
+import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.PageVO;
 
 
@@ -41,10 +46,23 @@ public class BoardList extends HttpServlet {
 		PageVO pvo = service.pageInfo(page, stype, sword);
 		
 		//서비스 메소드 호출 - page정보에 의한 리스트를 select-결과값list
+		Map<String , Object>map = new HashMap<String, Object>();
+		map.put("start", pvo.getStart());
+		map.put("end", pvo.getEnd());
+		map.put("stype", stype);
+		map.put("sword",sword);
+		
+		List<BoardVO>list = service.selectByPage(map);
+		
 		
 		//결과값을 request에 저장
+		request.setAttribute("listvalue", list);
+		request.setAttribute("startpage", pvo.getStartPage());
+		request.setAttribute("endpage", pvo.getEndPage());
+		request.setAttribute("totalpage", pvo.getTotalPage());
 		
 		//view페이지로 이동
+		request.getRequestDispatcher("/boardview/list.jsp").forward(request, response);
 		
 	
 	}

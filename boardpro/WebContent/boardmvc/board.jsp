@@ -20,44 +20,40 @@
 <script src="../js/jquery.serializejson.min.js"  type="text/javascript"></script>
 
 <style>
-*{
-   box-sizing: border-box;
+body *{
+  box-sizing:   border-box;
 }
-#result p{
- 
- margin : 1px;
- padding : 3px;
- height : auto;
+.p12{
+  display: flex;
+  flex-direction:  row;
+}
+p{
+  /*  border  : 1px dotted blue; */
+   padding : 4px;
+   margin  :2px;
+   word-break:keep-all;/* 줄바꿈: 단어단위로  */
 }
 .p1{
-  float : left;
-  width : 70%;
+   flex:  70%;
 }
 .p2{
-  float : right;
-  width : 28%;
-}
-.p3{
-  clear: both;
-}
-input[name=reply]{
-  height : 50px;
-  vertical-align: top; 
-}
-#pagelist{
-  margin-left : 20%;
-}
-label{
-  display : inline-block;
-  width : 80px;
-  height : 30px;
+   flex : 30%;
+   text-align:  right;
 }
 
-.reply-body{
- background : #f1fadd;
- border : 1px solid gold;
- margin : 1px;
- padding : 5px;
+.card-body{
+   display:  flex;
+   flex-direction:  column;
+}
+input[name=reply]{
+   height : 55px;
+   vertical-align: top;
+}
+textarea {
+	width : 70%;
+}
+#pagelist{
+	margin-left: 20%;
 }
 </style>
 
@@ -73,23 +69,56 @@ console.log(mypath);
 reply = { } ; //동적 으로 속성과 기능을 추가 가능  reply.name = ""  reply.bonum = 31 
 
 $(function(){
-	//페이지별로 리스트출력하기   외부 스크립트로 선언해있음 script src="../js/board.js" /페이지 시작하자마자 시작
-	  $.listPageServer(1);
+	//페이지별로 리스트출력하기  별도로 외부 스크립트로 선언해있음 script src="../js/board.js" /페이지 시작하자마자 시작
+	  $.listPageServer(1);  //=> ajax
 	  
 	  //이벤트 
 	  //다음 클릭 
+	  $ (document).on('click','#next',function(){
+		currentPage= parseInt( $('.pageno').last().text().trim())+1;
+		$.listPageServer(currentPage);
+		  
+	  })
+	  
 	 
 	  //이전클릭
-	
+	$(document).on('click','#prev',function(){
+		currentPage= parseInt( $('.pageno').first().text().trim())-1;
+		$.listPageServer(currentPage);
+	})
 	  
 	  //페이지번호 클릭 
 	  
-	  
-	  //검색 search클릭 
-	 
-	  
+	 $(document).on('click','.pageno',function(){
+		 
+		 currentPage = $(this).text().trim();
+		 $.listPageServer(currentPage);
+	 })
+	   //검색 search클릭 
+	   $('#search').on('click',function(){
+		   currentPage=1;
+		   $.listPageServer(currentPage);
+		   
+	   })
 	 
 	  //글쓰기 모달창에서 send전송 버튼 클릭 
+	  
+	  $('#send').on('click',function(){
+		  //입력한 모든 값을 가져온다
+		  fdata = $('#wform').serializeJSON();
+		  
+		  //폼데이터를 js에 있는 ajax로 가져가기 -> 
+		  $.boardWriteServer();
+		  
+		  //모달창 닫기
+		  $('#wform .txt').val("") //공백으로 지워라
+		  $('#wModal').modal('hide');
+		  
+		  
+		  
+		  
+	  })
+	  
 	  
 	  
 	  //수정 삭제 등록 댓글수정 댓글삭제 제목클릭  ---이벤트 
@@ -108,15 +137,17 @@ $(function(){
 		    }else if(vaction  == "delete" ){
 		    	alert(vidx +  "번 글을 삭제");
 		    	
+		    	$.boardDeleteServer();
+		    	
 		    	
 	    	
-		    }else if(vaction == "list"){
-		    	//alert( vidx +  "번 게시판글과 댓글을 모두 보기");
+		    }else if(vaction == "list"){ //제목을 클릭
+		    	alert( vidx +  "번 게시판글과 댓글을 모두 보기");
 		    	
 		    	
 		    	
 		    }else if(vaction  == "reply"){
-		    	//alert(vidx +  "번글에 댓글을 씁니다")
+		    	alert(vidx +  "번글에 댓글을 씁니다")
 		    	
 		    	
 		    	 

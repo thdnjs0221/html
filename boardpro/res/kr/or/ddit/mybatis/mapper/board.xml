@@ -18,10 +18,28 @@
 </sql>
 
 <!-- 글쓰기 -->
+<insert id="insertBoard" parameterType="boardVO">
+	insert into boardtab
+	values(
+	boardtab_num_seq.nextval
+	,#{subject}
+	,#{writer}
+	,#{mail}
+	,#{password}
+	,#{content}
+	,0
+	,#{wip}
+	,sysdate )
 
+
+</insert>
 
 <!-- 글삭제 -->
+<delete id="deleteBoard" parameterType="int" >
 
+delete boardtab where num =#{data}
+
+</delete>
 
 <!-- 글수정 -->
 
