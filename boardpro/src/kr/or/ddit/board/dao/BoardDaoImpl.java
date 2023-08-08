@@ -33,7 +33,7 @@ public class BoardDaoImpl implements IBoardDao {
 			}catch(Exception e){
 				e.printStackTrace();
 	                              
-	                          } finally {
+	          } finally {
 				sql.commit();
 				sql.close();
 			}
@@ -50,7 +50,7 @@ public class BoardDaoImpl implements IBoardDao {
 			}catch(Exception e){
 				e.printStackTrace();
 	                              
-	                          } finally {
+	          } finally {
 				sql.commit();
 				sql.close();
 			}
@@ -80,7 +80,7 @@ public class BoardDaoImpl implements IBoardDao {
 		}catch(Exception e){
 			e.printStackTrace();
                               
-                          } finally {
+         } finally {
 			sql.commit();
 			sql.close();
 		}
@@ -90,13 +90,32 @@ public class BoardDaoImpl implements IBoardDao {
 	@Override
 	public int insertReply(ReplyVO vo) {
 		int res=0;
-	//
+		try {
+			sql = MyBatisUtil.getSqlSession();
+			res =sql.insert("board.insertReply",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sql.commit();
+			sql.close();
+		}
+	
 		return res;
 	}
 
 	@Override
 	public int deleteReply(int renum) {
 		int res = 0;
+		try {
+			sql = MyBatisUtil.getSqlSession();
+			res= sql.delete("board.deleteReply",renum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sql.commit();
+			sql.close();
+		}
 		
 		return res;
 	}
@@ -128,7 +147,17 @@ public class BoardDaoImpl implements IBoardDao {
 	@Override
 	public List<ReplyVO> selectReply(int bonum) {
 		List<ReplyVO>   list = null;
+		try {
+			sql = MyBatisUtil.getSqlSession();
+			list= sql.selectList("board.selectReply",bonum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sql.commit();
+			sql.close();
+		}
 		
 		return list;
-	}
+	}	
 }

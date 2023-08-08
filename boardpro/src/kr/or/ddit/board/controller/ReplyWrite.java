@@ -13,25 +13,24 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
-import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.ReplyVO;
 
 
-@WebServlet("/BoardWrite.do")
-public class BoardWrite extends HttpServlet {
+@WebServlet("/ReplyWrite.do")
+public class ReplyWrite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-    public BoardWrite() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		//요청시 전송데이터 받기 
-		BoardVO vo = new BoardVO();
+		//요청시 전송 데이터 받기(라이브러리 이용 )- name, bonum, cont
+		ReplyVO vo = new ReplyVO();
 		
 		try {
 			BeanUtils.populate(vo, request.getParameterMap());
@@ -43,23 +42,16 @@ public class BoardWrite extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//글쓴사람ip를 내가 서버에 저장한거
-		vo.setWip(request.getRemoteAddr());
-		
-		//서비스객체 얻기 
+		//서비스 객체 얻기 
 		IBoardService service = BoardServiceImpl.getService();
 		
-		//서비스 메소드 호출하기 -결과값
-		int res = service.insertBoard(vo);
+		//서비스메소드 호출하기 - 결과값:int 
+		int res = service.insertReply(vo);
 		
-		//request에 저장
-		request.setAttribute("result", res);
+		request.setAttribute("result", res);  //공통  result에 보내기
 		
-		//뷰페이지로 이동하기 
+		//view페이지로 이동- 출력 또는 json데이터 생성
 		request.getRequestDispatcher("/boardview/result.jsp").forward(request, response);
-		
-		
-		
 		
 	}
 

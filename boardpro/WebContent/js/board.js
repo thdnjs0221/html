@@ -85,9 +85,15 @@ $.deleteReplyServer = function(){ //target :클릭한 댓글삭제버튼
    
    $.ajax({
       url  :  `${mypath}/ReplyDelete.do`,
-      type : 'get',
-      data : { },
+      type : 'get',  //번호만 가면 되니까get
+      data : {"renum" : vidx },
       success : function(res){
+				
+			if(res.sw =="성공"){
+				
+				//화면에서 해당 댓글 삭제하기
+				$(target).parents('.reply-body').remove(); //노란색 배경자체를 지워야해서 remove 
+			}
          
       },
       error : function(xhr){
@@ -103,10 +109,47 @@ $.replyListServer = function(){  //target :클릭한 등록버튼 , 클릭한 �
    $.ajax({
       url :  `${mypath}/ReplyList.do`,
       type : 'get',
-      data : {  },  // { "bonum" : reply.bonum },
+      data : { "bonum" : vidx },  // { "bonum" : reply.bonum },
       success : function(res){
-         
-      
+         //댓글리스트 출력 , 기준은 타켓!
+
+		rcode="";
+		$.each(res, function(i,v){
+			
+			cont= v.cont
+			cont= cont.replace(/\n/g,"<br>")		
+				rcode += `
+                 <div class="reply-body">
+                     <div class="p12">
+                        <p class="p1">
+                                             작성자:<span>${v.name}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             날짜 :<span>${v.redate}</span>         
+                        </p>
+                        <p class ="p2">
+                        
+                        <input idx="${v.renum}" type="button"  value="댓글수정" name="r_modify"  class="action">
+                        <input idx="${v.renum}" type="button"  value="댓글삭제" name="r_delete"  class="action">
+                        </p>
+                     </div>
+                     <p class="p3">
+                        ${cont}
+                     </p> 
+               </div>
+             `
+	
+		})//$.each끝
+		
+		//parents() ->조상  /find ->후손  찾을때!!!
+		// jsp에서 target=this
+		
+			//직접 후손으로 줘도 됨(댓글 한번 remove해줘야함)
+			$(target).parents('.card').find('.reply-body').remove();
+			
+			$(target).parents('.card').find('.card-body').append(rcode);
+			
+			//remove->지우고 / empty->노란색 테두리는 남아 있음 
+			
+
       }, //success
       error : function(xhr){
          alert( "상태 : " + xhr.status);
@@ -120,11 +163,20 @@ $.replyWriteServer = function(){
    $.ajax({
       url : `${mypath}/ReplyWrite.do`,
       type : 'post',
+	  data: reply, //name cont bonum 이 들어있음
 
       success : function(res){
+			//json데이터가 여기로 옴
+			
+			if(res.sw == "성공"){
+				//댓글리스트 출력
+				$.replyListServer();
+				
+			}
          
       },
       error : function(xhr){
+			alert("상태: "+xhr.status)
          
       },
       dataType : 'json'
@@ -173,8 +225,8 @@ $.listPageServer = function(cpage){
 	
 	
             code += `<div class="card">
-               <div class="card-header">
-                 <a class="btn action" name="list" idx="${v.num}" data-bs-toggle="collapse" href="#collapse${v.num}">
+               <div class="card-header" >
+                 <a class="btn action title" name="list" idx="${v.num}" data-bs-toggle="collapse" href="#collapse${v.num}">
                     ${v.subject}
                  </a>
                </div>
@@ -182,10 +234,10 @@ $.listPageServer = function(cpage){
                  <div class="card-body">
                      <div class="p12">
                         <p class="p1">
-                                      작성자:<span>${v.writer}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   이메일:<span>${v.mail}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   조회수:<span>${v.hit}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   날짜 :<span>${v.wdate}</span>         
+                                   작성자:<span class="wr">${v.writer}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   이메일:<span class ="ma">${v.mail}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   조회수:<span class="hi">${v.hit}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   날짜 :<span class='wd'>${v.wdate}</span>         
                         </p>
                         <p class ="p2">
                         
@@ -193,7 +245,7 @@ $.listPageServer = function(cpage){
                         <input idx="${v.num}" type="button"  value="삭제" name="delete"  class="action">
                         </p>
                      </div>
-                     <p class="p3">
+                     <p class="p3" >
                         ${content}
                      </p>
                      <p class="p4">

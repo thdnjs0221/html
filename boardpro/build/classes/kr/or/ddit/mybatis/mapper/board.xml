@@ -71,13 +71,35 @@ delete boardtab where num =#{data}
 
 
 <!-- 댓글 쓰기 -->
+<insert id="insertReply" parameterType="replyVO" >
+	insert into replytab
+	values(
+		replytab_renum_seq.nextval,
+		#{bonum},
+		#{name},
+		#{cont},
+		sysdate
+	)
+</insert>
 
 <!-- 댓글수정 -->
 
 <!-- 댓글삭제 -->
+<delete id="deleteReply" parameterType="int" >
+
+	delete from replytab where renum =#{data}
+	
+
+
+</delete>
 
 
 <!-- 댓글 리스트  -->
+<select id="selectReply" parameterType="int" resultType="replyVO">
+	select*from replytab where bonum =#{data} 
+
+
+</select>
 
 </mapper>
 
