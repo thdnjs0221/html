@@ -25,15 +25,16 @@ $.boardUpdate = function(){
    $.ajax({
       url :   `${mypath}/BoardUpdate.do`,
       type : 'post',
-
+      data : mdata,
       success : function(res){
-         alert(res.flag);
-          vparents =  $(vmodify).parents('.card');
-           $(vparents).find('a').text(vms)
+         if(res.sw=="성공"){
+            // 성공이면 화면의 본문의 내용을 modal창의 수정내용으로 변경
+            vparents =  $(target).parents('.card');
+             $(vparents).find('a').text(vtit);
           
-           $(vparents).find('#em').text(vmm);
-           $(vparents).find('.wp3').html(vmc);
-         
+             $(vparents).find('.ma').text(vmail);
+              $(vparents).find('.p3').html(vcont);
+         }
       },
       error : function(xhr){
          alert("상태 : " + xhr.status)
@@ -48,16 +49,14 @@ $.boardDeleteServer = function(){
       
       url  :  `${mypath}/BoardDelete.do`,
       type : 'get',
-      data : {"num": vidx},
+      data : {"num" : vidx},
       success : function(res){
-		if(res.sw=="성공"){
-			currentPage = 1;
-			$.listPageServer(currentPage);
-			
-			}
-         
+         if(res.sw =="성공"){
+            currentPage = 1;
+            $.listPageServer(currentPage);
+         }
       },
-      error : function(xhr){num
+      error : function(xhr){
          alert("상태 : " + xhr.status)
       },
       dataType : 'json'
@@ -70,9 +69,13 @@ $.replyUpdateServer = function(){
    $.ajax({
       url  :  `${mypath}/ReplyUpdate.do`,
       type : 'post',
-      
+      data : {"cont" : bmcont,
+            "renum" : vidx},
       success : function(res){
-         
+         if(res.sw=="성공"){
+            // 화면 댓글의 본문을 변경
+            
+         }
       },
       error : function(xhr){
          alert("상태 : " + xhr.status)
@@ -85,16 +88,13 @@ $.deleteReplyServer = function(){ //target :클릭한 댓글삭제버튼
    
    $.ajax({
       url  :  `${mypath}/ReplyDelete.do`,
-      type : 'get',  //번호만 가면 되니까get
-      data : {"renum" : vidx },
+      type : 'get',
+      data : { "renum" : vidx },
       success : function(res){
-				
-			if(res.sw =="성공"){
-				
-				//화면에서 해당 댓글 삭제하기
-				$(target).parents('.reply-body').remove(); //노란색 배경자체를 지워야해서 remove 
-			}
-         
+         if(res.sw=="성공"){
+            //화면에서 해당 댓글 삭제하기
+            $(target).parents('.reply-body').remove();
+         }
       },
       error : function(xhr){
          alert(xhr.status);
@@ -111,19 +111,17 @@ $.replyListServer = function(){  //target :클릭한 등록버튼 , 클릭한 �
       type : 'get',
       data : { "bonum" : vidx },  // { "bonum" : reply.bonum },
       success : function(res){
-         //댓글리스트 출력 , 기준은 타켓!
-
-		rcode="";
-		$.each(res, function(i,v){
-			
-			cont= v.cont
-			cont= cont.replace(/\n/g,"<br>")		
-				rcode += `
-                 <div class="reply-body">
+         rcode = "";
+         $.each(res, function(i,v){
+            
+            cont = v.cont;
+            cont = cont.replace(/\n/g, "<br>");
+            
+            rcode += `<div class="reply-body">
                      <div class="p12">
                         <p class="p1">
-                                             작성자:<span>${v.name}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             날짜 :<span>${v.redate}</span>         
+                                      작성자:<span>${v.name}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      날짜 :<span>${v.redate}</span>
                         </p>
                         <p class ="p2">
                         
@@ -131,25 +129,16 @@ $.replyListServer = function(){  //target :클릭한 등록버튼 , 클릭한 �
                         <input idx="${v.renum}" type="button"  value="댓글삭제" name="r_delete"  class="action">
                         </p>
                      </div>
-                     <p class="p3">
+                     <p class="rp3">
                         ${cont}
-                     </p> 
-               </div>
-             `
-	
-		})//$.each끝
-		
-		//parents() ->조상  /find ->후손  찾을때!!!
-		// jsp에서 target=this
-		
-			//직접 후손으로 줘도 됨(댓글 한번 remove해줘야함)
-			$(target).parents('.card').find('.reply-body').remove();
-			
-			$(target).parents('.card').find('.card-body').append(rcode);
-			
-			//remove->지우고 / empty->노란색 테두리는 남아 있음 
-			
-
+                     </p>
+                 </div>`
+         })// $.each 끝
+         
+         $(target).parents('.card').find('.reply-body').remove();
+         
+         $(target).parents('.card').find('.card-body').append(rcode);
+         
       }, //success
       error : function(xhr){
          alert( "상태 : " + xhr.status);
@@ -163,21 +152,16 @@ $.replyWriteServer = function(){
    $.ajax({
       url : `${mypath}/ReplyWrite.do`,
       type : 'post',
-	  data: reply, //name cont bonum 이 들어있음
-
+      data : reply, //name, cont, bonum 들어있음
+      
       success : function(res){
-			//json데이터가 여기로 옴
-			
-			if(res.sw == "성공"){
-				//댓글리스트 출력
-				$.replyListServer();
-				
-			}
-         
+         if(res.sw=="성공"){
+            //댓글 리스트 출력
+            $.replyListServer();
+         }
       },
       error : function(xhr){
-			alert("상태: "+xhr.status)
-         
+         alert("상태 : " + xhr.status)
       },
       dataType : 'json'
    })
@@ -186,13 +170,11 @@ $.boardWriteServer = function(){
    $.ajax({
       url : `${mypath}/BoardWrite.do`,
         type : 'post',
-		data: fdata,
+        data : fdata,
         success : function(res){
-	if(res.sw=="성공"){
-		currentPage  = 1;  //
-		$.listPageServer(currentPage)
-	}
-          
+          if(res.sw=="성공"){
+            
+         }
         },
         error : function(xhr){
            alert("상태 : " + xhr.status);
@@ -219,13 +201,12 @@ $.listPageServer = function(cpage){
          code = `<div class="container mt-3">
                     <div id="accordion">`
          $.each(res.datas, function(i,v){
-	
-			content = v.content; //엔터가 포함 -> br로 바꾸기
-			content =content.replace(/\n/g,"<br>")	
-	
-	
+            
+            content = v.content;   //엔터가 포함
+            content = content.replace(/\n/g,"<br>")
+            
             code += `<div class="card">
-               <div class="card-header" >
+               <div class="card-header">
                  <a class="btn action title" name="list" idx="${v.num}" data-bs-toggle="collapse" href="#collapse${v.num}">
                     ${v.subject}
                  </a>
@@ -233,11 +214,12 @@ $.listPageServer = function(cpage){
                <div id="collapse${v.num}" class="collapse" data-bs-parent="#accordion">
                  <div class="card-body">
                      <div class="p12">
+
                         <p class="p1">
-                                   작성자:<span class="wr">${v.writer}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   이메일:<span class ="ma">${v.mail}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      작성자:<span class="wr">${v.writer}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   이메일:<span class="ma">${v.mail}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                    조회수:<span class="hi">${v.hit}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   날짜 :<span class='wd'>${v.wdate}</span>         
+                                   날짜 :<span class="wd">${v.wdate}</span>         
                         </p>
                         <p class ="p2">
                         
@@ -245,7 +227,7 @@ $.listPageServer = function(cpage){
                         <input idx="${v.num}" type="button"  value="삭제" name="delete"  class="action">
                         </p>
                      </div>
-                     <p class="p3" >
+                     <p class="p3">
                         ${content}
                      </p>
                      <p class="p4">
@@ -260,14 +242,12 @@ $.listPageServer = function(cpage){
          
          code += `</div>
                </div>`;
-
-			//게시판 리스트 출력
+         //게시판 리스트 출력
          $('#result').html(code);
-
-            //페이지 정보 출력
-		pager = pageList(res.sp, res.ep, res.tp);
-		$('#pagelist').html(pager);
-                      
+         //페이지 정보 출력
+         pager = pageList(res.sp, res.ep, res.tp);
+         $('#pagelist').html(pager);
+         
         },//success
         error : function(xhr){
            alert("상태 : " + xhr.status)
@@ -279,33 +259,31 @@ $.listPageServer = function(cpage){
 }
 
 pageList =function(sp,ep,tp){
-   //페이지 처리
-      //이전
-	pager = "";
-	pager+=`<ul class="pagination">`;
-	
-	if(sp>1){
-		pager+=`  <li class="page-item"><a id="prev" class="page-link" href="#">Previous</a></li>`
-	}
+  //페이지 처리
+   //이전
+   pager = "";
+   pager += `<ul class="pagination">`;
+   if(sp > 1){
+      pager += `<li class="page-item"><a id="prev" class="page-link" href="#">Previous</a></li>`;
       
-      //페이지번호 
-
-	for(i = sp; i<=ep; i++){
-		if(i ==currentPage){
-			pager+=`<li class="page-item active"><a class="page-link pageno" href="#">${i}</a></li>`
-		}else{
-			pager+=` <li class="page-item"><a class="page-link" href="#">${i}</a></li>`
-		}
-	}
-     
-      //다음 
-	if(ep<tp){
-		
-		pager+=` <li class="page-item"><a id="next" class="page-link" href="#">Next</a></li>`
-	}
-	      pager+=`</ul>`
-      
-      return pager;
-      
-    
+   }
+   //페이지번호 
+   for(i=sp; i<=ep; i++){
+      if(i==currentPage){
+         pager += `<li class="page-item active"><a class="page-link pageno" href="#">${i}</a></li>`;
+      }else{
+         pager += `<li class="page-item"><a class="page-link pageno" href="#">${i}</a></li>`;
+      }
+   }
+   
+   
+   //다음 
+   if(ep <tp){
+      pager +=`<li class="page-item"><a id="next" class="page-link" href="#">Next</a></li>`;
+   }
+   
+   pager += `</ul>`;
+   
+   return pager;
+   
 }

@@ -42,7 +42,13 @@ delete boardtab where num =#{data}
 </delete>
 
 <!-- 글수정 -->
+<update id="updateBoard" parameterType="boardVO">
+	update boardtab set subject= #{subject}, mail= #{mail},
+						content=#{content}, password=#{password},
+						wdate=sysdate
+					where num=#{num}
 
+</update>
 
 <!-- 조회수증가 -->
 
@@ -83,6 +89,11 @@ delete boardtab where num =#{data}
 </insert>
 
 <!-- 댓글수정 -->
+<update id="updateReply" parameterType="replyVO">
+	 update replytab set cont={#cont}, redate={#sysdate} where renum = #{renum}
+
+</update>
+
 
 <!-- 댓글삭제 -->
 <delete id="deleteReply" parameterType="int" >

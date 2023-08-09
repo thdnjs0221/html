@@ -75,7 +75,7 @@ console.log(mypath);
 reply = { } ; //동적 으로 속성과 기능을 추가 가능  reply.name = ""  reply.bonum = 31 
 
 $(function(){
-	//페이지별로 리스트출력하기  별도로 외부 스크립트로 선언해있음 script src="../js/board.js" /페이지 시작하자마자 시작
+   //페이지별로 리스트 출력
      $.listPageServer(1);
      
      //이벤트 
@@ -113,7 +113,6 @@ $(function(){
       //입력한 모든 값을 가져온다
       fdata = $('#wform').serializeJSON();
       
-      //폼데이터를 js에 있는 ajax로 가져가기 -> 
       $.boardWriteServer();
       
       //모달창 닫기
@@ -126,14 +125,16 @@ $(function(){
      //수정 삭제 등록 댓글수정 댓글삭제 제목클릭  ---이벤트 
      $(document).on('click', '.action', function(){
            
-    	//전역변수 생성 ->board.js내부에서 사용하기 위해		  
-		  target = this; //target -> 모든 버튼 제목클릭  
+        //전역변수 생성 - board.js파일에서 사용하기 위함
+          target = this;
           vaction =    $(this).attr('name');
           vidx = $(this).attr('idx');
           
           if(vaction  == "modify"){
              alert(vidx + "번 글을 수정")
-             $('#mModal').modal('show');// 모달창 띄울때는 show
+             
+             //모달창 열기
+             $('#mModal').modal('show');
              
              //본문의 내용 가져오기
              vparents = $(this).parents('.card');
@@ -142,16 +143,22 @@ $(function(){
              vwr = $(vparents).find('.wr').text();
              //이메일
              vma = $(vparents).find('.ma').text();
-             //내용//내용은 <br>있으니까 html로 가져오기 
-             vcont = $(vparents).find('.p3').html();
+             //내용
+             vcont = $(vparents).find('.p3').html().trim();
+             console.log(vcont);
              //<br> => \n으로 변경
-             vcont = vcont.replace(/<br>/g, "\n");//<br>을 \n으로 변경한다 
+             vcont = vcont.replace(/<br>/g, "");
+             console.log(vcont);
              
              //제목
-             vtit = $(vparents).find('.title').text();
+             vtit = $(vparents).find('.title').text().trim();
              
              //modal창에 출력하기
-             $('#mform #writer').val(vwr);
+             $('#mform #writer').val(vwr);   // 이름
+             $('#mform #mail').val(vma);      // 메일
+             $('#mform #content').val(vcont);// 내용
+             $('#mform #subject').val(vtit);   // 제목
+             $('#mform #num').val(vidx);      // 번호   -반드시필요★
              
              
           }else if(vaction  == "delete" ){
@@ -163,12 +170,12 @@ $(function(){
           }else if(vaction == "list"){   //제목을 클릭
              alert( vidx +  "번 게시판글과 댓글을 모두 보기");
              
-          $.replyListServer();//제목클릭시 댓글 창 나오기
+          $.replyListServer();
              
              
           }else if(vaction  == "reply"){
              alert(vidx +  "번글에 댓글을 씁니다")
-             //('textarea').val xx->한개만 가져옴 /누른거 기준으로 가져오기->this/prev->앞에 형제
+             
              //입력한 내용가져오기
              cont = $(this).prev().val();
              
@@ -177,40 +184,47 @@ $(function(){
              name2 = String.fromCharCode(parseInt(Math.random()*26+97));
              name3 = parseInt(Math.random()*100+1);
              
-             reply.name = name1 + name2 + name3;//지금은 랜덤으로../로그인 아이디로 넣어주기
+             reply.name = name1 + name2 + name3;
              reply.bonum = vidx;
              reply.cont = cont;
              
-             //입력한 textarea내용 지우기(내용 등록후 textarea 지우기)
+             //입력한 textarea내용 지우기
              $(this).prev().val("");
              
              //댓글 쓰기 저장
              $.replyWriteServer();
              
-         	//여기에 댓글리스트 출력x
+             //댓글리스트 출력
                
              
              
              
           }else if(vaction == "r_modify"){
-             //alert(vidx + "번 댓글 을 수정 ")
+             alert(vidx + "번 댓글 을 수정 ");
+             
+             //댓글 수정창이 어디엔가 이미 열려있나 판단해야함
+             //이미 열려있다면 - 열려있는 부분에서 원래 상태로 돌려놓고 수정폼을 body로 이동시켜놓는다
+             if($('#modifyform').css('display')!="none"){
+                replyReset();
+             }
              
              
-             
-                
              //수정할 내용 (원래 내용)을 가져온다 
+             modicont = $(this).parents('.reply-body').find('.rp3').html().trim();
              
              //원래내용의 <br>태그를 \n으로 변경- modifyform (수정폼)에 출력 
+             modi = modicont.replace(/<br>/g,"\n");
+             $('#modifyform textarea').val(modi);
              
              //수정폼을 p3으로 이동 
+             $(this).parents('.reply-body').find('.rp3').empty().append($('#modifyform'));
              
              //수정폼을 보이기 
+             $('#modifyform').show();
              
           }else if(vaction == "r_delete"){
              alert(vidx + " 댓글 삭제");
-          
              
-             //renum기준으로 삭제
              $.deleteReplyServer();
              
           }
@@ -226,7 +240,7 @@ $(function(){
         $('#modifyform').hide();
         
         //원래내용을 p3으로 다시 출력 
-        $(vp3).html(modifycont);
+        $(vp3).html(modicont);
      }
      
      
@@ -237,44 +251,66 @@ $(function(){
      $('#btnok').on('click', function(){
         
         //입력한 내용을 가져온다 - 엔터기호가 포함 
-      
+        bmcont = $('#modifyform textarea').val().trim();
+        
         //엔터기호를 <br>태그로 변경 
+        amcont = bmcont.replace(/\n/g,"<br>");
        
-        //p3을 찾는다
+        //rp3을 찾는다
+        vp3 = $('#modifyform').parent();
+        
           
         //modifyform을 body로 이동  -안보이도록 설정 
+        $('#modifyform').appendTo($('body'));
+        $('#modifyform').hide();
         
-        //p3에  입력한 내용(<br>태그로 변경한) 을 출력 - DB 수정 후 에 실행 
-        //$(vp3).html(modiout);
+        //서버로 보내기
+        $.replyUpdateServer()
+        
+        //vp3에  입력한 내용(<br>태그로 변경한) 을 출력 - DB 수정 후 에 실행 
+        //$(vp3).html(amcont);
         
      })
      
      //댓글 수정창에서 취소버튼
      $('#btnreset').on('click', function(){
-        
+        replyReset();
      })
      
      
      //글 수정 modal창에서 전송버튼 클릭
      $('#msend').on('click', function(){
         //입력한 내용 가져오기
-        
-        //서버로 보내기 
-      
-        
-        //- db에서 수정성공 후 수정한 내용으로 화면(본문의 내용)바꾸기- 
+         mdata=$('#mform').serializeJSON();
+         console.log(mdata);
+         
+         //서버로 보내기 
+         $.boardUpdate();
+         
+         //- db에서 수정성공 후 수정한 내용(modal창에 입력한 내용)으로 화면(본문의 내용)바꾸기- 
+         //디비는 실패했는데 화면만 바뀌면 안됨 => db가 성공했을 때 바꿔야함 => ajax의 success에서
           //modal창에 수정한 내용을 가져온다 
+             vmail = $('#mform #mail').val();      // 메일
+             vcont = $('#mform #content').val();      // 내용
+             vtit = $('#mform #subject').val();      // 제목
+          
           //엔터기호가 포함
+          //엔터기호 변경
+          vcont = vcont.replace(/\n/g,"<br>")
+          
+          //modal 창에 입력된 내용 지우고 modal창 닫기
+          $('#mform .txt').val("");
+            $('#mModal').modal('hide');
           
          //엔터기호변경
           
           
            /* //화면(본문의 내용)바꾸기 성공시 할일-
-           vparents =  $(vmodify).parents('.card');
-           $(vparents).find('a').text(vms)
+           vparents =  $(target).parents('.card');
+           $(vparents).find('a').text(vtit)
           
-           $(vparents).find('#em').text(vmm);
-           $(vparents).find('.wp3').html(vmc);
+           $(vparents).find('.em').text(vmail);
+           $(vparents).find('.p3').html(vcont);
          */
         
      })
@@ -411,7 +447,7 @@ nav a{
            <input type="hidden" id="num" name="num" >
         
             <label>이름</label>
-            <input type="text" class="txt" id="writer" name="writer"> <br> 
+            <input readonly="readonly" type="text" class="txt" id="writer" name="writer"> <br> 
             
             <label>제목</label>
             <input type="text" class="txt" id="subject" name="subject"> <br> 

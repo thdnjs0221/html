@@ -59,8 +59,17 @@ public class BoardDaoImpl implements IBoardDao {
 
 	@Override
 	public int updateBoard(BoardVO vo) {
-		int res = 0;
-		
+		int res=0;
+		try {
+	           sql = MyBatisUtil.getSqlSession();
+			   res = sql.update("board.updateBoard",vo);
+			}catch(Exception e){
+				e.printStackTrace();
+	                              
+	          } finally {
+				sql.commit();
+				sql.close();
+			}
 		return res;
 	}
 
@@ -123,6 +132,17 @@ public class BoardDaoImpl implements IBoardDao {
 	@Override
 	public int updateReply(ReplyVO vo) {
 		int res = 0;
+		
+		try {
+			sql = MyBatisUtil.getSqlSession();
+			res= sql.update("board.updateReply",vo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sql.commit();
+			sql.close();
+		}
 		
 		return res;
 	}
