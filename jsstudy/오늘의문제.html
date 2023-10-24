@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div id="list">
+</div>
+<script>
+
+    const myList = document.querySelector("#list");
+    const position ={
+        level1 :"개발자",
+        level2 :"사장",
+        level3 :"전무",
+        level4 :"사원"
+    }
+    const sawons =[
+        {name:"박민주",pos:"level1"},
+        {name:"전수진",pos:"level3"},
+        {name:"문선영",pos:"level2"},
+        {name:"김원희",pos:"level1"},
+        {name:"황수빈",pos:"level4"},
+        {name:"유선영",pos:"level2"},
+        {name:"김도현",pos:"level3"},
+        {name:"최광식",pos:"level2"}
+
+    ];
+
+    function fOver(pThis){
+        console.log("체크:",pThis)
+        pThis.style.backgroundColor ="pink";
+    }
+    function fOut(pThis){
+        console.log("체크2:",pThis)
+        pThis.style.backgroundColor="white";
+    }
+
+    let tblStr= "<table border=1 width=400>";
+        tblStr += "<tr><th>넘버</th><th>이름</th><th>직위</th></tr>";
+
+        for(let i=0; i<sawons.length; i++){
+            let sawonsVO = sawons[i];   // 자바스타일로
+            tblStr += "<tr onmouseover='fOver(this)' onmouseout='fOut(this)'>";
+            tblStr += "<td>"+ (i+1)+"</td>";
+            tblStr += "<td>"+ sawonsVO.name+"</td>";
+            tblStr += "<td>"+ position[sawonsVO.pos]+"</td>";
+            //힌트 배열식 접근법 활용!!
+            tblStr += "</tr>";
+            
+        }
+        tblStr += "</table>";  //문자열 더하기 끝
+        
+        myList.innerHTML = tblStr;  //화면 넣기
+</script>

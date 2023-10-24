@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <meta charset="UTF-8">
+<script>
+    // 원시 타입 number,string,boolean   //undefined ,null 등은 무시
+    // 참조타입 배열, 객체 2개 묶어서 json(javascript object notatoin)이라 부름
+    // 동작방식(Operation)이 달라서 꼬옥 인식하지 않으면 안됨
+
+    // let merongo = new Object();
+    // merongo.name = "박주연";
+
+    let check =["kgb"];
+    let huk = check[0]; //문자열이라 (원시타입) 복사가 이루어졌다 (별명x) 
+
+    //huk[0] = "메롱";
+    huk="흑흑흑"
+    alert(check[0]);
+
+    // let merong={
+    //     name:"박주연"
+    // }
+
+    // let hope = merong; // 요때는 변수명이 별명으로 동작
+    //                  // 같은 걸 가리킴 call by reference (주소값)
+    // hope.name = "정하";
+
+    // alert(merong.name);
+    
+
+
+    //원시타입은 동작이 copy   call ny values로 실행됨
+    // let aaa = "범종";
+    // let bbb= aaa;  //복사 되었다고 함(copy) ->call by value
+
+    // alert("체크2"+bbb); 
+
+    // bbb="우정";
+    // alert("체크2"+bbb); 
+
+
+    
+    //alert("체크:"+aaa);
+
+
+</script>
