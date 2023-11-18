@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ag-Grid Basic Example</title>
+<!-- 
+커뮤니티 버전 무료
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script> -->
+<!-- enterprise 버전 유료 -->
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise/dist/ag-grid-enterprise.min.js"></script>
+</head>
+<body>
+    <div id="myGrid" style="height: 500px; width:800px;" class="ag-theme-alpine"></div>
+<script>
+/*sortable 정렬 가능  */
+const columnDefs = [
+  { field: "sujinNum",  headerName:"넘버"},
+  { field: "sujinName", headerName:"이름" },
+  { field: "sujinCont", headerName:"내용" },
+  { field: "sujinFile", headerName:"파일" }
+];
+
+// 데이타 정의
+const rowData = [
+  { make: "Toyota", model: "Celica", price: 35000 },
+  { make: "Ford", model: "Mondeo", price: 32000 },
+  { make: "Porsche", model: "Boxster", price: 72000 }
+];
+
+// 설정 옵션: 중요, 위에 정의한 것들이 여기서 통합됨에 주목
+const gridOptions = {
+	columnDefs: columnDefs,
+	  // rowData: rowData,n  // d아작스로 가져올거라 필요없음
+	  defaultColDef: {  //모든 컬럼이 가져아 할 디폴트 속성 정의
+	    sortable:true,
+	    filter:true,
+	    resizable:true,
+	    minWidth:100
+	},
+	 // 페이지 설정
+	  pagination:true,
+	  //paginationAutoPageSize:true,  // 자동으로 설정
+	  paginationPageSize:10,    // 같이 설정하니 위에 꺼 우선순위
+};
+
+//아작스로 데이터 가져오기
+/*
+function getData(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("get","/api/sujins",true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+        
+            console.log("확인:",JSON.parse(xhr.responseText));
+            let rslt = JSON.parse(xhr.responseText);
+        	// 데이타 구조 억지 땜빵!
+            gridOptions.api.setRowData(rslt);  // 아작스로 가져온 데이터 넣기
+        }
+    }
+    xhr.send();
+}
+*/
+
+//getData();
+
+async function getData(){  //async await 함수 자체는 비동기로 돌려줌! 안에는 동기 ..  체크2가 먼저뜸 
+	//fetch 눈으로 먼저 한번 보기
+	let response = await fetch("/api/sujins");  //Promise(약속)을 리턴   /await를 쓰려면 async 꼭 사용해주기
+	let rslt = await response.json ();
+	 
+	gridOptions.api.setRowData(rslt);  //agGrid에 데이터 넣기 
+	alert("체크1");
+}
+
+	
+
+// 그리드 셋업
+document.addEventListener('DOMContentLoaded', () => {
+  const gridDiv = document.querySelector('#myGrid');
+  new agGrid.Grid(gridDiv, gridOptions);
+  
+  getData();  // 아작스로 데이터 불러오기
+  alert("체크2"); //체크2가 먼저뜸 
+});    
+</script>
+</body>
+</html>

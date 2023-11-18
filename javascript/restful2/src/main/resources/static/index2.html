@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Restful client</title>
+<style>
+    #list {
+        margin: 3px auto;
+        width: 650px;
+        height: 600px;
+        overflow: scroll;
+        border: 1px solid pink;
+    }
+
+
+</style>
+</head>
+
+<body>
+    <h1>레스트풀 클라이언트 SPA - Single Page Applicantion</h1>
+    <div id="list"></div>
+    <div id="tab">
+        <div id="ins">
+            <!-- -->
+            <form action="" >  
+            <!--disabled="disabled"-> 아작스는 상관없지만 폼 전송이 ㄷ안됨 readonly는 전송이 됨  -->
+                순번: <input type="text" name="myNum" id="myNum" required disabled="disabled"> <br>
+                이름: <input type="text" name="myName" id="myName" required> <br>
+                내용: <textarea name="myCont" cols="60" id="myCont" rows="5" required> </textarea><br>
+               파일: <input type="text" name="myFile" id="myFile" required> <br>
+            <input type="submit" value="입력">
+            <input type="button" onclick="fUpdate()" value="수정">
+            </form>
+        </div>
+    </div>
+    <script>
+        const myForm = document.forms[0]; //페이지에서 만나는 첫번째  form
+        const myList = document.querySelector("#list");
+        const myNum = document.querySelector("#myNum");
+        const myName = document.querySelector("#myName");
+        const myCont = document.querySelector("#myCont");
+        const myFile = document.querySelector("#myFile");
+        
+        const fUpdate = () =>{
+
+            let sujinVO ={
+                sujinNum: myNum.value,
+                sujinName: myName.value,
+                sujinCont: myCont.value,
+                sujinFile: myFile.value
+            }
+            console.log("확인",sujinVO);
+            let xhr = new XMLHttpRequest();
+            xhr.open("put", "/api/sujins", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log("확인",xhr.responseText);
+                    if(xhr.responseText){
+                        fInit();
+                    }
+                }
+
+            }
+            xhr.send(JSON.stringify(sujinVO)); // get 이외는 보내는 데이터를 전부 send안에 
+        	
+        }
+        
+
+       // console.log("체킁:",myForm);
+
+        //아작스를 써야하기 때문에 submit 먼저 막기
+        // 전송
+        myForm.onsubmit = () => {
+            event.preventDefault(); //기본 built- in 기능 막기, form 전송 막기
+
+            let sujinVO ={
+                sujinNum:0,
+                sujinName: myName.value,
+                sujinCont: myCont.value,
+                sujinFile: myFile.value
+            }
+            console.log("확인",sujinVO);
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "/api/sujins", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log("확인",xhr.responseText);
+                    if(xhr.responseText){
+                        fInit();
+                    }
+                }
+
+            }
+            xhr.send(JSON.stringify(sujinVO)); // get 이외는 보내는 데이터를 전부 send안에 
+        }
+
+        //tr클릭
+        const fTr = pThis =>{
+            console.log("확인1:",pThis)
+            
+            myNum.value=pThis.children[0].innerHTML;
+            myName.value=pThis.children[1].innerHTML;
+            myCont.value=pThis.children[2].innerHTML;
+            myFile.value=pThis.children[3].innerHTML;
+
+        }
+
+        const fTrOver = (pThis) =>{
+            console.log("확인2:",pThis)
+            pThis.style.backgroundColor ="pink"
+            
+        }
+
+        const fTrOut= (pThis) =>{
+            console.log("확인3:",pThis)
+            pThis.style.backgroundColor ="white"
+
+        }
+
+
+
+        //리스트 뿌리는 함수
+        const fList = (rsltArr) =>{
+           
+                    let tblStr = `
+                    <table border=1>
+                        <tr><th>순번</th><th>이름</th><th>내용</th><th>파일</th></tr>
+                         `;
+                    for (let i = 0; i < rsltArr.length; i++) {
+                        let sujinVO = rsltArr[i];
+                        tblStr += `
+                        
+                        <tr onclick=fTr(this) onmouseover=fTrOver(this) onmouseout=fTrOut(this) ><th>${sujinVO.sujinNum}</th>
+                            <th>${sujinVO.sujinName}</th>
+                            <th>${sujinVO.sujinCont}</th>
+                            <th>${sujinVO.sujinFile}</th>
+                        </tr>
+                        `;
+
+                    }
+                    tblStr += "</table>";
+                    myList.innerHTML = tblStr; //화면에 뿌리기
+
+        }
+        const fInit = () => {
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("get", "/api/sujins", true);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log("체크:", JSON.parse(xhr.responseText));
+                    fList(JSON.parse(xhr.responseText));
+                    
+
+                }
+            }
+            xhr.send();
+        }
+        document.addEventListener("DOMContentLoaded", fInit); // $(function(){})
+
+
+
+    </script>
+</body>
+
+</html>
