@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<button id="sukho" onclick="fAjax()">눌렁</button>
+<script>
+    // id를 직접 변수명으로 사용하면 나쁜 사람
+    // 짧은 샘플코드 작성시에만 사용하고, 프로젝트에는 사용하지 않음!
+    //(가독성을 망가뜨림! -> 프로젝트 커지면 전역변수를 다 모아서 처리)
+    // 더구나 요즘은 페이지내에 id값도 반복해서 막사용(원래는 권장하지 않은 내용)
+    console.log("체킁",sukho); 
+
+    const fAjax = async () =>{
+        /*
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","https://www.flickr.com/services/feeds/photos_public.gne?tags=cat&format=json",true);
+        xhr.onreadystatechange = () =>{
+            if(xhr.readyState == 4 && xhr.status == 200){
+                console.log(xhr.responseText);
+            }
+        }
+        xhr.send();
+        */
+
+        let response = await fetch("https://www.flickr.com/services/feeds/photos_public.gne?tags=cat&format=json")
+
+        let rslt = await response.text();
+        console.log("돌아온 값:",rslt);
+
+    }
+
+</script>

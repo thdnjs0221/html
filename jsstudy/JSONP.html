@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script>
+   // 불리는 함수를 미리 맹글어 둠! 
+   // 매개변수에 JSON형식으로 넘겨준다해서(Padding)  JSONP라 부름
+   // ajax cross-origin 우회방법 중 1개인데, 
+   // 서비스하는 쪽에서 이런식으로 지원을 해줘야 사용가능!
+  function jsonFlickrFeed(pRslt){
+    myDisp.innerHTML = "";   // 뿌리기 전에 한번 클리어!
+    //console.log("누느로 보아용!!",pRslt);
+
+    let imgItems = pRslt.items;
+
+    for(let i=0; i<imgItems.length; i++){
+        let imgUrl = imgItems[i].media.m;
+        //console.log("이미지 url:",imgItems[i].media.m);
+        let myImg = document.createElement("img");
+        myImg.src = imgUrl;
+        myDisp.appendChild(myImg);
+    }
+
+  }
+</script>
+</head>
+<body>
+    <input type="text" id="schImg" value="" placeholder="찾는 이미지?">
+    <button onclick="fSchImg()">껌색</button>
+    <div id="disp"></div>
+<script>
+    const preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags=" ;
+    const postURL = "&format=json";
+    const fSchImg = () =>{
+        let schURL = `${preURL}${mySch.value}${postURL}`;
+        let myScript = document.createElement("script"); // 스크립트 태그 생성
+        myScript.src = schURL;  // 태그 src속성에 작성된 URL 넣깅
+        document.head.appendChild(myScript); // 문서의 head태그사이에 넣깅
+    }
+
+    const myDisp = document.querySelector("#disp");
+    const mySch = document.querySelector("#schImg");
+</script>
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=ddit&format=json"></script>
+</body>
+</html>

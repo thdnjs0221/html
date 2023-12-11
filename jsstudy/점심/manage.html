@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>대덕점심메뉴</title>
+<style>
+    #wrapper {
+        width:300px;
+        margin: 10px auto;
+        text-align: center;
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="resRegister">
+            <h1>식당등록</h1>
+            <form id="resRegisterForm">
+            <table>
+                <tbody>
+                    <tr><td>이 름 </td><td><input type="text" name="resName" value="홍길동점" required></td></tr>
+                    <tr><td>전 화 </td><td><input type="text" name="resTel" value="010-1111-2222" pattern="010-[0-9]{4}-[0-9]{4}" required></td></tr>
+                    <tr><td>주 소 </td><td><input type="text" name="resAddress" value="오뎅?" required></td></tr>
+                    <tr><td>대표메뉴</td><td><input type="text" name="resMain" value="똔까스" required></td></tr>
+                    <tr><td>비 고</td><td><input type="text" name="resEtc" value="맛집"></td></tr>
+                    <tr><td colspan="2"><input type="submit" value="등록" id="btnSubmit" ><input type="reset" value="다시"></td></tr>
+                </tbody>
+            </table>
+            </form>    
+        </div>
+    </div>
+<script>
+    /**  전역변수 선언 구간 **/
+    const dbName = "myDB";
+    const tblName = "ress";
+    let ressList;
+
+    const resRegisterForm = document.querySelector("#resRegisterForm");
+
+    /** 템플릿 스트링 선언 구간 **/
+
+    /**  유틸 함수 구간 **/
+    const fSerialize = (pForm) => {
+        let elems = pForm.elements;
+
+        let resInfo  = {};
+        for(let {name,value} of elems){
+            if(name){
+                resInfo[name] = value;
+            }
+        }
+
+        console.log("체킁:",resInfo);
+        return resInfo;
+    }
+
+    /** 전역함수 선언 구간 **/
+    const fInit = () => {
+       let initCheck = localStorage.getItem("myDB")
+       if(!initCheck){
+            let myDB = {};
+            myDB.ress = [];
+            localStorage.setItem(dbName,JSON.stringify(myDB));         
+       }
+
+       ressList = JSON.parse(localStorage.getItem(dbName)).ress;
+
+    }
+
+    const fResRegister = ()=>{
+        event.preventDefault();
+        fSerialize(resRegisterForm);
+
+    }
+
+    /** 이벤트 등록 구간 **/
+    resRegisterForm.addEventListener("submit",fResRegister);
+    window.addEventListener("DOMContentLoaded",fInit);
+</script>
+</body>
+</html>

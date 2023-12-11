@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+ let doyun = {};  // 빈 객체 생성
+ //doyun.0 = "권";  // 변수명은 숫자로 시작할 수 없다는 규칙에 위배, $,_ 
+
+ doyun[0] = "권";  // doyun["0"]과 같음
+ doyun.length = 1;
+ doyun[1] ="도윤";
+ doyun.length++;
+
+ for(let i=0; i < doyun.length; i++ ){
+    alert(doyun[i]);
+ }
+
+ console.log("체킁:",doyun);
+
+ let doyun1 = ["권","도윤"];
+ console.log("체킁1",doyun1);
+
+
+</script>

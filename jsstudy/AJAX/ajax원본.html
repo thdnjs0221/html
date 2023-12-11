@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div id="disp" style="text-align: center;"></div>
+<script>
+// 심부름꾼(ajax)을 1명만 맹글어서 여러명이 쓰면 아저씨 죽음! 포기
+// 꼭 함수를 이용해서 지역변수로 각자 필요에 맞게 사용
+// DRY
+
+/*일반화시키기 매개변수 낱개로 낱낱히 1
+const ajax  = function(pMetod,pURL,pCB){
+    let xhr = new XMLHttpRequest();
+    xhr.open(pMetod,pURL,true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+            pCB(xhr.responseText);
+            //서버로 부터 돌려받은값 처리
+        }
+    }
+    xhr.send();  // 아작스 실행!
+}
+*/
+
+const myDisp = document.querySelector("#disp");
+// 좀더 멋지게 일반화시키기 매개변수 갯수에 영향받지 않켕 {}
+const $={};  // 빈객체, $와 _는 변수명으로 쓸 수 있는 특수문자
+// jQuery $.ajax의 탄생!
+
+
+// CRUD + 페이징 + 검색 + 아작스
+$.getJSON = function(pURL,pCB){
+    let xhr = new XMLHttpRequest();
+    xhr.open("get",pURL,true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+             pCB(JSON.parse(xhr.responseText));
+        }
+    }
+    xhr.send();  // 아작스 실행!
+}
+
+$.getJSON("data.json",function(rslt){
+     console.log("체에킁:",rslt);
+})
+
+$.ajax  = function(pSet){
+    let xhr = new XMLHttpRequest();
+    xhr.open(pSet.type,pSet.url,true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            //console.log(xhr.responseText);
+            //서버로 부터 돌려받은값 처리
+            if(pSet.dataType == "json"){
+                pSet.success(JSON.parse(xhr.responseText));
+            }else {
+                pSet.success(xhr.responseText);
+            }
+        }
+    }
+    xhr.send();  // 아작스 실행!
+}
+
+$.ajax({
+    type:"get",
+    url:"/jsstudy/AJAX/data.json",
+    dataType:"json",
+    success:function(rslt){
+        console.log("체킁:",rslt);
+    }
+})
+
+
+$.ajax({
+    type:"get",
+    url:"/jsstudy/AJAX/merong.txt",
+    success:function(rslt){
+        myDisp.innerHTML = `
+            <h1>음 느낌이 마구 마구 와용</h1>
+            ${rslt}
+            <h1>정말이예용</h1>
+        `;
+    }
+})
+
+
+/*
+ajax("get","/jsstudy/AJAX/merong.txt",function(rslt){
+    myDisp.innerHTML = `
+        <h1>보영 실망이얌!</h1>
+        ${rslt}
+    `;
+});
+*/
+/*
+const ajax1 = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("get","/jsstudy/AJAX/merong.txt",true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+            myDisp.innerHTML = xhr.responseText;
+        }
+    }
+    xhr.send();  // 아작스 실행!
+}
+ajax1();
+
+const ajax2 = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("get","/jsstudy/AJAX/merong.csv",true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+            result = xhr.responseText;
+        //alert("썽꽁")
+        }
+    }
+    xhr.send();  // 아작스 실행!
+}
+
+ajax2();
+*/
+
+
+
+
+
+
+// 이해를 위해 아작스 원본 모습 확인(요걸 이해하면 가장 좋음)
+/*
+let xhr = new XMLHttpRequest();  // 나 대신 통신해 줄 심부름꾼 아저씨 생성
+// get, post, put, delete (요정만 기억)
+xhr.open("get","/jsstudy/AJAX/merong.csv",true); // 시킬 일 지정
+
+// 심부름꾼 아저씨에게 변화가 생기면 이벤트가 발생
+xhr.onreadystatechange = function(){
+    if(xhr.readyState == 4 && xhr.status == 200 ) { // 0,1,2,3,4  => 우리가 관심있는 건 끝났냐? 
+         console.log(xhr.responseText)   // 심부름의 결과물(곧 서버가 돌려 준 값)
+    }
+}
+
+// get 이외의 방식에서만 send안에 전송할 내용을 적음
+xhr.send();                          // 시킨대로 하세용
+*/
+</script>

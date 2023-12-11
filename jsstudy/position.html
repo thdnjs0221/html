@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+    /* 레이아웃 구성시에는 꼬옥 border를 넣어서 누네 보이겡 */
+    div {
+        border: 1px solid black;
+    }
+
+    #huk {
+        position: fixed;  /* default? */
+        top:100px;
+        width: 100vw;
+        background-color: blueviolet;
+    }
+    /* 부모 relative, 자식 absolute 꼬옥 알아야 함! */
+    #wrapper {
+        position: relative;
+    }
+    h1 {
+        position: absolute;
+        background-color: black;
+        color:white
+    }
+</style>
+<body>
+    <div style="display:none">흥</div>
+    <div id="huk">치</div>
+    <div>뿡</div>
+    <div id="wrapper">
+        <h1 style="top:30px">난 최고의 프로그래머당1</h1>
+        <h1 style="top:60px;z-index:99999999999">난 최고의 프로그래머당2</h1>
+        <h1 style="top:90px">난 최고의 프로그래머당3</h1>
+        <h1 style="top:120px">난 최고의 프로그래머당4</h1>    
+    </div>
+</body>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div style="width:800px">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        const ctx = document.querySelector('#myChart');
+
+        //chart.js가 잘 만들어진 이유, return값으로 제어가 직관적
+        // line과 bar는 한 차트에서 같이 쓰일 수 있당! (mixed 차트)
+        const myChart = new Chart(ctx, {
+            type: 'bar',  // bar, line, pie,doughnut,radar
+            data: {
+                // 값 표시 갯수는 라벨 수에 의존
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','재성'],
+                datasets: []
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // 옵션 구조를 파악하는 순간 사용법의 대부분을 이해할 수 있음!
+       //console.log("라벨:",myChart.data.datasets[0].label);
+       //console.log("데이터:",myChart.data.datasets[0].data); // 읽기가능
+       //myChart.data.datasets[0].data = [120, 190, 30, 50, 20, 30,60]; // 쓰기
+       //console.log("데이터2:",myChart.data.datasets[0].data); // 쓰여졌는지 확인
+
+       //7개의 랜덤 데이타를 가진 배열 리턴
+       function fRanData(){
+         let data =[];
+         for(let i=1; i<=7; i++){
+            data.push( Math.round(Math.random()*50) + 50); // 50~100;
+         }
+         return data;
+       }
+
+
+    //0.5초마다 차트를 그리는(Rendering) 함수
+    function fRender(){
+        let types = ["line","bar"];
+        let colors = ["gray","blue"]; 
+       for(let i=0; i<2; i++){
+            let ranData ={
+                type:types[i],
+                label: `202${i+2}년 재성 키`,
+                data: fRanData(),
+                borderWidth: 1,
+                backgroundColor: colors[i]
+            };
+            myChart.data.datasets[i] = ranData;              
+       }
+       // 제일 중요한 메소드 update
+       myChart.update(); // 다시 그려랑, 멋진말롱 rendering
+
+       setTimeout(fRender,2000);
+    }
+
+    fRender();  // 콜
+
+    </script>
+</body>
+
+</html>

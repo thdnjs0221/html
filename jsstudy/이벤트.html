@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #merong {
+        width:200px;
+        height: 200px;
+        background-color: black;
+        color:white;
+        border-radius: 50%; /* 동그래미 맹글깅 */
+        line-height: 200px;
+        text-align: center;
+
+    }
+</style>
+</head>
+<body>
+    <!-- 브라우져 마다 input:file 모습이 다름 완존 짜증!-->
+    <button onclick="fSukho()">나의파일선택</button>
+    <input type="file" id="sukho"  value="" style="display:none">
+    <br>
+    주민번호<input type="text" value="" tabindex="1" onkeydown="fEnter(1)" autofocus><br>
+    이름<input type="text" value="" tabindex="4" onkeydown="fEnter(2)"><br>
+    나이<input type="text" value="" tabindex="-1" onkeydown="fEnter(3)"><br>
+    별명<input type="text" value="" tabindex="2"  ><br>
+    <button onclick="fbtnClick()">누르숑</button>
+    <button id="naBtn">나도 버튼인뎅</button>
+    <div id="merong" contenteditable  tabindex="0"  onkeydown="fKeyDown()">나도 눌러져용?</div>
+</body>
+<script>
+    const myFile = document.querySelector("#sukho");
+
+    const fSukho = ()=>{
+        myFile.click(); // 강제 클릭!, 눈에 안보이만 페이지속에 존재
+        // jQuery에선 trigger 메소드 이용!
+    }
+
+    const myTexts = document.querySelectorAll("input[type=text]");
+    const fEnter = (pNum)=>{
+        if(event.keyCode == 13){
+            myTexts[pNum].focus();   // 3번째 text에 커서
+        }
+    }
+
+    // tabindex=0  -> focus 받을 수 있겡
+    // tabindex =-1  -> focus 빼앗깅
+    // 1,2,3 탭키 입력시 순서
+    // key이벤트는 focus를 받을 수 있는 거에만 발생!
+    // keypress 와 keydown의 차이 -> 
+    const fKeyDown = () => {
+        //alert(event.keyCode);
+        //alert(event.key);  잘 안 써, 왜? 
+        //if(event.keyCode == 13){  // 엔터키 처리는 꽤 많이 사용됨!
+        //    alert("너 엔터 눌렀징?"); // 요걸 좀 더 많이 씀
+        //}
+    }
+
+
+    const naBtn = document.querySelector("#naBtn");
+    naBtn.onclick = () =>{   // 등록법 2번
+        alert("나 누르지망 졸령!");
+    }
+
+    naBtn.onclick = () =>{   // 등록법 2번
+        alert("석호는 왜 안졸려?");
+    }
+
+    // 등록법 3번, 덮어쓰지 않콩, 이벤트큐라는 곳에 추가 등록을 함!
+    const fClick1= () =>{
+        alert("난 어케 되는 거얌?")
+    }
+    naBtn.addEventListener("click",fClick1);
+
+    // 잘 사용하지는 않음(빈도가 낮은편)
+    naBtn.removeEventListener("click",fClick1);
+
+    naBtn.addEventListener("click",()=>{
+        alert("석호 밥 잘먹징?")
+    })
+
+
+// 이벤트 등록법 3가지 , inline, on이벤트명(뒤에 꺼이 앞에 꺼이 더퍼서)
+  const fbtnClick = () => {
+    alert("나 눌렀닝?");
+  }
+</script>
+</html>

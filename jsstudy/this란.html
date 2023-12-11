@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<h1 id="js">재성 오케잉</h1>
+<button id="bind">억지 bind 예제 버튼</button>
+<script>
+    //사용이 권장되지는 않음. (잘 못씀)
+    //document.write("<h1>태형 얼굴 안 보임</h1>");
+
+    /* 기본을 아는 사람
+    function prt(msg){
+        document.write(msg);
+    }
+    */
+
+    // 요따구로 사용하면 고참이 절대 건들지 않아용!
+    var prt = document.write.bind(document); // 문법 OK?
+
+    prt("<h1>요따구로 쉽다고용</h1>");
+    prt("<h1>고러타니께용</h1>");
+
+
+
+    const myBind = document.querySelector("#bind");
+
+    function fClick(pName){
+        alert(`${pName}님 저 누르셨어용?`);
+        alert(this.merong);
+    }
+
+    myBind.addEventListener("click",fClick.bind(
+    {merong: "재성메롱"},"이수정"));
+
+
+    // call, apply, bind라는 function객체의 메소드로
+    //  function안의 this값을 개발자가 직접 지정이 가능해짐
+    function fThis(pArg1,pArg2,pArg3){
+        console.log("체킁:",this);//?  window
+        console.log("매개변수",pArg1,pArg2,pArg3);
+    }
+    
+    fThis();
+    // 객체 선언
+    var sujin = {
+        name:"전 수진",
+        mood:"반짝 반짝"
+    }
+
+    fThis.call(document.querySelector("#js"),"김","재","성");
+    fThis.apply(sujin,["전","수","진"]); 
+    // apply는 무조건 매개변수를 배열에 담아서 넘겨야 함. 그외는 call과 똑같음
+    
+    // bind는 함수를 실행 안 시키고
+    // 내부적으로 this값과 매개변수가 세팅된 함수를 맹글어서 
+    // 함수(포인터)를 되돌려 줌!
+    console.log(fThis.bind(document,"난","HTML문서"));
+
+
+
+    /*
+    fThis();
+    //참조(Reference)로 메소드 추가
+    sujin.msg = fThis;
+    // this가 가리키는 값이 달라짐
+    // 개발자들이 반발!, 요따구로는 프로그램 넘 힘들당. 대책을 내놓아랑!
+    sujin.msg();
+    */
+
+
+
+
+
+
+    
+    // 위에 껀 요것과 같음!, 전역함수 선언은 window객체에
+    // 메소드를 추가하는 것과 같당!
+    //window.fThis = function(){
+    //    console.log("체킁",this);
+    //}
+
+
+    //window.fThis();  // fThis();
+
+    //var myName = "이수정";
+    //window.myName = "이수정"  // 위와 동일한 의미!
+    //alert(myName);
+    // 주의사항: let과 const는 기존 var와는 저장되는 context가 달라요
+
+   // let myName2 = "유선영 디버깅 못함";
+   // alert(window.myName2);
+
+
+</script>

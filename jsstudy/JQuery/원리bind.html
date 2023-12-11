@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div class="kjh">김소원</div>
+<div class="kjh">이은솔</div>
+<div class="kjh">신수연</div>
+<div class="kjh">김정하 예쁜이</div>
+<script>
+    !function () {
+        const $ = function (pSel) {
+            return new myDom(pSel);       // 여기서 생성해서 돌려줌 
+        }
+
+        const myDom = function (pSel) {
+            let elems = document.querySelectorAll(pSel);
+
+            this.selQuery = pSel;     // 선택자를 임시로 저장해 둠
+            this.length = elems.length;
+            for (let i = 0; i < elems.length; i++) {
+                this[i] = elems[i];
+            }
+            return this;  // 생략 가능
+        }        
+        $.fn=myDom.prototype; // myDom.prototype을 밖에서도 접근 가능하겡 (jQuery Plug-in)
+        window.$=$;  // 전역변수 $가 지역변수 $를 참조! 
+
+    }();
+
+    $.fn.html = function(pArg){
+        // 매개변수 값이 넘어오지 않았을 때
+        if(!pArg){
+            return this[0].innerHTML
+        }
+
+        //매개변수가 넘어 왔는뎅, 문자열이 넘어 왔음
+        if(typeof(pArg)=="string"){
+            for(let i=0; i<this.length; i++){
+                this[i].innerHTML = pArg;
+            }
+            return this;  // 메소드 체인닝, 다시 박스 리턴
+        }
+
+        //매개변수가 넘어 왔는뎅, 함수(곧 콜백)가 넘어 왔음
+        if(typeof(pArg) == "function"){
+            //실제 jQuery에서 가장 많이 사용되는 패턴!, 쭝요!
+            for(let i=0; i<this.length; i++){
+                // call을 이용 컨테이너에 담긴 각각을 this가 가리키도록 지정!
+                this[i].innerHTML = pArg.call(this[i],i,this[i].innerHTML);
+            }
+            return this; // 메소드 체인닝, 다시 박스 리턴!
+        }
+    }
+
+    // this값 확인
+    // 화살표함수에는 this사용에 대한 제약사항이 있는데
+    // 외우지 말공, this를 제어해야 할 땐 그냥 화살표함수를 사용하지 않는 걸롱
+    $(".kjh").html(function(index,oldHtml){
+        console.log("체킁:",this);
+        return oldHtml;  // 원래값 그대로 리턴
+    })
+
+</script>

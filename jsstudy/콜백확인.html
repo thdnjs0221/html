@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+    <div class="ks">송석원</div>
+    <div class="ks">오경석</div>
+    <div class="ks">권도윤</div>
+    <div class="ks">김보영</div>
+    <div class="ks">김소원</div>
+<script>
+    const myKs = document.querySelectorAll(".ks");
+    console.log("체킁:",myKs);
+
+    //jQuery each 흉네!
+    // 누네만 익쑥해지면 이미 중급을 넘어선! 자꾸 연습!
+    const $ = {};   // 빈 객체 생성
+    $.each = function(pArr,pCb){
+        for(let i=0; i<pArr.length; i++){
+            pCb(i,pArr[i]);   // 콜백함수를 호출하는뎅, 배열인덱스와 해당 인덱스 값을 넘김
+        }
+    }
+
+    $.each(myKs,function(index,div){
+        console.log("체킁",index,div);
+        if(div.innerHTML == "권도윤"){
+            div.style.color="pink";
+            div.style.fontSize="20em"; // 
+        }
+    })
+
+</script>

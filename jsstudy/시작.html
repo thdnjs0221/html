@@ -1,74 +1,56 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <script>
+    // var, let, const 
+    // var function 안에 있냐 밖에 있냐만 구분하면 됨!
 
-    //var let const (let const 권장)
-    //var function 안에 있냐 밖에 있냐만 구분하면 됨!
-
-    //한마디로 하면 원시타입은 속성도 메소드도 없는 애!
-    // 문자열을 ""뺴고는 다 true 보통 truthy(true같은 값)
+    // 한마디로 하면 원시타입은 속성도 메소드도 없는 애!
+    // 문자열은 ""빼고는 다 true 보통 truthy(true같은 값)
     // number는 0빼고 다 true
-    // undefined , null 은 false  
+    // undefined, null 은 false
 
+    let msg = !0;  //  있어 보여
 
-    let msg =  !0;   
-
-    //자동 형변환을 이해는 하지만 , 가독성이 필요할때는 
-    //비교문을 일부러 써주기도 함! 
-    if("다 이해 되었지용?"){   //문자열이 왔는데도 판단함.스크립트는 자동으로 boolean 값을 바꿈  빈공백 뺴고는 다 true
+    // 자동형변환을 이해는 하지만, 가독성이 필요할 때는
+    // 비교문을 일부러 써주기도 함!
+    if("다 이해 되었지용?"){
         alert("정말?"+msg);
     }
 
-
     /*
-    let numStr ="1000";
+    let numStr = "1000";
     alert(typeof(numStr));
-    numStr =numStr - 0;
-    alert("체크:"+typeof(numStr));
+    numStr = numStr / 1;   // 더하기만 2가지 문자열, 넘버
+    alert("체에킁:" + typeof(numStr)); //?
     */
-    
-    // let ck =numStr - 1000;  //더하기만 2가지 문자열, 넘버  (-,*,/ 는 문자열이 숫자로 변환해서 산술을 해줌 )
-    // alert("체크:"+ck);
+
 
     /*
     let primStr = "오경석";
 
-    alert(typeof(primStr)); //데이터 타입 확인
-    alert(primStr.substring(0,1));  //오  
-    //원시타입인데 메소드 되는 이유?  원시타입에 .을 찍는 순간 Wrapeer class로 자동으로 바뀜
-    //stirng->String으로 바뀜
-
-    // Wrapeer 불편한것을 편하게 쓰려고..(박스를 씌운다)*/
-
-
-
-
-
-    /*
-    const bts = {name:"메롱"};
-
-    bts.name ="뷔";  //객체는 그대로 있고  객체 안의 내용만 바꾸려해서 됨
-
-    bts = {name: "보영? 안보영?"}; // 안되는 이유?  const라서 객체(박스)를 생성하려고 해서 안됨 ! 내용은 바꿀수 있다
-    // const 쓸때 객체는 못바꾸고 내용은 바꿀수있다
-    // let은 객체 바꿀수있다
+    alert(typeof(primStr));  // 데이터 타입 확인
+    alert(primStr.substring(0,1)); // 오 우리 모르겡 string -> String
     */
 
-    // var aaa = "훙치뿡";
-    // function fCheck(){
-    //     var aaa=3;  //지역변수 (local variable)
+    /*
+    const bts={ name:"메롱"};
 
-    //     for(var i=1; i<=10; i++){
+    bts.name = "쩡꾹";
 
-    //     }
-    //     alert("체크:"+i);
+    bts = {name:"보영? 안보영?"}  // 요거 안되는 이유? 재성추론
+    */
+   // alert(bts.name);
+    /*
+    var aaa = "흥치뿡";
+    function fCheck(){
+        var aaa = 3;  // 지역변수 (local variable)
+        for(var i=1; i<=10; i++){
+        }
+        alert("체킁:" + i);
+    }
 
-    // }
-
-    // fCheck();
-    // alert("체크:"+aaa);
-    
-
-
+    fCheck();
+    alert("체킁:"+ aaa);
+    */ 
 
 </script>

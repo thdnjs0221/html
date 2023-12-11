@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 연봉을 많이 받을 수 있는 내용이니 집중!
+    // function 키워드가 함수/클래스 를 의미!
+
+    const myDom = function(pName){
+        this.name = pName;       // 속성 추가
+
+        /* 요기에 선언하면 메모리가 낭비됨( 메모리가 많다면 그리 해도 됨!)
+        this.prt = function(){   // 메소드 추가
+            console.log("내이름은:",this.name);
+        }
+        */
+        return this;    // 클래스의 의미로 사용될 땐 요거이 생략되어 있음
+    }
+
+    //prototype이란 것에 주목, 이것 때문에 자바스크립트를
+    // prototype 객체지향 언어라고 부름
+    myDom.prototype.prt = function(){
+        console.log("메롱",this.name);
+    }
+
+
+    
+    let ksh = new myDom("김석호");
+    let kjs = new myDom("김재성");
+    console.log("한번더 체킁",kjs);
+
+    ksh.prt();
+    kjs.prt();
+</script>

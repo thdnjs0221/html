@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #wrapper {
+        margin: 200px auto;  /* 수평 가운데 정렬 */
+        width: 70%;
+        border:1px solid black;
+    }
+    #modal {
+        position: fixed;
+        left:0; top:0;
+        z-index : 1000;
+        width:100%;
+        height:100%;
+        background-color: rgba(0, 255,0, 0.7);
+        display: none;  /* 처음엔 안 보여 하니깡 */
+    }
+    #modalCont {
+        width:50%;
+        height:80%;
+        margin: 50px auto; /* 수평 중앙 정렬*/
+        background-color: black;
+        color:white;
+    }
+</style>
+</head>
+<body>
+<!-- 나의 모달 -->
+<div id="modal">
+    <div id="modalCont">
+        <h1>난 최고의 프로그래머당당</h1>
+        <button id="clsBtn">X</button>
+    </div>
+</div>
+
+<!--보통 메인 영역은 wrapper나 container란 이름을 지정-->
+<div id="wrapper">
+    <button id="modBtn">모달열깅</button>
+</div>
+<script>
+    const modBtn = document.querySelector("#modBtn");
+    const clsBtn = document.querySelector("#clsBtn");
+    const modal = document.querySelector("#modal");
+
+    modBtn.addEventListener("click",function(){
+        modal.style.display="block"; // 보이겡
+    });
+
+    clsBtn.addEventListener("click",function(){
+        modal.style.display ="none";  // 안 보이겡!
+    })
+
+
+
+</script>
+</body>
+</html>

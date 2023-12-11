@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<div id="list">
-</div>
+<div id="list"></div>
+<div id="merong"></div>
+<input type="text"  id="jb" value="">
 <script>
 
+    let jbstr = document.querySelector("#jb");
+    console.log("체킁:",jbstr);
+    jbstr.value = "안녕 정범";
+
+
+    // template string  `백틱사용
+    let aaa = "권도윤";
+    //let ccc = "안녕 " + aaa;
+    let ccc = `안녕 ${aaa}`; // 주의사항! jsp안에 쓸 때 \처리 필요
+    let merong = `
+        <div>메롱</div>
+        <h1>헉</h1>
+    `;
+    document.querySelector("#merong").innerHTML = merong;
+
+    
+    //alert(ccc);
+
     const myList = document.querySelector("#list");
-    const position ={
-        level1 :"개발자",
-        level2 :"사장",
-        level3 :"전무",
-        level4 :"사원"
+    const position = {
+        level1: "개발자",
+        level2: "사장",
+        level3: "전무",
+        level4: "사원",
     }
-    const sawons =[
+
+    const sawons = [
         {name:"박민주",pos:"level1"},
         {name:"전수진",pos:"level3"},
         {name:"문선영",pos:"level2"},
@@ -20,32 +40,30 @@
         {name:"유선영",pos:"level2"},
         {name:"김도현",pos:"level3"},
         {name:"최광식",pos:"level2"}
-
     ];
 
     function fOver(pThis){
-        console.log("체크:",pThis)
-        pThis.style.backgroundColor ="pink";
+        console.log("체킁:",pThis);
+        pThis.style.backgroundColor="pink";
     }
     function fOut(pThis){
-        console.log("체크2:",pThis)
+        console.log("체킁2:",pThis);
         pThis.style.backgroundColor="white";
     }
 
-    let tblStr= "<table border=1 width=400>";
-        tblStr += "<tr><th>넘버</th><th>이름</th><th>직위</th></tr>";
+    let tblStr = "<table border=1 width=400>";
+    tblStr += "<tr><th>넘버</th><th>이름</th><th>직위</th></tr>";
+    
+    for(let i=0; i<sawons.length; i++){
+        let sawonVO = sawons[i];  // 억지 약간 자바스타일롱
+        tblStr += "<tr onmouseover='fOver(this)' onmouseout='fOut(this)'>";
+        tblStr += "<td>" + (i+1) + "</td>";        
+        tblStr += "<td>" + sawonVO.name + "</td>";   
+        // 힌트 배열식접근법 활용!   깨달음을 열어줄꺼예용!
+        tblStr += "<td>" + position[sawonVO.pos] + "</td>";    
+        tblStr += "</tr>";
+    }
 
-        for(let i=0; i<sawons.length; i++){
-            let sawonsVO = sawons[i];   // 자바스타일로
-            tblStr += "<tr onmouseover='fOver(this)' onmouseout='fOut(this)'>";
-            tblStr += "<td>"+ (i+1)+"</td>";
-            tblStr += "<td>"+ sawonsVO.name+"</td>";
-            tblStr += "<td>"+ position[sawonsVO.pos]+"</td>";
-            //힌트 배열식 접근법 활용!!
-            tblStr += "</tr>";
-            
-        }
-        tblStr += "</table>";  //문자열 더하기 끝
-        
-        myList.innerHTML = tblStr;  //화면 넣기
+    tblStr += "</table>";  // 문자열 더하기 끄읕
+    myList.innerHTML = tblStr;  // 화면에 넣깅
 </script>

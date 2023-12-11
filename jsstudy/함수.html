@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 먼저 함수는 왜 쓰나용?, 반복되는 부분을 편하게 쓰기 위함
+// DRY원칙 (Do not Repeat Yourself) 반복하지 마랑!
+
+//재성();
+//재성1();  // hoisting (위로 올리깅) 
+
+// 자주 쓰이는 콜백 형태!
+const $ = {};   // 빈 객체 생성
+$.each = function(pArr,pCb){
+    for(let i=0; i<pArr.length; i++){
+        pCb(i,pArr[i]);   // 콜백함수를 호출하는뎅, 배열인덱스와 해당 인덱스 값을 넘김
+    }
+}
+
+
+$.each(["김석호","김재성","이재혁"],function(pIndex,pVal){
+    alert(`인덱스: ${pIndex} , 값: ${pVal}  `);
+});
+
+
+
+function 재성1(){
+    alert("함수 공식 선언 문법");
+}
+
+let sum = 1 + 2 + 3 + 4;
+// 함수 공식 선언문법이 아니고 , 표현식(expresssion)
+// 매개변수에 올 수 있는 데이터 타입 제한은 없음
+const 재성 = function(pArg){  // pArg = function(){...}
+    alert("재성 함수 호출");
+    pArg("김도현");              // 재성안에서 콜백(callback) 함수호출
+}
+
+
+const myCB = function(pArg){
+    alert(`안녕 ${pArg} ` );
+}
+
+//재성(myCB);
+
+// 보통 콜백 함수가 손에 익는데 대략 3일정도 걸려용!
+/*
+재성(function(){        // 재성 호출 
+    alert("난 함수얌!");
+});
+*/
+
+//재성();
+
+/* 함수 선언법
+function 재성(){
+    alert("메롱");
+    //return "수빈 만만셍";  // 요게 생략되어 있음. 끝을 알림
+
+    return ["태형","기웅",{name:"도연",habit:"지각"}];
+    /*
+    return function(){
+        return function(){
+            return "허걱";
+        }
+    }
+    
+}
+*/
+
+//alert("체킁:"+재성()()());    // 함수 호출 , 선언만으로는 실행이 안됨!
+
+//alert("체킁:" + 재성()[2].name);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

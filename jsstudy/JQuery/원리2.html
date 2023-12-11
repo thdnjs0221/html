@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div class="kjh">김소원</div>
+<div class="kjh">이은솔</div>
+<div class="kjh">신수연</div>
+<div class="kjh">김정하 예쁜이</div>
+<script>
+    // $("#aaa")
+
+    // 즉각 실행함수
+    //var $;   // 전역변수
+//    var kgb ="민주 주의!"
+//    alert(window.kgb);
+    !function () {
+        // new를 생략하고 싶다면 factory
+        const $ = function (pSel) {
+            return new myDom(pSel);       // 여기서 생성해서 돌려줌 
+        }
+
+        const myDom = function (pSel) {
+            let elems = document.querySelectorAll(pSel);
+
+            this.selQuery = pSel;     // 선택자를 임시로 저장해 둠
+            this.length = elems.length;
+            // 선택해 온 걸 옮겨 담기
+            for (let i = 0; i < elems.length; i++) {
+                this[i] = elems[i];
+            }
+            return this;  // 생략 가능
+        }
+        
+        //메소드를 추가하려면 항상 여기서 
+        //myDom.prototype.메소드명 = function(){};
+
+        $.fn=myDom.prototype; // myDom.prototype을 밖에서도 접근 가능하겡 (jQuery Plug-in)
+        window.$=$;  // 전역변수 $가 지역변수 $를 참조! 
+
+    }();
+
+   // 흐름을 이해하고,  콜백을 잘 활용할 수 있으면 GOOD!
+
+    // 나만의 메소드 추강! (요런걸 jQuery 플러그인 개발이라고 부름)
+    // 자.스는 오버로딩 지원 안함! (기본이 오버라이딩 덮어쓰깅)
+    // html 메소드는 매개변수 없는 거, 매개변수 있는거 (문자열, 함수)
+    // jQuery 메소드는 일반적으로 3가지 패턴을 가짐
+    // 값 읽기(매개변수 없는거), 전체쓰기(매개변수가 문자열), 부분조작(콜백함수)
+    $.fn.html = function(pArg){
+        // 매개변수 값이 넘어오지 않았을 때
+        if(!pArg){
+            return this[0].innerHTML
+        }
+
+        //매개변수가 넘어 왔는뎅, 문자열이 넘어 왔음
+        if(typeof(pArg)=="string"){
+            for(let i=0; i<this.length; i++){
+                this[i].innerHTML = pArg;
+            }
+            return this;  // 메소드 체인닝, 다시 박스 리턴
+        }
+
+        //매개변수가 넘어 왔는뎅, 함수(곧 콜백)가 넘어 왔음
+        if(typeof(pArg) == "function"){
+            //실제 jQuery에서 가장 많이 사용되는 패턴!, 쭝요!
+            for(let i=0; i<this.length; i++){
+                this[i].innerHTML = pArg(i,this[i].innerHTML);
+            }
+            return this; // 메소드 체인닝, 다시 박스 리턴!
+        }
+    }
+
+    // 박스 안에서 있는 것 중 1개 선택!
+    $.fn.eq = function(pIndex){
+        //return this[pIndex];
+        this[0] = this[pIndex]; // 1개만 남겨야 함
+        this.length = 1;        // 당연히 length는 1;
+        for(let i=1; i<this.length; i++){  // 0번 이외의 나머지는 지우깅
+            delete this[i];
+        }
+        return this;
+    }
+
+    // 맨 처음 선택한 것들로 되돌리깅! (구현 방식은 선택적) 
+    $.fn.end = function(){
+        return $(this.selQuery); 
+    }
+
+    //let divs = new myDom(".kjh");
+    let divs = $(".kjh");    // new가 더이상 필요없음!
+
+    //console.log(divs.eq(2));
+
+    divs.eq(0)                  // 0번 1개만 선택
+        .html("<h1>요거 되나용?</h1>")
+        .end()                  // 다시 4개 선택
+        .eq(2)                  // 2번 1개만 선택
+        .html("<h1>요렇게도 쓸 수 있디용</h1>")
+        .end()
+        .html(function(index,html){
+            if(index == 3){
+                return `<h1>${html} 느낌이 오디용</h1>`;
+            }
+            return html;
+        });
+
+/*
+    divs.html(function(pIndex,pHtml){
+        console.log("체킁:",pIndex,pHtml);
+        if(pIndex == 1){
+            return "<h1>메롱 e7e</h1>";
+        }
+
+        return pHtml; // 조건에 해당하지 않을 때는 원래 값 그대로 리턴!
+    }).html(function(pIndex,pHtml){
+        console.log("체킁:",pIndex,pHtml);
+        if(pHtml == "신수연"){
+            return `<h1>${pHtml} 만만세</h1>`;
+        }
+        return pHtml; // 조건에 해당하지 않을 때는 원래 값 그대로 리턴!
+    });
+*/
+    //console.log("체킁:",$.fn)
+    //alert(divs.html());  // 매개변수 없을 때
+
+   // divs.html("<h1>모기 너무 졸려용</h1>");
+
+
+    
+    //divs.html("<h1>석호는 석촌호수</h1>");
+
+    //console.log("이상하면 체킁:", divs);
+    //divs[2].innerHTML = "<h1>안농 난 메롱이얌</h1>";
+
+</script>
